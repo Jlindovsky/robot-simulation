@@ -43,6 +43,7 @@ file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/Users/macik/Desktop/fit_vut/
 set(OLD_GLOB
   "/Users/macik/Desktop/fit_vut/ICP/appRun/app_proj.cpp"
   "/Users/macik/Desktop/fit_vut/ICP/appRun/barrier.cpp"
+  "/Users/macik/Desktop/fit_vut/ICP/appRun/gameButton.cpp"
   "/Users/macik/Desktop/fit_vut/ICP/appRun/main.cpp"
   "/Users/macik/Desktop/fit_vut/ICP/appRun/robot.cpp"
   "/Users/macik/Desktop/fit_vut/ICP/appRun/window.cpp"
@@ -65,7 +66,8 @@ endif()
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/Users/macik/Desktop/fit_vut/ICP/appRun/*.h")
 set(OLD_GLOB
   "/Users/macik/Desktop/fit_vut/ICP/appRun/app_proj.h"
-  "/Users/macik/Desktop/fit_vut/ICP/appRun/barier.h"
+  "/Users/macik/Desktop/fit_vut/ICP/appRun/barrier.h"
+  "/Users/macik/Desktop/fit_vut/ICP/appRun/gameButton.h"
   "/Users/macik/Desktop/fit_vut/ICP/appRun/robot.h"
   "/Users/macik/Desktop/fit_vut/ICP/appRun/window.h"
   )

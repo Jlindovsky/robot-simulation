@@ -26,8 +26,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(appRun
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        barier.h barrier.cpp
+        barrier.h barrier.cpp
         robot.cpp robot.h window.cpp window.h
+        gameButton.h gameButton.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET appRun APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

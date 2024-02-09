@@ -1,4 +1,4 @@
-/Users/macik/Desktop/fit_vut/ICP/build-appRun-Qt_6_6_1_for_macOS-Debug/appRun_autogen/EWIEGA46WW/moc_window.cpp: /Users/macik/Desktop/fit_vut/ICP/appRun/window.h \
+/Users/macik/Desktop/fit_vut/ICP/build-appRun-Qt_6_6_1_for_macOS-Debug/appRun_autogen/EWIEGA46WW/moc_barrier.cpp: /Users/macik/Desktop/fit_vut/ICP/appRun/barrier.h \
   /Users/macik/Desktop/fit_vut/ICP/build-appRun-Qt_6_6_1_for_macOS-Debug/appRun_autogen/moc_predefs.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h \
@@ -87,13 +87,7 @@
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/stdio.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/syslimits.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/wait.h \
-  /Users/macik/Desktop/fit_vut/ICP/appRun/barrier.h \
-  /Users/macik/Desktop/fit_vut/ICP/appRun/gameButton.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/QList \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/QObject \
-  /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/QRect \
-  /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/QSize \
-  /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/QSizeF \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/q20functional.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/q20memory.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/q20type_traits.h \
@@ -122,7 +116,6 @@
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qcontainerinfo.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qcontainertools_impl.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qcontiguouscache.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qcoreevent.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qdarwinhelpers.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qdatastream.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qdebug.h \
@@ -137,7 +130,6 @@
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qglobalstatic.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qhash.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qhashfunctions.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qiodevice.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qiodevicebase.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qiterable.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qiterator.h \
@@ -153,7 +145,6 @@
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qmetatype.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qminmax.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qnamespace.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qnativeinterface.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qnumeric.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qobject.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qobject_impl.h \
@@ -162,7 +153,6 @@
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qoverload.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qpair.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qpoint.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qpointer.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qprocessordetection.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qrect.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qrefcount.h \
@@ -206,63 +196,28 @@
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qtversionchecks.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qtypeinfo.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qtypes.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qurl.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qutf8stringview.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qvariant.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qvarlengtharray.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qversiontagging.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qxptype_traits.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/QBrush \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/QMouseEvent \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/QPen \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/QTransform \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qaction.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qbitmap.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qbrush.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qcolor.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qcursor.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qevent.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qeventpoint.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qfont.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qfontinfo.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qfontmetrics.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qicon.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qimage.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qinputdevice.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qkeysequence.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpaintdevice.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpainter.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpainterpath.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpalette.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpen.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpixelformat.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpixmap.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpointingdevice.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpolygon.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qregion.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qrgb.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qrgba64.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qscreen.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qtextoption.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qtgui-config.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qtguiexports.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qtguiglobal.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qtransform.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qvector2d.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qvectornd.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qwindowdefs.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsItem \
   /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsRectItem \
-  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsScene \
-  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsView \
-  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qabstractscrollarea.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qframe.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qgraphicsitem.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qgraphicsscene.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qgraphicsview.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qscrollarea.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qsizepolicy.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qtwidgets-config.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qtwidgetsexports.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qtwidgetsglobal.h \
-  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qwidget.h
+  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qtwidgetsglobal.h

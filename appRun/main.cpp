@@ -1,4 +1,4 @@
-#include "app_proj.h"
+
 #include "window.h"
 #include <QApplication>
 #include <QLocale>
@@ -10,6 +10,6 @@ int main(int argc, char *argv[])
 
     window * game = new window;
     game->show();
-
+    game->mainWindow();
     return a.exec();
 }

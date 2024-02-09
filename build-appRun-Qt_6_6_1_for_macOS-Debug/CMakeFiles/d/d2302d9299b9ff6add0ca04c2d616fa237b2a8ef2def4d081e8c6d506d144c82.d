@@ -90,8 +90,10 @@ appRun_autogen/timestamp: \
   /Users/macik/Desktop/fit_vut/ICP/appRun/app_proj.cpp \
   /Users/macik/Desktop/fit_vut/ICP/appRun/app_proj.h \
   /Users/macik/Desktop/fit_vut/ICP/appRun/app_proj.ui \
-  /Users/macik/Desktop/fit_vut/ICP/appRun/barier.h \
   /Users/macik/Desktop/fit_vut/ICP/appRun/barrier.cpp \
+  /Users/macik/Desktop/fit_vut/ICP/appRun/barrier.h \
+  /Users/macik/Desktop/fit_vut/ICP/appRun/gameButton.cpp \
+  /Users/macik/Desktop/fit_vut/ICP/appRun/gameButton.h \
   /Users/macik/Desktop/fit_vut/ICP/appRun/main.cpp \
   /Users/macik/Desktop/fit_vut/ICP/appRun/robot.cpp \
   /Users/macik/Desktop/fit_vut/ICP/appRun/robot.h \
@@ -224,7 +226,9 @@ appRun_autogen/timestamp: \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qvarlengtharray.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qversiontagging.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/Headers/qxptype_traits.h \
+  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/QBrush \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/QMouseEvent \
+  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/QPen \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/QTransform \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qaction.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qbitmap.h \
@@ -242,6 +246,7 @@ appRun_autogen/timestamp: \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qkeysequence.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpaintdevice.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpainter.h \
+  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpainterpath.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpalette.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpen.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qpixelformat.h \
@@ -260,11 +265,14 @@ appRun_autogen/timestamp: \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qvector2d.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qvectornd.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/Headers/qwindowdefs.h \
+  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsItem \
+  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsRectItem \
   /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsScene \
   /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsView \
   /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/QMainWindow \
   /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qabstractscrollarea.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qframe.h \
+  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qgraphicsitem.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qgraphicsscene.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qgraphicsview.h \
   /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qmainwindow.h \
