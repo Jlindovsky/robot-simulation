@@ -1,0 +1,9 @@
+/Users/macik/Desktop/fit_vut/ICP/build-appRun-Qt_6_6_1_for_macOS-Debug/CMakeFiles/appRun.dir
+/Users/macik/Desktop/fit_vut/ICP/build-appRun-Qt_6_6_1_for_macOS-Debug/CMakeFiles/edit_cache.dir
+/Users/macik/Desktop/fit_vut/ICP/build-appRun-Qt_6_6_1_for_macOS-Debug/CMakeFiles/rebuild_cache.dir
+/Users/macik/Desktop/fit_vut/ICP/build-appRun-Qt_6_6_1_for_macOS-Debug/CMakeFiles/list_install_components.dir
+/Users/macik/Desktop/fit_vut/ICP/build-appRun-Qt_6_6_1_for_macOS-Debug/CMakeFiles/install.dir
+/Users/macik/Desktop/fit_vut/ICP/build-appRun-Qt_6_6_1_for_macOS-Debug/CMakeFiles/install/local.dir
+/Users/macik/Desktop/fit_vut/ICP/build-appRun-Qt_6_6_1_for_macOS-Debug/CMakeFiles/install/strip.dir
+/Users/macik/Desktop/fit_vut/ICP/build-appRun-Qt_6_6_1_for_macOS-Debug/CMakeFiles/appRun_autogen_timestamp_deps.dir
+/Users/macik/Desktop/fit_vut/ICP/build-appRun-Qt_6_6_1_for_macOS-Debug/CMakeFiles/appRun_autogen.dir

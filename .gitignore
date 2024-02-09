@@ -2,3 +2,4 @@
 makefile
 *.o
 app
+.DS*
