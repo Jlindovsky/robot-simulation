@@ -105,6 +105,14 @@ build CMakeFiles/appRun.dir/gameButton.cpp.o: CXX_COMPILER__appRun_unscanned_Deb
   OBJECT_DIR = CMakeFiles/appRun.dir
   OBJECT_FILE_DIR = CMakeFiles/appRun.dir
 
+build CMakeFiles/appRun.dir/editcontroler.cpp.o: CXX_COMPILER__appRun_unscanned_Debug /Users/macik/Desktop/fit_vut/ICP/appRun/editcontroler.cpp || cmake_object_order_depends_target_appRun
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = CMakeFiles/appRun.dir/editcontroler.cpp.o.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.2 -fcolor-diagnostics
+  INCLUDES = -I/Users/macik/Desktop/fit_vut/ICP/build-appRun-Qt_6_6_1_for_macOS-Debug/appRun_autogen/include -isystem /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Headers -iframework /Users/macik/Qt/6.6.1/macos/lib -isystem /Users/macik/Qt/6.6.1/macos/mkspecs/macx-clang -isystem /Users/macik/Qt/6.6.1/macos/include -isystem /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Headers -isystem /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Headers
+  OBJECT_DIR = CMakeFiles/appRun.dir
+  OBJECT_FILE_DIR = CMakeFiles/appRun.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target appRun
@@ -113,7 +121,7 @@ build CMakeFiles/appRun.dir/gameButton.cpp.o: CXX_COMPILER__appRun_unscanned_Deb
 #############################################
 # Link the executable appRun.app/Contents/MacOS/appRun
 
-build appRun.app/Contents/MacOS/appRun: CXX_EXECUTABLE_LINKER__appRun_Debug CMakeFiles/appRun.dir/appRun_autogen/mocs_compilation.cpp.o CMakeFiles/appRun.dir/main.cpp.o CMakeFiles/appRun.dir/app_proj.cpp.o CMakeFiles/appRun.dir/barrier.cpp.o CMakeFiles/appRun.dir/robot.cpp.o CMakeFiles/appRun.dir/window.cpp.o CMakeFiles/appRun.dir/gameButton.cpp.o | /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/QtGui /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/QtCore || appRun_autogen appRun_autogen_timestamp_deps
+build appRun.app/Contents/MacOS/appRun: CXX_EXECUTABLE_LINKER__appRun_Debug CMakeFiles/appRun.dir/appRun_autogen/mocs_compilation.cpp.o CMakeFiles/appRun.dir/main.cpp.o CMakeFiles/appRun.dir/app_proj.cpp.o CMakeFiles/appRun.dir/barrier.cpp.o CMakeFiles/appRun.dir/robot.cpp.o CMakeFiles/appRun.dir/window.cpp.o CMakeFiles/appRun.dir/gameButton.cpp.o CMakeFiles/appRun.dir/editcontroler.cpp.o | /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/QtGui /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/QtCore || appRun_autogen appRun_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.2
   LINK_LIBRARIES = -Wl,-rpath,/Users/macik/Qt/6.6.1/macos/lib  /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/QtWidgets  /Users/macik/Qt/6.6.1/macos/lib/QtGui.framework/Versions/A/QtGui  /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/QtCore  -framework IOKit  -framework DiskArbitration  -Xlinker -framework -Xlinker OpenGL  -Xlinker -framework -Xlinker AGL  -framework AppKit  -framework ImageIO  -framework Metal
   LINK_PATH = -iframework /Users/macik/Qt/6.6.1/macos/lib
@@ -215,7 +223,7 @@ build appRun_autogen/timestamp appRun_autogen/mocs_compilation.cpp | ${cmake_nin
 #############################################
 # Phony custom command for CMakeFiles/appRun_autogen_timestamp_deps
 
-build CMakeFiles/appRun_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/appRun_autogen_timestamp_deps: phony /Users/macik/Qt/6.6.1/macos/./libexec/uic /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/QtCore /Users/macik/Qt/6.6.1/macos/./libexec/moc /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/QtWidgets
+build CMakeFiles/appRun_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/appRun_autogen_timestamp_deps: phony /Users/macik/Qt/6.6.1/macos/./libexec/uic /Users/macik/Qt/6.6.1/macos/lib/QtWidgets.framework/Versions/A/QtWidgets /Users/macik/Qt/6.6.1/macos/lib/QtCore.framework/Versions/A/QtCore /Users/macik/Qt/6.6.1/macos/./libexec/moc
 
 
 #############################################

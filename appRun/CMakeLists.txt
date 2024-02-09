@@ -29,6 +29,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         barrier.h barrier.cpp
         robot.cpp robot.h window.cpp window.h
         gameButton.h gameButton.cpp
+        editcontroler.h editcontroler.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET appRun APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

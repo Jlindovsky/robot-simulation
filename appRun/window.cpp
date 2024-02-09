@@ -58,6 +58,7 @@ void window::editWindowSignal()
 
     QGraphicsRectItem *bar2 = new QGraphicsRectItem(playground->x(), playground->y(), 20, 20, playground);
     bar2->setPos(200, 200);
+    bar2->setPos(-100, -100);
     bar2->setPen(pen);
     editScene->addItem(bar2);
 

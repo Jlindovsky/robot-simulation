@@ -3,4 +3,5 @@ makefile
 *.o
 app
 .DS*
-*.log
+*.*log
+./build*
