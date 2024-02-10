@@ -41,41 +41,46 @@ void window::editWindowSignal()
     editScene->setSceneRect(0, 0, 1024, 768);
     setScene(editScene);
 
-    QGraphicsRectItem *playground = new QGraphicsRectItem(100, 100, 500, 500);
-    playground->setPos(100, 100);
+    QGraphicsRectItem *playground = new QGraphicsRectItem(70, 100, 500, 500);
+    playground->setPos(70, 100);
     QPen pen;
     pen.setColor(Qt::white); // Set the border color (replace with your desired color)
     pen.setWidth(4);         // Set the border width (replace with your desired width)
     playground->setPen(pen);
     editScene->addItem(playground);
 
-    barrierC *bar1 = new barrierC(0, 0, 30, 30, playground);
-    bar1->setPos(playground->pos());
+
+    barrierC *edgeTop = new barrierC(playground->x(), playground->y(), 500, 1, playground);
+    edgeTop->setPos(0,0);
     pen.setColor(Qt::cyan);
-    bar1->setPen(pen);
-    pen.setColor(Qt::white);
-    editScene->addItem(bar1);
+    edgeTop->setPen(pen);
+    editScene->addItem(edgeTop);
 
-    barrierC *bar2 = new barrierC(playground->x(), playground->y(), 20, 20, playground);
-    bar2->setPos(200, 200);
-    bar2->setPen(pen);
-    editScene->addItem(bar2);
+    barrierC *edgeBottom = new barrierC(playground->x(), playground->y(), 500, 1, playground);
+    edgeBottom->setPos(0, 500);
+    edgeBottom->setPen(pen);
+    editScene->addItem(edgeBottom);
 
-    barrierC *bar3 = new barrierC(playground->x(), playground->y(), 10, 10, playground);
-    bar3->setPos(200, 40);
+    barrierC *edgeLeft = new barrierC(playground->x(), playground->y(), 1, 500, playground);
+    edgeLeft->setPos(0, 0);
     pen.setColor(Qt::red);
-    bar3->setPen(pen);
-    editScene->addItem(bar3);
+    edgeLeft->setPen(pen);
+    editScene->addItem(edgeLeft);
+
+    barrierC *edgeRight = new barrierC(playground->x(), playground->y(), 1, 500, playground);
+    edgeRight->setPos(500, 0);
+    edgeRight->setPen(pen);
+    editScene->addItem(edgeRight);
 
     Robot *rob1 = new Robot(playground->x(), playground->y(), 50, 50, playground);
-    rob1->setPos(200, 250);
+    rob1->setPos(playground->x(), playground->y());
     QBrush brush(Qt::blue);
     brush.setColor(Qt::darkMagenta);
     rob1->setBrush(brush);
 
     QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), rob1, SLOT(move()));
-    timer->start(200);
+    timer->start(70);
 
     editScene->addItem(rob1);
 }

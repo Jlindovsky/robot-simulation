@@ -4,6 +4,7 @@
 #include <QLocale>
 #include <QTranslator>
 window * game;
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
