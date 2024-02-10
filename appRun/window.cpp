@@ -42,30 +42,40 @@ void window::editWindowSignal()
     setScene(editScene);
 
     QGraphicsRectItem *playground = new QGraphicsRectItem(100, 100, 500, 500);
-    playground->setPos(100,100);
+    playground->setPos(100, 100);
     QPen pen;
     pen.setColor(Qt::white); // Set the border color (replace with your desired color)
     pen.setWidth(4);         // Set the border width (replace with your desired width)
     playground->setPen(pen);
     editScene->addItem(playground);
 
-    QGraphicsRectItem *bar1 = new QGraphicsRectItem(0, 0, 30, 30, playground);
+    barrierC *bar1 = new barrierC(0, 0, 30, 30, playground);
     bar1->setPos(playground->pos());
     pen.setColor(Qt::cyan);
     bar1->setPen(pen);
     pen.setColor(Qt::white);
     editScene->addItem(bar1);
 
-    QGraphicsRectItem *bar2 = new QGraphicsRectItem(playground->x(), playground->y(), 20, 20, playground);
+    barrierC *bar2 = new barrierC(playground->x(), playground->y(), 20, 20, playground);
     bar2->setPos(200, 200);
-    bar2->setPos(-100, -100);
     bar2->setPen(pen);
     editScene->addItem(bar2);
 
-    QGraphicsRectItem *bar3 = new QGraphicsRectItem(playground->x(), playground->y(), 10, 10, playground);
+    barrierC *bar3 = new barrierC(playground->x(), playground->y(), 10, 10, playground);
     bar3->setPos(200, 40);
     pen.setColor(Qt::red);
     bar3->setPen(pen);
     editScene->addItem(bar3);
 
+    Robot *rob1 = new Robot(playground->x(), playground->y(), 50, 50, playground);
+    rob1->setPos(200, 250);
+    QBrush brush(Qt::blue);
+    brush.setColor(Qt::darkMagenta);
+    rob1->setBrush(brush);
+
+    QTimer *timer = new QTimer();
+    QObject::connect(timer, SIGNAL(timeout()), rob1, SLOT(move()));
+    timer->start(200);
+
+    editScene->addItem(rob1);
 }
