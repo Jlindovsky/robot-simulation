@@ -7,7 +7,7 @@ gameButton::gameButton(QString name, QGraphicsItem *parent)
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::darkCyan);
     setBrush(brush);
-
+    setParentItem(parent);
     // draw the text
     text = new QGraphicsTextItem(name, this);
     int xPos = rect().width() / 2 - text->boundingRect().width() / 2;
@@ -15,8 +15,10 @@ gameButton::gameButton(QString name, QGraphicsItem *parent)
     text->setPos(xPos, yPos);
 }
 
-void gameButton::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void gameButton::mousePressEvent(QGraphicsSceneMouseEvent *event )
 {
     emit clicked();
 }
+
+void gameButton::clicked() {}
 

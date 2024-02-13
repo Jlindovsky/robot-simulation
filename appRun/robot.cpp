@@ -16,48 +16,6 @@ qreal Robot::getAngle()
     return this->angle;
 }
 
-Hitbox::Hitbox(Robot *r) : QGraphicsRectItem(0, 0, 60, 60, r)
-{
-    int offset = 10; // sensor sensitivity
-    // welkej if else w a h
-    // int hitboxX = x() - w / 2;
-    // int hitboxY = y() - h / 2;
-    setParent(r);
-    QPen pen;
-    pen.setWidth(4);
-    pen.setColor(Qt::white);
-    setPen(pen);
-    setRotation(r->getAngle());
-    setPos(mapToParent(0, 0));
-}
-void Hitbox::moveHitbox(Robot *r)
-{
-    double angleRadians = (90 - (int(r->getAngle()) % 90)) * M_PI / 180.0;
-
-    // Calculate base and height
-    double base = 1 * cos(angleRadians);
-    double height = 1 * sin(angleRadians);
-    if (r->getAngle() < 90 && r->getAngle() >= 0)
-    {
-        // setPos(x() + height, y() + base);
-        setPos(mapToParent(height, base));
-    }
-    else if (r->getAngle() < 180 && r->getAngle() >= 90)
-    {
-        // setPos(x() - base, y() + height);
-        setPos(mapToParent(0 - base, height));
-    }
-    else if (r->getAngle() < 270 && r->getAngle() >= 180)
-    {
-        // setPos(x() - height, y() - base);
-        setPos(mapToParent(0 - height, 0 - base));
-    }
-    else
-    {
-        // setPos(x() + base, y() - height);
-        setPos(mapToParent(base, 0 - height));
-    }
-}
 void Robot::calculateMove()
 {
     previousLocation = pos();

@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QGraphicsRectItem>
 #include <QBrush>
+#include <QGraphicsSceneMouseEvent>
 
 class gameButton: public QObject, public QGraphicsRectItem
 {

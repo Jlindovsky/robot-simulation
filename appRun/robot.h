@@ -5,21 +5,10 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
 #include <QObject>
-#include "barrier.h"
 #include <QPen>
 #include <typeinfo>
+#include "barrier.h"
 
-class Robot;
-
-class Hitbox : public QObject, public QGraphicsRectItem
-{
-    Q_OBJECT
-public:
-    Hitbox(Robot *);
-    void moveHitbox(Robot *);
-
-private:
-};
 
 class Robot : public QObject, public QGraphicsEllipseItem
 {
@@ -38,7 +27,6 @@ private:
     int angle;           // [0-360]
     int step;
     int spin;
-    Hitbox *hitbox;
     // public slots:
 };
 
