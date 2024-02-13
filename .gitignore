@@ -6,4 +6,5 @@ app
 *.*log
 build-*
 build
+build/App*
 myBuild/
