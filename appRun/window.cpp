@@ -93,6 +93,6 @@ void window::editWindowSignal()
 
     QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), rob1, SLOT(move()));
-    timer->start(50);
+    timer->start(100);
     editScene->addItem(rob1);
 }

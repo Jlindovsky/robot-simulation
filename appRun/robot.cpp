@@ -4,7 +4,7 @@ Robot::Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent)
     : QGraphicsEllipseItem(x, y, w, w, parent)
 {
     sensor = 40;
-    circumference = w/2;
+    circumference = w / 2;
     angle = 270;
     directionOfSpin = 1; // tmp
     step = 20;
@@ -63,11 +63,8 @@ void Robot::move()
             qDebug() << "Hit!" << ((colliding_items[i])) << Qt::endl;
         }
     }
-    if (hit)
-    {
-        setPos(previousLocation);
-    }
-    else
+    setPos(previousLocation);
+    if (!hit)
     {
         calculateHit(step);
     }
