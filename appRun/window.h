@@ -11,6 +11,8 @@
 #include "barrierC.h"
 #include "robot.h"
 
+#define SIZE_R 50
+#define SIZE_B 75
 // Playground sizes
 #define PLAY_X 200
 #define PLAY_Y 0
