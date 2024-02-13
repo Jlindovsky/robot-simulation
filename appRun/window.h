@@ -8,7 +8,7 @@
 #include <QPen>
 #include <QTimer>
 #include "gameButton.h"
-#include "barrier.h"
+#include "barrierC.h"
 #include "robot.h"
 
 // UI controler

@@ -86,7 +86,7 @@ void window::editWindowSignal()
     bar2->setPen(pen);
     editScene->addItem(bar2);
 
-    Robot *rob1 = new Robot(0, 0, 50, 50, playground);
+    Robot *rob1 = new Robot(0, 0, 50, playground);
     QBrush brush(Qt::blue);
     brush.setColor(Qt::darkMagenta);
     rob1->setBrush(brush);

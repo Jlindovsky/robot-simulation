@@ -7,14 +7,14 @@
 #include <QObject>
 #include <QPen>
 #include <typeinfo>
-#include "barrier.h"
+#include "barrierC.h"
 
 
 class Robot : public QObject, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
-    Robot(qreal x, qreal y, qreal w, qreal h, QGraphicsRectItem *parent);
+    Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent);
     void calculateMove();
     qreal getAngle();
 public slots:

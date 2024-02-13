@@ -20,5 +20,4 @@ void gameButton::mousePressEvent(QGraphicsSceneMouseEvent *event )
     emit clicked();
 }
 
-void gameButton::clicked() {}
 
