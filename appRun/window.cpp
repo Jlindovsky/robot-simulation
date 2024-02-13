@@ -84,19 +84,24 @@ void window::editWindowSignal()
     bar1->setPen(pen);
     editScene->addItem(bar1);
 
-    barrierC *bar2 = new barrierC(-50, -50, 100, 100, playground);
-
+    barrierC *bar2 = new barrierC(50, 50, 100, 100, playground);
     pen.setColor(Qt::magenta);
     bar2->setPen(pen);
     editScene->addItem(bar2);
 
-    Robot *rob1 = new Robot(0, 0, 50, playground);
+    Robot *rob1 = new Robot(150, 150, 50, playground);
     QBrush brushRob(Qt::blue);
     brushRob.setColor(Qt::darkMagenta);
     rob1->setBrush(brushRob);
 
+    Robot *rob2 = new Robot(450, 450, 50, playground);
+    brushRob.setColor(Qt::yellow);
+    rob2->setBrush(brushRob);
+
     QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), rob1, SLOT(move()));
+    QObject::connect(timer, SIGNAL(timeout()), rob2, SLOT(move()));
     timer->start(100);
     editScene->addItem(rob1);
+    editScene->addItem(rob2);
 }

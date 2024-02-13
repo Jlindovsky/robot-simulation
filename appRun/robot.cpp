@@ -1,7 +1,7 @@
 #include "robot.h"
 
 Robot::Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent)
-    : QGraphicsEllipseItem(x, y, w, w, parent)
+    : QGraphicsEllipseItem(0, 0, w, w, parent)
 {
     sensor = 40;
     circumference = w / 2;
@@ -9,7 +9,7 @@ Robot::Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent)
     directionOfSpin = 1; // tmp
     step = 20;
     spin = 35; // tmp
-    this->setPos(mapToParent(300, 300));
+    this->setPos(mapToParent(x, y));
     // hitbox = new Hitbox(this);
 }
 qreal Robot::getAngle()
