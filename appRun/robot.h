@@ -1,14 +1,13 @@
 
 #ifndef ROBOT_H
 #define ROBOT_H
-#include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
 #include <QObject>
 #include "barrier.h"
 #include <QPen>
 #include <typeinfo>
-
 
 class Robot;
 

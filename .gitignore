@@ -4,6 +4,6 @@ makefile
 app
 .DS*
 *.*log
-buil*
-build/
+build-*
+build
 myBuild/

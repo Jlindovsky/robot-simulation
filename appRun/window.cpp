@@ -28,9 +28,11 @@ void window::mainWindow()
     connect(newGameButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
     welcomeScene->addItem(newGameButton);
 
-    gameButton *loadGameButton = new gameButton(QString("new"));
+    gameButton *loadGameButton = new gameButton(QString("new but blue"));
     bxPos = this->width() / 2 - loadGameButton->boundingRect().width() / 2;
     byPos = 475;
+    QBrush brush(Qt::blue);
+    loadGameButton->setBrush(brush);
     loadGameButton->setPos(bxPos, byPos);
     connect(loadGameButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
     welcomeScene->addItem(loadGameButton);
