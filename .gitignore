@@ -6,5 +6,5 @@ app
 *.*log
 build-*
 build
-build/App*
+build/appRun.app/Contents/MacOS/appRun
 myBuild/
