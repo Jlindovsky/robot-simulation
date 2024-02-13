@@ -21,11 +21,11 @@ window::~window()
 
 void window::mainWindow()
 {
-    gameButton *newGameButton = new gameButton(QString("new"), 300, 275, 200, 50);
+    gameButton *newGameButton = new gameButton(QString("new"), 400, 275, 200, 50);
     connect(newGameButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
     welcomeScene->addItem(newGameButton);
 
-    gameButton *loadGameButton = new gameButton(QString("new but blue"), 300, 475, 200, 50);
+    gameButton *loadGameButton = new gameButton(QString("new but blue"), 400, 475, 200, 50);
     QBrush brush(Qt::blue);
     loadGameButton->setBrush(brush);
     connect(loadGameButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
@@ -38,28 +38,48 @@ void window::editWindowSignal()
     editScene->setSceneRect(0, 0, 1024, 768);
     setScene(editScene);
 
-    QGraphicsRectItem *playground = new QGraphicsRectItem(0, 0, 824, 650);
-    playground->setPos(200, 0);
+    QGraphicsRectItem *playground = new QGraphicsRectItem(0, 0, PLAY_W, PLAY_H);
+    playground->setPos(PLAY_X, PLAY_Y);
     QPen pen;
     pen.setColor(Qt::white); // Set the border color (replace with your desired color)
     pen.setWidth(4);         // Set the border width (replace with your desired width)
     playground->setPen(pen);
     editScene->addItem(playground);
 
-    QGraphicsRectItem *panel = new QGraphicsRectItem(0, 0, 200, 768);
-    panel->setPos(0, 0);
+    QGraphicsRectItem *iPanel = new QGraphicsRectItem(0, 0, IPANEL_W, IPANEL_H);
+    iPanel->setPos(IPANEL_X, IPANEL_Y);
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::white);
-    panel->setBrush(brush);
-    editScene->addItem(panel);
+    iPanel->setBrush(brush);
+    pen.setColor(Qt::white);
+    iPanel->setPen(pen);
+    editScene->addItem(iPanel);
 
-    gameButton *robotButton = new gameButton(QString("new"), 50, 50, 50, 20, panel);
+    QGraphicsRectItem *pPanel = new QGraphicsRectItem(0, 0, PPANEL_W, PPANEL_H);
+    pPanel->setPos(PPANEL_X, PPANEL_Y);
+    brush.setStyle(Qt::SolidPattern);
+    brush.setColor(Qt::green);
+    pen.setColor(Qt::green);
+    pPanel->setPen(pen);
+    pPanel->setBrush(brush);
+    editScene->addItem(pPanel);
+
+    QGraphicsRectItem *rPanel = new QGraphicsRectItem(0, 0, RPANEL_W, RPANEL_H);
+    rPanel->setPos(RPANEL_X, RPANEL_Y);
+    brush.setStyle(Qt::SolidPattern);
+    brush.setColor(Qt::red);
+    rPanel->setBrush(brush);
+    pen.setColor(Qt::red);
+    rPanel->setPen(pen);
+    editScene->addItem(rPanel);
+
+    gameButton *robotButton = new gameButton(QString("new"), 50, 50, 50, 20, iPanel);
     connect(robotButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
     editScene->addItem(robotButton);
 
     barrierC *edgeTop = new barrierC(0, 0, 824, 1, playground);
-    pen.setColor(Qt::cyan);
+    pen.setColor(Qt::black);
     edgeTop->setPen(pen);
     editScene->addItem(edgeTop);
 
@@ -68,7 +88,7 @@ void window::editWindowSignal()
     editScene->addItem(edgeBottom);
 
     barrierC *edgeLeft = new barrierC(0, 0, 1, 650, playground);
-    pen.setColor(Qt::red);
+
     edgeLeft->setPen(pen);
     editScene->addItem(edgeLeft);
 
@@ -77,13 +97,11 @@ void window::editWindowSignal()
     editScene->addItem(edgeRight);
 
     barrierC *bar1 = new barrierC(250, 250, 100, 100, playground);
-
     pen.setColor(Qt::magenta);
     bar1->setPen(pen);
     editScene->addItem(bar1);
 
     barrierC *bar2 = new barrierC(50, 50, 100, 100, playground);
-    pen.setColor(Qt::magenta);
     bar2->setPen(pen);
     editScene->addItem(bar2);
 
