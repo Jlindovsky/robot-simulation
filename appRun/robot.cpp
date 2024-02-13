@@ -3,6 +3,7 @@
 Robot::Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent)
     : QGraphicsEllipseItem(x, y, w, w, parent)
 {
+    sensor = 40;
     circumference = w/2;
     angle = 270;
     directionOfSpin = 1; // tmp
@@ -16,15 +17,15 @@ qreal Robot::getAngle()
     return this->angle;
 }
 
-void Robot::calculateMove()
+void Robot::calculateHit(int step1)
 {
     previousLocation = pos();
     // Convert angle to radians
     double angleRadians = (90 - (angle % 90)) * M_PI / 180.0;
 
     // Calculate base and height
-    double base = step * cos(angleRadians);
-    double height = step * sin(angleRadians);
+    double base = step1 * cos(angleRadians);
+    double height = step1 * sin(angleRadians);
     if (angle < 90 && angle >= 0)
     {
         setPos(x() + height, y() + base);
@@ -44,7 +45,7 @@ void Robot::calculateMove()
 }
 void Robot::move()
 {
-    calculateMove();
+    calculateHit(sensor);
     //  get a list of all the items currently colliding with this bullet
     QList<QGraphicsItem *> colliding_items = collidingItems();
     bool hit = false;
@@ -65,6 +66,10 @@ void Robot::move()
     if (hit)
     {
         setPos(previousLocation);
+    }
+    else
+    {
+
     }
     // scene()->removeItem(hitbox);
     // delete (hitbox);
