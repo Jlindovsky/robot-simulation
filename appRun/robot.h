@@ -7,6 +7,20 @@
 #include <QObject>
 #include "barrier.h"
 #include <QPen>
+#include <typeinfo>
+
+
+class Robot;
+
+class Hitbox : public QObject, public QGraphicsRectItem
+{
+    Q_OBJECT
+public:
+    Hitbox(Robot *);
+    void moveHitbox(Robot *);
+
+private:
+};
 
 class Robot : public QObject, public QGraphicsEllipseItem
 {
@@ -14,19 +28,21 @@ class Robot : public QObject, public QGraphicsEllipseItem
 public:
     Robot(qreal x, qreal y, qreal w, qreal h, QGraphicsRectItem *parent);
     void calculateMove();
-    void generateHitbox();
+    qreal getAngle();
 public slots:
     void move();
 
 private:
+    QPointF previousLocation;
     int circumference;
     int directionOfSpin; // ±1
     int angle;           // [0-360]
     int step;
     int spin;
-    QGraphicsRectItem *hitbox;
+    Hitbox *hitbox;
     // public slots:
 };
+
 #endif
 
 /*

@@ -16,6 +16,7 @@ window::window()
 window::~window()
 {
     delete welcomeScene;
+    delete editScene;
 }
 
 void window::mainWindow()
@@ -31,7 +32,7 @@ void window::mainWindow()
     bxPos = this->width() / 2 - loadGameButton->boundingRect().width() / 2;
     byPos = 475;
     loadGameButton->setPos(bxPos, byPos);
-    connect(loadGameButton, SIGNAL(clicked()), this, SLOT(start()));
+    connect(loadGameButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
     welcomeScene->addItem(loadGameButton);
 }
 void window::editWindowSignal()
@@ -49,9 +50,8 @@ void window::editWindowSignal()
     playground->setPen(pen);
     editScene->addItem(playground);
 
-
     barrierC *edgeTop = new barrierC(playground->x(), playground->y(), 500, 1, playground);
-    edgeTop->setPos(0,0);
+    edgeTop->setPos(0, 0);
     pen.setColor(Qt::cyan);
     edgeTop->setPen(pen);
     editScene->addItem(edgeTop);
@@ -72,15 +72,25 @@ void window::editWindowSignal()
     edgeRight->setPen(pen);
     editScene->addItem(edgeRight);
 
-    Robot *rob1 = new Robot(playground->x(), playground->y(), 50, 50, playground);
-    rob1->setPos(playground->x(), playground->y());
+    barrierC *bar1 = new barrierC(playground->x(), playground->y(), 100, 100, playground);
+    bar1->setPos(250, 250);
+    pen.setColor(Qt::magenta);
+    bar1->setPen(pen);
+    editScene->addItem(bar1);
+
+    barrierC *bar2 = new barrierC(playground->x(), playground->y(), 100, 100, playground);
+    bar2->setPos(50, 50);
+    pen.setColor(Qt::magenta);
+    bar2->setPen(pen);
+    editScene->addItem(bar2);
+
+    Robot *rob1 = new Robot(0, 0, 50, 50, playground);
     QBrush brush(Qt::blue);
     brush.setColor(Qt::darkMagenta);
     rob1->setBrush(brush);
 
     QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), rob1, SLOT(move()));
-    timer->start(70);
-
+    timer->start(50);
     editScene->addItem(rob1);
 }
