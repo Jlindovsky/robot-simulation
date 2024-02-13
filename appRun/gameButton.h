@@ -6,22 +6,23 @@
 #include <QBrush>
 #include <QGraphicsSceneMouseEvent>
 
-class gameButton: public QObject, public QGraphicsRectItem
+class gameButton : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 public:
     // constructors
-    gameButton(QString name, QGraphicsItem* parent=NULL);
+    gameButton(QString name, int x, int y, int w, int h, QGraphicsItem *parent = NULL);
 
     // public methods (events)
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     // possible extras
-    //void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-    //void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+    // void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
+    // void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 signals:
     void clicked();
+
 private:
-    QGraphicsTextItem* text;
+    QGraphicsTextItem *text;
 };
 
 #endif // GAMEBUTTON_H

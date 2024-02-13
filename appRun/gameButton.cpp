@@ -1,8 +1,9 @@
 #include "gameButton.h"
 
-gameButton::gameButton(QString name, QGraphicsItem *parent)
+gameButton::gameButton(QString name, int x, int y, int w, int h, QGraphicsItem *parent)
 {
-    setRect(0, 0, 200, 50);
+    setRect(0, 0, w, h);
+    setPos(x, y);
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::darkCyan);
@@ -15,9 +16,7 @@ gameButton::gameButton(QString name, QGraphicsItem *parent)
     text->setPos(xPos, yPos);
 }
 
-void gameButton::mousePressEvent(QGraphicsSceneMouseEvent *event )
+void gameButton::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     emit clicked();
 }
-
-
