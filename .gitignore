@@ -7,4 +7,4 @@ app
 build-*
 build/*
 myBuild/
-
+CMakeLists.txt.user
