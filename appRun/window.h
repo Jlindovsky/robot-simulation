@@ -11,6 +11,26 @@
 #include "barrierC.h"
 #include "robot.h"
 
+typedef enum inputType
+{
+    BAR,
+    AR,
+    RCR,
+    NTH
+}inputType;
+
+typedef struct inputData
+{
+    inputType which;
+    union data
+    {
+        barrierC * bar;
+        Robot * ar;
+        Robot * rcr;
+    };
+}inputData;
+
+
 // UI controler
 class window : public QGraphicsView
 {
@@ -29,6 +49,7 @@ public slots:
     //      void loadGame();
     //      void chosenFile();
     void editWindowSignal();
+    void clickInEdit(inputData *,int,int);
     //      void playGame();
 
 private:
