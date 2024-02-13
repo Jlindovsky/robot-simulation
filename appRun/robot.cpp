@@ -69,7 +69,7 @@ void Robot::move()
     }
     else
     {
-
+        calculateHit(step);
     }
     // scene()->removeItem(hitbox);
     // delete (hitbox);
