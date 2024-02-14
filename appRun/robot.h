@@ -15,6 +15,8 @@ class Robot : public QObject, public QGraphicsEllipseItem
 public:
     Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent);
     void calculateHit(int step);
+public slots:
+    virtual void move();
 
 protected:
     QPointF previousLocation;
