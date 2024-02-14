@@ -4,12 +4,15 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 #include <QMouseEvent>
+#include <QKeyEvent>
 #include <QList>
 #include <QPen>
 #include <QTimer>
 #include "gameButton.h"
 #include "barrierC.h"
+#include "robot.h"
 #include "ARobot.h"
+#include "RCRobot.h"
 
 #define SIZE_R 50
 #define SIZE_B 75
@@ -63,17 +66,13 @@ public:
     void mainWindow();
     void editWindow();
     void playWindow();
+    void keyPressEvent(QKeyEvent*event)override;
     QGraphicsScene *welcomeScene;
     QGraphicsScene *editScene;
-
+    
 public slots:
-    //      void newGame();
-    //      void loadGame();
-    //      void chosenFile();
     void editWindowSignal();
     void clickInEdit(inputData *, int, int);
     //      void playGame();
 
-private:
-    // scene atributes
 };

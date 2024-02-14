@@ -24,7 +24,7 @@ void ARobot::move()
 
             angle = ((angle + (directionOfSpin * spin)) + 360) % 360;
             hit = true;
-            qDebug() << "Hit!" << ((colliding_items[i])) << Qt::endl;
+           // qDebug() << "Hit!" << ((colliding_items[i])) << Qt::endl;
         }
     }
     setPos(previousLocation);

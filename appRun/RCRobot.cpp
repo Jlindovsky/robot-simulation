@@ -5,9 +5,21 @@ RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent,int sensor
 {
     sensor = sensorIN;
     directionOfSpin = 1;
+    setFlag(QGraphicsItem::ItemIsFocusable);
 }
 
 void RCRobot::move()
 {
-
+    qDebug()<<"moving";
 }
+void RCRobot::handleKeyPressEvent(QKeyEvent*key)
+{
+//todo
+}
+void RCRobot::mousePressEvent(QGraphicsSceneMouseEvent * event)
+{
+    setFocus();
+    qDebug()<<"cliked"<<(this)->pos();
+}
+
+

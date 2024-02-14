@@ -35,6 +35,7 @@ void window::mainWindow()
     connect(loadGameButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
     welcomeScene->addItem(loadGameButton);
 }
+
 void window::editWindowSignal()
 {
     // set up the scene
@@ -130,6 +131,14 @@ void window::editWindowSignal()
     brushRob.setColor(Qt::green);
     rob3->setBrush(brushRob);
 
+    RCRobot *RCrob1 = new RCRobot(250, 100, 50, playground, 20);
+    brushRob.setColor(Qt::green);
+    RCrob1->setBrush(brushRob);
+
+    RCRobot *RCrob2 = new RCRobot(20, 200, 50, playground, 20);
+    brushRob.setColor(Qt::green);
+    RCrob2->setBrush(brushRob);
+
     QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), rob1, SLOT(move()));
     QObject::connect(timer, SIGNAL(timeout()), rob2, SLOT(move()));
@@ -138,6 +147,8 @@ void window::editWindowSignal()
     editScene->addItem(rob1);
     editScene->addItem(rob2);
     editScene->addItem(rob3);
+    editScene->addItem(RCrob1);
+    editScene->addItem(RCrob2);
 
     QLineEdit *lineEdit = new QLineEdit;
     // Set an integer validator to restrict input to the range [0, 500]
@@ -148,4 +159,21 @@ void window::editWindowSignal()
 
     lineEdit->setGeometry(50, 60, 100, 30); // Adjust position and size as needed
     editScene->addWidget(lineEdit);
+}
+
+void window::keyPressEvent(QKeyEvent*event)
+{
+    qDebug()<<event->key()<<"window";
+    //if arrow key
+    if(items().size()>0)
+    {
+        foreach (QGraphicsItem *item, items()) {
+            if (item->hasFocus()) {
+                auto tmp = dynamic_cast<RCRobot*>(item);
+                //handle key
+                tmp->move();
+            }
+        }
+    }
+
 }

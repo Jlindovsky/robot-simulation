@@ -17,7 +17,8 @@ public:
     void calculateHit(int step);
 public slots:
     virtual void move();
-
+signals:
+    void clicked();
 protected:
     QPointF previousLocation;
     int circumference;
