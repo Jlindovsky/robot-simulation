@@ -1,4 +1,8 @@
 #include "window.h"
+#include <QLineEdit>
+#include <QIntValidator>
+#include <QLabel>
+#include <QHBoxLayout>
 
 window::window()
 {
@@ -133,4 +137,14 @@ void window::editWindowSignal()
     editScene->addItem(rob1);
     editScene->addItem(rob2);
     editScene->addItem(rob3);
+
+    QLineEdit *lineEdit = new QLineEdit;
+    // Set an integer validator to restrict input to the range [0, 500]
+    QIntValidator *validator = new QIntValidator(0, 500);
+    lineEdit->setValidator(validator);
+    // Create a label to describe the input
+    QLabel *label = new QLabel("Enter a number between 0 and 500:");
+
+    lineEdit->setGeometry(50, 60, 100, 30); // Adjust position and size as needed
+    editScene->addWidget(lineEdit);
 }
