@@ -74,25 +74,33 @@ void window::editWindowSignal()
     rPanel->setPen(pen);
     editScene->addItem(rPanel);
 
-    gameButton *robotButton = new gameButton(QString("new"), 50, 50, 50, 20, iPanel);
-    connect(robotButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
-    editScene->addItem(robotButton);
+    gameButton *robotAButton = new gameButton(QString("Auto Robot"), 50, 50, 80, 20, iPanel);
+    connect(robotAButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
+    editScene->addItem(robotAButton);
 
-    barrierC *edgeTop = new barrierC(0, 0, 824, 1, playground);
+    gameButton *robotRButton = new gameButton(QString("RC robot"), 50, 300, 80, 20, iPanel);
+    connect(robotRButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
+    editScene->addItem(robotRButton);
+
+    gameButton *barrierButton = new gameButton(QString("Barrier"), 50, 550, 80, 20, iPanel);
+    connect(barrierButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
+    editScene->addItem(barrierButton);
+
+    barrierC *edgeTop = new barrierC(0, 0, PLAY_W, 1, playground);
     pen.setColor(Qt::black);
     edgeTop->setPen(pen);
     editScene->addItem(edgeTop);
 
-    barrierC *edgeBottom = new barrierC(0, 650, 824, 1, playground);
+    barrierC *edgeBottom = new barrierC(0, PLAY_H, PLAY_W, 1, playground);
     edgeBottom->setPen(pen);
     editScene->addItem(edgeBottom);
 
-    barrierC *edgeLeft = new barrierC(0, 0, 1, 650, playground);
+    barrierC *edgeLeft = new barrierC(0, 0, 1, PLAY_H, playground);
 
     edgeLeft->setPen(pen);
     editScene->addItem(edgeLeft);
 
-    barrierC *edgeRight = new barrierC(824, 0, 1, 650, playground);
+    barrierC *edgeRight = new barrierC(PLAY_W, 0, 1, PLAY_H, playground);
     edgeRight->setPen(pen);
     editScene->addItem(edgeRight);
 
@@ -113,11 +121,16 @@ void window::editWindowSignal()
     Robot *rob2 = new Robot(450, 450, 50, playground);
     brushRob.setColor(Qt::yellow);
     rob2->setBrush(brushRob);
+    Robot *rob3 = new Robot(450, 100, 50, playground);
+    brushRob.setColor(Qt::green);
+    rob3->setBrush(brushRob);
 
     QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), rob1, SLOT(move()));
     QObject::connect(timer, SIGNAL(timeout()), rob2, SLOT(move()));
-    timer->start(100);
+    QObject::connect(timer, SIGNAL(timeout()), rob3, SLOT(move()));
+    timer->start(30);
     editScene->addItem(rob1);
     editScene->addItem(rob2);
+    editScene->addItem(rob3);
 }
