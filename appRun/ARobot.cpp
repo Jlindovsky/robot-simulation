@@ -1,9 +1,35 @@
 #include "ARobot.h"
 
-ARobot::ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent) : Robot(x, y, w, parent)
+ARobot::ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIn, int directionOfSpinIn, int spinIn) : Robot(x, y, w, parent)
 {
-    sensor = 40;
-    directionOfSpin = 1; // tmp
-    spin = 35;           // tmp
-    this->setPos(mapToParent(x, y));
+    sensor = sensorIn;
+    directionOfSpin = directionOfSpinIn; // tmp
+    spin = spinIn;                       // tmp
+}
+
+void ARobot::move()
+{
+    calculateHit(sensor);
+    //  get a list of all the items currently colliding with this bullet
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+    bool hit = false;
+    // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+    {
+        barrierC *barrierItem = dynamic_cast<barrierC *>(colliding_items[i]);
+
+        // Check if the dynamic_cast was successful and the object is a barrierC or its derived class
+        if (barrierItem != nullptr && typeid(*barrierItem) == typeid(barrierC))
+        {
+
+            angle = ((angle + (directionOfSpin * spin)) + 360) % 360;
+            hit = true;
+            qDebug() << "Hit!" << ((colliding_items[i])) << Qt::endl;
+        }
+    }
+    setPos(previousLocation);
+    if (!hit)
+    {
+        calculateHit(step);
+    }
 }

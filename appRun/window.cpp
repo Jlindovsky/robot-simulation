@@ -117,15 +117,16 @@ void window::editWindowSignal()
     bar2->setPen(pen);
     editScene->addItem(bar2);
 
-    Robot *rob1 = new Robot(150, 150, 50, playground);
+    ARobot *rob1 = new ARobot(150, 150, 50, playground, 40, 1, 30);
     QBrush brushRob(Qt::blue);
     brushRob.setColor(Qt::darkMagenta);
     rob1->setBrush(brushRob);
 
-    Robot *rob2 = new Robot(450, 450, 50, playground);
+    ARobot *rob2 = new ARobot(450, 450, 50, playground, 30, -1, 40);
     brushRob.setColor(Qt::yellow);
     rob2->setBrush(brushRob);
-    Robot *rob3 = new Robot(450, 100, 50, playground);
+
+    ARobot *rob3 = new ARobot(450, 100, 50, playground, 20, 1, 50);
     brushRob.setColor(Qt::green);
     rob3->setBrush(brushRob);
 

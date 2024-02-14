@@ -9,7 +9,7 @@
 #include <QTimer>
 #include "gameButton.h"
 #include "barrierC.h"
-#include "robot.h"
+#include "ARobot.h"
 
 #define SIZE_R 50
 #define SIZE_B 75
