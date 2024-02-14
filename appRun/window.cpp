@@ -78,13 +78,13 @@ void window::editWindowSignal()
     rPanel->setPen(pen);
     editScene->addItem(rPanel);
 
-    gameButton *robotAButton = new gameButton(QString("Auto Robot"), 50, 50, 80, 20, iPanel);
-    connect(robotAButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
-    editScene->addItem(robotAButton);
+    gameButton *ARButton = new gameButton(QString("Auto Robot"), 50, 50, 80, 20, iPanel);
+    connect(ARButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
+    editScene->addItem(ARButton);
 
-    gameButton *robotRButton = new gameButton(QString("RC robot"), 50, 300, 80, 20, iPanel);
-    connect(robotRButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
-    editScene->addItem(robotRButton);
+    gameButton *RCRButton = new gameButton(QString("RC robot"), 50, 300, 80, 20, iPanel);
+    connect(RCRButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
+    editScene->addItem(RCRButton);
 
     gameButton *barrierButton = new gameButton(QString("Barrier"), 50, 550, 80, 20, iPanel);
     connect(barrierButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));

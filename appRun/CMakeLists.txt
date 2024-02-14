@@ -28,6 +28,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         gameButton.h gameButton.cpp
         editcontroler.h editcontroler.cpp
         backend.cpp
+        ARobot.cpp ARobot.h
+        RCRobot.cpp RCRobot.h
 
     )
 # Define target properties for Android with Qt 6 as:

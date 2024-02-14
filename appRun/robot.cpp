@@ -3,18 +3,12 @@
 Robot::Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent)
     : QGraphicsEllipseItem(0, 0, w, w, parent)
 {
-    sensor = 40;
+
     circumference = w / 2;
     angle = 270;
-    directionOfSpin = 1; // tmp
     step = 20;
-    spin = 35; // tmp
     this->setPos(mapToParent(x, y));
     // hitbox = new Hitbox(this);
-}
-qreal Robot::getAngle()
-{
-    return this->angle;
 }
 
 void Robot::calculateHit(int step1)
