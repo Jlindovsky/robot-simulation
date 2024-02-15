@@ -1,25 +1,38 @@
 #include "RCRobot.h"
 
-RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent,int sensorIN)
-: Robot(x, y, w, parent)
+RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIN)
+    : Robot(x, y, w, parent)
 {
     sensor = sensorIN;
     directionOfSpin = 1;
     setFlag(QGraphicsItem::ItemIsFocusable);
 }
 
-void RCRobot::move()
+void RCRobot::moveWithKey(QKeyEvent *event)
 {
-    qDebug()<<"moving";
+    if (event->key() == UPARROW)
+    {
+        qDebug() << "moving up";
+    }
+    else if (event->key() == LARROW)
+    {
+        qDebug() << "rotate Left";
+    }
+    else if (event->key() == RARROW)
+    {
+        qDebug() << "rotate Right";
+    }
+    else
+    {
+        qDebug() << "jinej klic";
+    }
 }
-void RCRobot::handleKeyPressEvent(QKeyEvent*key)
+void RCRobot::handleKeyPressEvent(QKeyEvent *key)
 {
-//todo
+    // todo
 }
-void RCRobot::mousePressEvent(QGraphicsSceneMouseEvent * event)
+void RCRobot::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     setFocus();
-    qDebug()<<"cliked"<<(this)->pos();
+    qDebug() << "cliked" << (this)->pos();
 }
-
-

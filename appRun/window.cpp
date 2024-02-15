@@ -154,6 +154,7 @@ void window::editWindowSignal()
     // Set an integer validator to restrict input to the range [0, 500]
     QIntValidator *validator = new QIntValidator(0, 500);
     lineEdit->setValidator(validator);
+    lineEdit->installEventFilter(this);
     // Create a label to describe the input
     QLabel *label = new QLabel("Enter a number between 0 and 500:");
 
@@ -163,15 +164,27 @@ void window::editWindowSignal()
 
 void window::keyPressEvent(QKeyEvent*event)
 {
-    qDebug()<<event->key()<<"window";
     //if arrow key
+    if(event->key() == Qt::Key_Space)
+    {
+        setFocus();
+    }
     if(items().size()>0)
     {
         foreach (QGraphicsItem *item, items()) {
-            if (item->hasFocus()) {
-                auto tmp = dynamic_cast<RCRobot*>(item);
-                //handle key
-                tmp->move();
+            // if (item->hasFocus() && (event->key() == UPARROW || event->key() == LARROW || event->key() == RARROW)) {
+            //     auto tmp = dynamic_cast<RCRobot*>(item);
+            //     //handle key
+            //     tmp->moveWithKey(event);
+            // }
+            if(item->hasFocus() && item->type() == ARobot::Type)
+            {
+                qDebug()<<"ARobot";
+            }
+            else if(item->hasFocus() && item->type() == RCRobot::Type)
+            {
+                qDebug()<<"RCRobot";
+                //auto tmp = dynamic_cast<QGraphicsTextItem*>(item);
             }
         }
     }

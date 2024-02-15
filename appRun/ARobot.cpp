@@ -32,4 +32,5 @@ void ARobot::move()
     {
         calculateHit(step);
     }
+    //generate direction
 }

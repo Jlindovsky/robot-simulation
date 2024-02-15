@@ -4,6 +4,11 @@
 #include "robot.h"
 #include <QKeyEvent>
 
+#define UPARROW 16777235
+#define LARROW 16777234
+#define RARROW 16777236
+
+
 class RCRobot : public Robot
 {
 public:
@@ -12,7 +17,7 @@ public:
    // void keyPressEvent(QKeyEvent * event)override;
     void handleKeyPressEvent(QKeyEvent* event);
 public slots:
-    void move() override;
+    void moveWithKey(QKeyEvent*event);
 
 };
 
