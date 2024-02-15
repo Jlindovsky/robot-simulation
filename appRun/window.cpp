@@ -51,16 +51,9 @@ void window::editWindowSignal()
     playground->setPen(pen);
     editScene->addItem(playground);
 
-    QGraphicsRectItem *iPanel = new QGraphicsRectItem(0, 0, IPANEL_W, IPANEL_H);
-    iPanel->setPos(IPANEL_X, IPANEL_Y);
-    QBrush brush;
-    brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::white);
-    iPanel->setBrush(brush);
-    pen.setColor(Qt::white);
-    iPanel->setPen(pen);
-    editScene->addItem(iPanel);
+    editBuilder = new editControler(editScene);
 
+    QBrush brush;
     QGraphicsRectItem *pPanel = new QGraphicsRectItem(0, 0, PPANEL_W, PPANEL_H);
     pPanel->setPos(PPANEL_X, PPANEL_Y);
     brush.setStyle(Qt::SolidPattern);
@@ -79,17 +72,6 @@ void window::editWindowSignal()
     rPanel->setPen(pen);
     editScene->addItem(rPanel);
 
-    gameButton *ARButton = new gameButton(QString("Auto Robot"), 50, 50, 80, 20, iPanel);
-    connect(ARButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
-    editScene->addItem(ARButton);
-
-    gameButton *RCRButton = new gameButton(QString("RC robot"), 50, 300, 80, 20, iPanel);
-    connect(RCRButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
-    editScene->addItem(RCRButton);
-
-    gameButton *barrierButton = new gameButton(QString("Barrier"), 50, 550, 80, 20, iPanel);
-    connect(barrierButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
-    editScene->addItem(barrierButton);
 
     barrierC *edgeTop = new barrierC(0, 0, PLAY_W, 1, playground);
     pen.setColor(Qt::black);
@@ -150,43 +132,7 @@ void window::editWindowSignal()
     editScene->addItem(RCrob1);
     editScene->addItem(RCrob2);
 
-    QLineEdit *lineEdit = new QLineEdit;
-    // Set an integer validator to restrict input to the range [0, 500]
-    QIntValidator *validator = new QIntValidator(0, 500);
-    lineEdit->setValidator(validator);
-    lineEdit->installEventFilter(this);
-    // Create a label to describe the input
-    QLabel *label = new QLabel("Enter a number between 0 and 500:");
-
-    lineEdit->setGeometry(50, 60, 100, 30); // Adjust position and size as needed
-    editScene->addWidget(lineEdit);
-}
-
-void window::keyPressEvent(QKeyEvent*event)
-{
-    //if arrow key
-    if(event->key() == Qt::Key_Space)
-    {
-        setFocus();
-    }
-    if(items().size()>0)
-    {
-        foreach (QGraphicsItem *item, items()) {
-            // if (item->hasFocus() && (event->key() == UPARROW || event->key() == LARROW || event->key() == RARROW)) {
-            //     auto tmp = dynamic_cast<RCRobot*>(item);
-            //     //handle key
-            //     tmp->moveWithKey(event);
-            // }
-            if(item->hasFocus() && item->type() == ARobot::Type)
-            {
-                qDebug()<<"ARobot";
-            }
-            else if(item->hasFocus() && item->type() == RCRobot::Type)
-            {
-                qDebug()<<"RCRobot";
-                //auto tmp = dynamic_cast<QGraphicsTextItem*>(item);
-            }
-        }
-    }
 
 }
+
+

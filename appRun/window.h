@@ -9,10 +9,9 @@
 #include <QPen>
 #include <QTimer>
 #include "gameButton.h"
-#include "barrierC.h"
-#include "robot.h"
-#include "ARobot.h"
-#include "RCRobot.h"
+
+#include "editcontroler.h"
+//lib refactor
 
 #define SIZE_R 50
 #define SIZE_B 75
@@ -37,13 +36,7 @@
 #define RPANEL_W 824
 #define RPANEL_H 168
 
-typedef enum inputType
-{
-    BAR,
-    AR,
-    RCR,
-    NTH
-} inputType;
+
 
 typedef struct inputData
 {
@@ -56,6 +49,8 @@ typedef struct inputData
     };
 } inputData;
 
+
+
 // UI controler
 class window : public QGraphicsView
 {
@@ -66,13 +61,14 @@ public:
     void mainWindow();
     void editWindow();
     void playWindow();
-    void keyPressEvent(QKeyEvent*event)override;
+    // void keyPressEvent(QKeyEvent*event)override; maybe some other time
     QGraphicsScene *welcomeScene;
     QGraphicsScene *editScene;
-    
+
 public slots:
     void editWindowSignal();
     void clickInEdit(inputData *, int, int);
     //      void playGame();
-
+private:
+    editControler *editBuilder;
 };
