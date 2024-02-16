@@ -11,7 +11,9 @@
 #include "ARobot.h"
 #include "RCRobot.h"
 #include "gameButton.h"
+#include <vector>
 #include <qvalidator.h>
+using namespace std;
 
 // InsertPanel sizes
 #define IPANEL_X 0
@@ -29,15 +31,15 @@
 #define RPANEL_W 824
 #define RPANEL_H 168
 
-typedef enum inputType
+enum inputType
 {
     BAR,
     AR,
     RCR,
     NTH
-} inputType;
+};
 
-typedef struct editSlotARobot
+struct editSlotARobot
 {
     QGraphicsTextItem *name;
 
@@ -56,9 +58,9 @@ typedef struct editSlotARobot
     gameButton *buildARobot;
 
     ARobot *rob;
-} editSlotARobot;
+};
 
-typedef struct editSlotRCRobot
+struct editSlotRCRobot
 {
     QGraphicsTextItem *name;
 
@@ -69,14 +71,30 @@ typedef struct editSlotRCRobot
     gameButton *buildRCRobot;
 
     RCRobot *rob;
-} editSlotRCRobot;
+};
 
-typedef struct editSlotBarrier
+struct editSlotBarrier
 {
     QGraphicsTextItem *name;
     gameButton *buildBarrier;
     barrierC *bar;
-} editSlotBarrier;
+};
+
+struct bottomSlot
+{
+    //active robots
+    vector<RCRobot*> activable;
+    gameButton *up;
+    gameButton *left;
+    gameButton *right;
+};
+
+struct playSlot
+{
+    gameButton *play;
+    gameButton *pause;
+    gameButton *save;
+};
 
 class editControler
 {
