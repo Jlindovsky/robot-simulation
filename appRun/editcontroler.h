@@ -104,7 +104,6 @@ public:
     void buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene);
 
-private:
     editSlotARobot ASlot;
     editSlotRCRobot RCSlot;
     editSlotBarrier  BARSlot;

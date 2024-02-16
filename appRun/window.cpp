@@ -98,6 +98,7 @@ void window::editWindowSignal()
     RCRobot *RCrob1 = new RCRobot(250, 100, 50, playground, 20);
     brushRob.setColor(Qt::green);
     RCrob1->setBrush(brushRob);
+    connect(editBuilder->bottomSlot.up,SIGNAL(clicked()),RCrob1,SLOT(moveUp()));
 
     RCRobot *RCrob2 = new RCRobot(20, 200, 50, playground, 20);
     brushRob.setColor(Qt::green);
