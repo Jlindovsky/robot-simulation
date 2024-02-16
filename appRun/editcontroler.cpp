@@ -94,13 +94,16 @@ void editControler::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 
 void editControler::buildConstrolsEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
-    bottomSlot.up = new gameButton(QString("up"), 50, 10, 50, 50, parent);
+    bottomSlot.up = new gameButton(QString("up"), 70, 10, 50, 50, parent);
+    bottomSlot.left = new gameButton(QString("left"), 130, 10, 50, 50, parent);
+    bottomSlot.right = new gameButton(QString("right"), 190, 10, 50, 50, parent);
     scene->addItem(bottomSlot.up);
+    scene->addItem(bottomSlot.left);
+    scene->addItem(bottomSlot.right);
     // fixed first RCRobot in scene
-    gameButton * robButton1 = new gameButton(QString("rob1"),10,10,20,30,parent);
+    gameButton *robButton1 = new gameButton(QString("rob1"), 10, 10, 50, 50, parent);
     bottomSlot.robs.push_back(robButton1);
     scene->addItem(robButton1);
-    
 }
 
 editControler::editControler(QGraphicsScene *scene)
