@@ -37,8 +37,10 @@ void window::mainWindow()
 }
 void window::moveUpActive()
 {
+    //todo make sure you in play mode -> move only when robot is chosen
     foreach (QGraphicsItem *item, items()) {
             if (item->hasFocus()) {
+                //theoreticly throw and catch for dynamic cast
                 auto tmp = dynamic_cast<RCRobot*>(item);
                 tmp->moveUp();
             }
