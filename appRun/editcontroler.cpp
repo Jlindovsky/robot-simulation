@@ -18,13 +18,12 @@ void editControler::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     RCSlot.sensorInput->setValidator(RCSlot.sensorValidator);
     RCSlot.sensorInput->setGeometry(RCSlot.name->x(), RCSlot.name->y() + 80, 100, 30); // Adjust position and size as needed
 
-
     RCSlot.buildRCRobot = new gameButton(QString("build ARobot"), RCSlot.name->x(), RCSlot.name->y() + 120, 100, 30, parent);
 
     scene->addItem(RCSlot.name);
     scene->addItem(RCSlot.sensorText);
     scene->addWidget(RCSlot.sensorInput);
-    //magic bracho
+    // magic bracho
     scene->addItem(RCSlot.buildRCRobot);
 }
 void editControler::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
@@ -76,9 +75,8 @@ void editControler::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     scene->addWidget(ASlot.directionInput);
     scene->addItem(ASlot.spinText);
     scene->addWidget(ASlot.spinInput);
-    //magic bracho
+    // magic bracho
     scene->addItem(ASlot.buildARobot);
-
 }
 void editControler::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
@@ -87,13 +85,13 @@ void editControler::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     BSlot.name->setPos(50, 480);
     BSlot.name->setDefaultTextColor(Qt::black);
 
-
     BSlot.buildBarrier = new gameButton(QString("build Barrier"), BSlot.name->x(), BSlot.name->y() + 40, 100, 30, parent);
 
     scene->addItem(BSlot.name);
-    //magic bracho
+    // magic bracho
     scene->addItem(BSlot.buildBarrier);
 }
+
 editControler::editControler(QGraphicsScene *scene)
 {
     QGraphicsRectItem *iPanel = new QGraphicsRectItem(0, 0, IPANEL_W, IPANEL_H);
@@ -106,6 +104,20 @@ editControler::editControler(QGraphicsScene *scene)
     pen.setColor(Qt::white);
     iPanel->setPen(pen);
     scene->addItem(iPanel);
+
+    QGraphicsRectItem *pPanel = new QGraphicsRectItem(0, 0, PPANEL_W, PPANEL_H);
+    pPanel->setPos(PPANEL_X, PPANEL_Y);
+    brush.setStyle(Qt::SolidPattern);
+    pPanel->setPen(pen);
+    pPanel->setBrush(brush);
+    scene->addItem(pPanel);
+
+    QGraphicsRectItem *rPanel = new QGraphicsRectItem(0, 0, RPANEL_W, RPANEL_H);
+    rPanel->setPos(RPANEL_X, RPANEL_Y);
+    brush.setStyle(Qt::SolidPattern);
+    rPanel->setBrush(brush);
+    rPanel->setPen(pen);
+    scene->addItem(rPanel);
 
     buildRCREdit(iPanel, scene);
     buildAREdit(iPanel, scene);

@@ -54,24 +54,6 @@ void window::editWindowSignal()
     editBuilder = new editControler(editScene);
 
     QBrush brush;
-    QGraphicsRectItem *pPanel = new QGraphicsRectItem(0, 0, PPANEL_W, PPANEL_H);
-    pPanel->setPos(PPANEL_X, PPANEL_Y);
-    brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::green);
-    pen.setColor(Qt::green);
-    pPanel->setPen(pen);
-    pPanel->setBrush(brush);
-    editScene->addItem(pPanel);
-
-    QGraphicsRectItem *rPanel = new QGraphicsRectItem(0, 0, RPANEL_W, RPANEL_H);
-    rPanel->setPos(RPANEL_X, RPANEL_Y);
-    brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::red);
-    rPanel->setBrush(brush);
-    pen.setColor(Qt::red);
-    rPanel->setPen(pen);
-    editScene->addItem(rPanel);
-
 
     barrierC *edgeTop = new barrierC(0, 0, PLAY_W, 1, playground);
     pen.setColor(Qt::black);
@@ -131,8 +113,4 @@ void window::editWindowSignal()
     editScene->addItem(rob3);
     editScene->addItem(RCrob1);
     editScene->addItem(RCrob2);
-
-
 }
-
-
