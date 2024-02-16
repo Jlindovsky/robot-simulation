@@ -8,7 +8,6 @@
 #include <QList>
 #include <QPen>
 #include <QTimer>
-#include "gameButton.h"
 
 #include "editcontroler.h"
 //lib refactor
