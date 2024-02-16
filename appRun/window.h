@@ -68,7 +68,7 @@ public slots:
     void editWindowSignal();
     void clickInEdit(inputData *, int, int);
     void moveUpActive();
-    void setActiveRCR(RCRobot * rob);
+    void setActiveRCR(RCRobot *);
     //      void playGame();
 private:
     editControler *editBuilder;
