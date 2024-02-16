@@ -10,7 +10,7 @@
 #include <QTimer>
 
 #include "editcontroler.h"
-//lib refactor
+// lib refactor
 
 #define SIZE_R 50
 #define SIZE_B 75
@@ -35,8 +35,6 @@
 #define RPANEL_W 824
 #define RPANEL_H 168
 
-
-
 typedef struct inputData
 {
     inputType which;
@@ -47,8 +45,6 @@ typedef struct inputData
         Robot *rcr;
     };
 } inputData;
-
-
 
 // UI controler
 class window : public QGraphicsView
@@ -68,9 +64,12 @@ public slots:
     void editWindowSignal();
     void clickInEdit(inputData *, int, int);
     void moveUpActive();
+    void rotateLeftActive();
+    void rotateRightActive();
+
     void setActiveRCR(RCRobot *);
     //      void playGame();
 private:
     editControler *editBuilder;
-    RCRobot* activeRCR;
+    RCRobot *activeRCR;
 };

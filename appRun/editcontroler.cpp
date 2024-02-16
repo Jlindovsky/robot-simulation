@@ -103,7 +103,10 @@ void editControler::buildConstrolsEdit(QGraphicsItem *parent, QGraphicsScene *sc
     // fixed first RCRobot in scene
     gameButton *robButton1 = new gameButton(QString("rob1"), 10, 10, 50, 50, parent);
     bottomSlot.robs.push_back(robButton1);
-    scene->addItem(robButton1);
+    scene->addItem(bottomSlot.robs[0]);
+    gameButton *robButton2 = new gameButton(QString("rob2"), 10, 70, 50, 50, parent);
+    bottomSlot.robs.push_back(robButton2);
+    scene->addItem(bottomSlot.robs[1]);
 }
 
 editControler::editControler(QGraphicsScene *scene)

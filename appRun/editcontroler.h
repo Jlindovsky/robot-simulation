@@ -97,8 +97,9 @@ struct playSlot
     gameButton *save;
 };
 
-class editControler
+class editControler:public QObject
 {
+    Q_OBJECT
 public:
     editControler(QGraphicsScene *scene);
     void buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene);

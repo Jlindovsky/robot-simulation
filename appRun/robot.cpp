@@ -6,7 +6,6 @@ Robot::Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent)
 
     circumference = w / 2;
     angle = 270;
-    step = 20;
     this->setPos(mapToParent(x, y));
     // hitbox = new Hitbox(this);
 }

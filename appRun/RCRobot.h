@@ -14,9 +14,6 @@ public:
     RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIN);
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     // void keyPressEvent(QKeyEvent * event)override;
-
-public slots:
-    void moveWithKey(QKeyEvent *event);
     void moveUp();
     void rotateLeft();
     void rotateRight();

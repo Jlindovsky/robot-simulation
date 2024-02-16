@@ -5,28 +5,11 @@ RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int senso
 {
     sensor = sensorIN;
     directionOfSpin = 1;
+    spin = 30;
+    step = sensorIN/2;
     setFlag(QGraphicsItem::ItemIsFocusable);
 }
 
-void RCRobot::moveWithKey(QKeyEvent *event)
-{
-    if (event->key() == UPARROW)
-    {
-        qDebug() << "moving up";
-    }
-    else if (event->key() == LARROW)
-    {
-        qDebug() << "rotate Left";
-    }
-    else if (event->key() == RARROW)
-    {
-        qDebug() << "rotate Right";
-    }
-    else
-    {
-        qDebug() << "jinej klic";
-    }
-}
 void RCRobot::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 
@@ -37,7 +20,6 @@ void RCRobot::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void RCRobot::moveUp()
 {
-    qDebug() << "moving up in |RCR|";
     calculateHit(sensor);
     QList<QGraphicsItem *> colliding_items = collidingItems();
     bool hit = false;
@@ -57,9 +39,9 @@ void RCRobot::moveUp()
 }
 void RCRobot::rotateLeft()
 {
-    angle += (spin + 360) + 360;
+    angle = (angle - spin + 360) % 360;
 }
 void RCRobot::rotateRight()
 {
-    angle -= (spin + 360) + 360;
+    angle = (angle + spin + 360) % 360;
 }

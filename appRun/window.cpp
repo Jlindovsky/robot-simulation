@@ -37,6 +37,7 @@ void window::mainWindow()
 }
 void window::setActiveRCR(RCRobot *rob)
 {
+    qDebug() << "activate";
     QPen peero;
     peero.setColor(Qt::green);
     if (activeRCR != nullptr)
@@ -50,18 +51,21 @@ void window::setActiveRCR(RCRobot *rob)
 }
 void window::moveUpActive()
 {
-    // todo make sure you in play mode -> move only when robot is chosen
-    foreach (QGraphicsItem *item, items())
-    {
-        if (item != nullptr && item->hasFocus())
-        {
-            // theoreticly throw and catch for dynamic cast
-            qDebug() << "focused";
-            auto tmp = dynamic_cast<RCRobot *>(item);
-            tmp->moveUp();
-        }
-    }
+    qDebug() << "move bitch";
+    if (activeRCR)
+        activeRCR->moveUp();
 }
+void window::rotateLeftActive()
+{
+    if (activeRCR)
+        activeRCR->rotateLeft();
+}
+void window::rotateRightActive()
+{
+    if (activeRCR)
+        activeRCR->rotateRight();
+}
+
 void window::editWindowSignal()
 {
     // set up the scene
@@ -80,6 +84,9 @@ void window::editWindowSignal()
 
     editBuilder = new editControler(editScene);
     connect(editBuilder->bottomSlot.up, SIGNAL(clicked()), this, SLOT(moveUpActive()));
+    connect(editBuilder->bottomSlot.right, SIGNAL(clicked()), this, SLOT(rotateRightActive()));
+    connect(editBuilder->bottomSlot.left, SIGNAL(clicked()), this, SLOT(rotateLeftActive()));
+
     QBrush brush;
 
     barrierC *edgeTop = new barrierC(0, 0, PLAY_W, 1, playground);
@@ -123,18 +130,20 @@ void window::editWindowSignal()
     // rob3->setBrush(brushRob);
 
     RCRobot *RCrob1 = new RCRobot(250, 100, 50, playground, 20);
-    brushRob.setColor(Qt::green);
+    brushRob.setColor(Qt::white);
     RCrob1->setBrush(brushRob);
     editBuilder->bottomSlot.activable.push_back(RCrob1);
     // connect rob button
-    connect((editBuilder->bottomSlot.robs[0]), SIGNAL(clicked()), this, SLOT(setActiveRCR(RCrob1)));
+    connect(editBuilder->bottomSlot.robs[0], &gameButton::clicked, this, [=]()
+            { setActiveRCR(RCrob1); });
 
     RCRobot *RCrob2 = new RCRobot(20, 200, 50, playground, 20);
-    brushRob.setColor(Qt::green);
+    brushRob.setColor(Qt::white);
     RCrob2->setBrush(brushRob);
     editBuilder->bottomSlot.activable.push_back(RCrob2);
     // connect rob button
-    //connect((editBuilder->bottomSlot.robs[1]), SIGNAL(clicked()), this, SLOT(setActiveRCR(RCrob2)));
+    connect(editBuilder->bottomSlot.robs[1], &gameButton::clicked, this, [=]()
+            { setActiveRCR(RCrob2); });
 
     QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), rob1, SLOT(move()));
