@@ -9,6 +9,7 @@ gameButton::gameButton(QString name, int x, int y, int w, int h, QGraphicsItem *
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::darkCyan);
     setBrush(brush);
+    setFlag(QGraphicsItem::ItemIsFocusable,false);
     // draw the text
     text = new QGraphicsTextItem(name, this);
     int xPos = rect().width() / 2 - text->boundingRect().width() / 2;

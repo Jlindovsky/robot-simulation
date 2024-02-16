@@ -35,21 +35,38 @@ void window::mainWindow()
     connect(loadGameButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
     welcomeScene->addItem(loadGameButton);
 }
+void window::setActiveRCR(RCRobot *rob)
+{
+    QPen peero;
+    peero.setColor(Qt::green);
+    if (activeRCR != nullptr)
+    {
+        peero.setWidth(0);
+        activeRCR->setPen(peero);
+    }
+    peero.setWidth(4);
+    activeRCR = rob;
+    activeRCR->setPen(peero);
+}
 void window::moveUpActive()
 {
-    //todo make sure you in play mode -> move only when robot is chosen
-    foreach (QGraphicsItem *item, items()) {
-            if (item->hasFocus()) {
-                //theoreticly throw and catch for dynamic cast
-                auto tmp = dynamic_cast<RCRobot*>(item);
-                tmp->moveUp();
-            }
+    // todo make sure you in play mode -> move only when robot is chosen
+    foreach (QGraphicsItem *item, items())
+    {
+        if (item != nullptr && item->hasFocus())
+        {
+            // theoreticly throw and catch for dynamic cast
+            qDebug() << "focused";
+            auto tmp = dynamic_cast<RCRobot *>(item);
+            tmp->moveUp();
         }
+    }
 }
 void window::editWindowSignal()
 {
     // set up the scene
     editScene = new QGraphicsScene();
+    editScene->clear();
     editScene->setSceneRect(0, 0, 1024, 768);
     setScene(editScene);
 
@@ -62,7 +79,7 @@ void window::editWindowSignal()
     editScene->addItem(playground);
 
     editBuilder = new editControler(editScene);
-
+    connect(editBuilder->bottomSlot.up, SIGNAL(clicked()), this, SLOT(moveUpActive()));
     QBrush brush;
 
     barrierC *edgeTop = new barrierC(0, 0, PLAY_W, 1, playground);
@@ -97,31 +114,36 @@ void window::editWindowSignal()
     brushRob.setColor(Qt::darkMagenta);
     rob1->setBrush(brushRob);
 
-    ARobot *rob2 = new ARobot(450, 450, 50, playground, 30, -1, 40);
-    brushRob.setColor(Qt::yellow);
-    rob2->setBrush(brushRob);
+    // ARobot *rob2 = new ARobot(450, 450, 50, playground, 30, -1, 40);
+    // brushRob.setColor(Qt::yellow);
+    // rob2->setBrush(brushRob);
 
-    ARobot *rob3 = new ARobot(450, 100, 50, playground, 20, 1, 50);
-    brushRob.setColor(Qt::green);
-    rob3->setBrush(brushRob);
+    // ARobot *rob3 = new ARobot(450, 100, 50, playground, 20, 1, 50);
+    // brushRob.setColor(Qt::green);
+    // rob3->setBrush(brushRob);
 
     RCRobot *RCrob1 = new RCRobot(250, 100, 50, playground, 20);
     brushRob.setColor(Qt::green);
     RCrob1->setBrush(brushRob);
-    connect(editBuilder->bottomSlot.up,SIGNAL(clicked()),this,SLOT(moveUpActive()));
+    editBuilder->bottomSlot.activable.push_back(RCrob1);
+    // connect rob button
+    connect((editBuilder->bottomSlot.robs[0]), SIGNAL(clicked()), this, SLOT(setActiveRCR(RCrob1)));
 
     RCRobot *RCrob2 = new RCRobot(20, 200, 50, playground, 20);
     brushRob.setColor(Qt::green);
     RCrob2->setBrush(brushRob);
+    editBuilder->bottomSlot.activable.push_back(RCrob2);
+    // connect rob button
+    //connect((editBuilder->bottomSlot.robs[1]), SIGNAL(clicked()), this, SLOT(setActiveRCR(RCrob2)));
 
     QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), rob1, SLOT(move()));
-    QObject::connect(timer, SIGNAL(timeout()), rob2, SLOT(move()));
-    QObject::connect(timer, SIGNAL(timeout()), rob3, SLOT(move()));
+    // QObject::connect(timer, SIGNAL(timeout()), rob2, SLOT(move()));
+    // QObject::connect(timer, SIGNAL(timeout()), rob3, SLOT(move()));
     timer->start(30);
     editScene->addItem(rob1);
-    editScene->addItem(rob2);
-    editScene->addItem(rob3);
+    // editScene->addItem(rob2);
+    // editScene->addItem(rob3);
     editScene->addItem(RCrob1);
     editScene->addItem(RCrob2);
 }

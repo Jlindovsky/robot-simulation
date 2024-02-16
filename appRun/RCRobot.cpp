@@ -29,12 +29,15 @@ void RCRobot::moveWithKey(QKeyEvent *event)
 }
 void RCRobot::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    setFocus();
+
+    this->setFocus();
     qDebug() << "cliked" << (this)->pos();
 }
 
+
 void RCRobot::moveUp()
 {
+    qDebug() << "moving up in |RCR|";
     calculateHit(sensor);
     QList<QGraphicsItem *> colliding_items = collidingItems();
     bool hit = false;
@@ -47,8 +50,8 @@ void RCRobot::moveUp()
         if (barrierItem != nullptr && typeid(*barrierItem) == typeid(barrierC))
         {
             setPos(previousLocation);
-            return;
             qDebug() << "Hit! wont move";
+            return;
         }
     }
 }

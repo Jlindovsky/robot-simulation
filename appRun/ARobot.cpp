@@ -5,6 +5,7 @@ ARobot::ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorI
     sensor = sensorIn;
     directionOfSpin = directionOfSpinIn; // tmp
     spin = spinIn;                       // tmp
+    setFlag(QGraphicsItem::ItemIsFocusable,false);
 }
 
 void ARobot::move()

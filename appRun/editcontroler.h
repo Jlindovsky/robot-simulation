@@ -84,6 +84,7 @@ struct bottomSlot
 {
     // active robots
     vector<RCRobot *> activable;
+    vector<gameButton*> robs;
     gameButton *up;
     gameButton *left;
     gameButton *right;
