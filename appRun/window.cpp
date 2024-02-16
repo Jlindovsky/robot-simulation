@@ -35,7 +35,15 @@ void window::mainWindow()
     connect(loadGameButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
     welcomeScene->addItem(loadGameButton);
 }
-
+void window::moveUpActive()
+{
+    foreach (QGraphicsItem *item, items()) {
+            if (item->hasFocus()) {
+                auto tmp = dynamic_cast<RCRobot*>(item);
+                tmp->moveUp();
+            }
+        }
+}
 void window::editWindowSignal()
 {
     // set up the scene
@@ -98,7 +106,7 @@ void window::editWindowSignal()
     RCRobot *RCrob1 = new RCRobot(250, 100, 50, playground, 20);
     brushRob.setColor(Qt::green);
     RCrob1->setBrush(brushRob);
-    connect(editBuilder->bottomSlot.up,SIGNAL(clicked()),RCrob1,SLOT(moveUp()));
+    connect(editBuilder->bottomSlot.up,SIGNAL(clicked()),this,SLOT(moveUpActive()));
 
     RCRobot *RCrob2 = new RCRobot(20, 200, 50, playground, 20);
     brushRob.setColor(Qt::green);

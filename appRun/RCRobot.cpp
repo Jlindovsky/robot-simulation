@@ -36,7 +36,7 @@ void RCRobot::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void RCRobot::moveUp()
 {
     calculateHit(sensor);
-     QList<QGraphicsItem *> colliding_items = collidingItems();
+    QList<QGraphicsItem *> colliding_items = collidingItems();
     bool hit = false;
     // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
@@ -46,19 +46,17 @@ void RCRobot::moveUp()
         // Check if the dynamic_cast was successful and the object is a barrierC or its derived class
         if (barrierItem != nullptr && typeid(*barrierItem) == typeid(barrierC))
         {
-
-            angle = ((angle + (directionOfSpin * spin)) + 360) % 360;
-            hit = true;
-           // qDebug() << "Hit!" << ((colliding_items[i])) << Qt::endl;
+            setPos(previousLocation);
+            return;
+            qDebug() << "Hit! wont move";
         }
     }
-    setPos(previousLocation);
 }
 void RCRobot::rotateLeft()
 {
-    angle += (spin+360)+360;
+    angle += (spin + 360) + 360;
 }
 void RCRobot::rotateRight()
 {
-    angle -= (spin+360)+360;
+    angle -= (spin + 360) + 360;
 }
