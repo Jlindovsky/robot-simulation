@@ -84,19 +84,23 @@ void editControler::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     BARSlot.name->setParent(dynamic_cast<QObject *>(parent));
     BARSlot.name->setPos(50, 480);
     BARSlot.name->setDefaultTextColor(Qt::black);
-
+    BARSlot.bar = new barrierC();
     BARSlot.buildBarrier = new gameButton(QString("build Barrier"), BARSlot.name->x(), BARSlot.name->y() + 40, 100, 30, parent);
-
+    connect(BARSlot.buildBarrier, SIGNAL(clicked()), this, SLOT(getReadyBar()));
     scene->addItem(BARSlot.name);
     // magic bracho
     scene->addItem(BARSlot.buildBarrier);
 }
-
-void editControler::buildConstrolsEdit(QGraphicsItem *parent, QGraphicsScene *scene)
+void editControler::getReadyBar()
 {
-    bottomSlot.up = new gameButton(QString("up"), 70, 10, 50, 50, parent);
-    bottomSlot.left = new gameButton(QString("left"), 130, 10, 50, 50, parent);
-    bottomSlot.right = new gameButton(QString("right"), 190, 10, 50, 50, parent);
+    BARSlot.bar = new barrierC();
+}
+
+void editControler::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *scene)
+{
+    bottomSlot.up = new gameButton(QString("up"), RPANEL_W - 70, 10, 50, 50, parent);
+    bottomSlot.left = new gameButton(QString("left"), RPANEL_W - 130, 10, 50, 50, parent);
+    bottomSlot.right = new gameButton(QString("right"), RPANEL_W - 190, 10, 50, 50, parent);
     scene->addItem(bottomSlot.up);
     scene->addItem(bottomSlot.left);
     scene->addItem(bottomSlot.right);
@@ -139,5 +143,5 @@ editControler::editControler(QGraphicsScene *scene)
     buildRCREdit(iPanel, scene);
     buildAREdit(iPanel, scene);
     buildBAREdit(iPanel, scene);
-    buildConstrolsEdit(rPanel, scene);
+    buildControlsEdit(rPanel, scene);
 }

@@ -21,8 +21,6 @@ signals:
     void clicked();
 
 protected:
-    virtual void focusInEvent(QFocusEvent *event) override;
-    virtual void focusOutEvent(QFocusEvent *event) override;
     QPointF previousLocation;
     int circumference;
     int directionOfSpin; // ±1

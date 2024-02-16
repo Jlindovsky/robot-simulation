@@ -12,7 +12,6 @@ class RCRobot : public Robot
 {
 public:
     RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIN);
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     // void keyPressEvent(QKeyEvent * event)override;
     void moveUp();
     void rotateLeft();

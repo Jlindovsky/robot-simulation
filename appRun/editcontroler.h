@@ -15,6 +15,13 @@
 #include <qvalidator.h>
 using namespace std;
 
+#define SIZE_R 50
+#define SIZE_B 75
+// Playground sizes
+#define PLAY_X 200
+#define PLAY_Y 0
+#define PLAY_W 824
+#define PLAY_H 650
 // InsertPanel sizes
 #define IPANEL_X 0
 #define IPANEL_Y 0
@@ -75,6 +82,7 @@ struct editSlotRCRobot
 
 struct editSlotBarrier
 {
+    vector<barrierC *> bars;
     QGraphicsTextItem *name;
     gameButton *buildBarrier;
     barrierC *bar;
@@ -84,7 +92,7 @@ struct bottomSlot
 {
     // active robots
     vector<RCRobot *> activable;
-    vector<gameButton*> robs;
+    vector<gameButton *> robs;
     gameButton *up;
     gameButton *left;
     gameButton *right;
@@ -97,7 +105,7 @@ struct playSlot
     gameButton *save;
 };
 
-class editControler:public QObject
+class editControler : public QObject
 {
     Q_OBJECT
 public:
@@ -105,12 +113,15 @@ public:
     void buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene);
-    void buildConstrolsEdit(QGraphicsItem *parent, QGraphicsScene *scene);
+    void buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *scene);
 
     editSlotARobot ASlot;
     editSlotRCRobot RCSlot;
     editSlotBarrier BARSlot;
     bottomSlot bottomSlot;
+
+public slots:
+    void getReadyBar();
 };
 
 #endif // EDITCONTROLER_H

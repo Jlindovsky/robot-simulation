@@ -42,15 +42,3 @@ void Robot::move()
     qDebug()<<"parent function";
 }
 
-void Robot::focusInEvent(QFocusEvent *event)
-{
-    qDebug() << "Item gained focus"<<event;
-    QGraphicsItem::focusInEvent(event);
-    // Set a flag or perform actions when the item gains focus
-}
-void Robot::focusOutEvent(QFocusEvent *event)
-{
-    QGraphicsItem::focusOutEvent(event);
-    qDebug() << "Item lost focus";
-    // Set a flag or perform actions when the item loses focus
-}

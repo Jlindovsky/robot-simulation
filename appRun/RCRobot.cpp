@@ -7,15 +7,8 @@ RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int senso
     directionOfSpin = 1;
     spin = 30;
     step = sensorIN/2;
-    setFlag(QGraphicsItem::ItemIsFocusable);
 }
 
-void RCRobot::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-
-    this->setFocus();
-    qDebug() << "cliked" << (this)->pos();
-}
 
 
 void RCRobot::moveUp()
