@@ -107,7 +107,8 @@ public:
 private:
     editSlotARobot ASlot;
     editSlotRCRobot RCSlot;
-    editSlotBarrier BSlot;
+    editSlotBarrier  BARSlot;
+    bottomSlot bottomSlot;
 };
 
 #endif // EDITCONTROLER_H
