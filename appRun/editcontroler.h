@@ -82,8 +82,8 @@ struct editSlotBarrier
 
 struct bottomSlot
 {
-    //active robots
-    vector<RCRobot*> activable;
+    // active robots
+    vector<RCRobot *> activable;
     gameButton *up;
     gameButton *left;
     gameButton *right;
@@ -103,10 +103,11 @@ public:
     void buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene);
+    void buildConstrolsEdit(QGraphicsItem *parent, QGraphicsScene *scene);
 
     editSlotARobot ASlot;
     editSlotRCRobot RCSlot;
-    editSlotBarrier  BARSlot;
+    editSlotBarrier BARSlot;
     bottomSlot bottomSlot;
 };
 
