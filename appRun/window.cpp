@@ -51,7 +51,6 @@ void window::setActiveRCR(RCRobot *rob)
 }
 void window::moveUpActive()
 {
-    qDebug() << "move bitch";
     if (activeRCR)
         activeRCR->moveUp();
 }
