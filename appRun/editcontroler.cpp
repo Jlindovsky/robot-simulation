@@ -2,7 +2,7 @@
 
 void editControler::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
-    RCSlot.name = new QGraphicsTextItem(QString("Automatic Robot"));
+    RCSlot.name = new QGraphicsTextItem(QString("RC Robot"));
     RCSlot.name->setParent(dynamic_cast<QObject *>(parent));
     RCSlot.name->setPos(50, 320);
     RCSlot.name->setDefaultTextColor(Qt::black);
@@ -18,7 +18,7 @@ void editControler::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     RCSlot.sensorInput->setValidator(RCSlot.sensorValidator);
     RCSlot.sensorInput->setGeometry(RCSlot.name->x(), RCSlot.name->y() + 80, 100, 30); // Adjust position and size as needed
 
-    RCSlot.buildRCRobot = new gameButton(QString("build ARobot"), RCSlot.name->x(), RCSlot.name->y() + 120, 100, 30, parent);
+    RCSlot.buildRCRobot = new gameButton(QString("build RCRobot"), RCSlot.name->x(), RCSlot.name->y() + 120, 100, 30, parent);
 
     scene->addItem(RCSlot.name);
     scene->addItem(RCSlot.sensorText);

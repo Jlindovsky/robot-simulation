@@ -66,10 +66,13 @@ public slots:
     void moveUpActive();
     void rotateLeftActive();
     void rotateRightActive();
-
+    void checkARInput();
     void setActiveRCR(RCRobot *);
     //      void playGame();
 private:
     editControler *editBuilder;
     RCRobot *activeRCR;
+    vector<ARobot *> ARobotVec;
+    QGraphicsRectItem *playground;
+    QTimer *timer;
 };

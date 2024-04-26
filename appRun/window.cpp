@@ -66,6 +66,40 @@ void window::rotateRightActive()
         activeRCR->rotateRight();
 }
 
+void window::checkARInput()
+{
+    auto slot = editBuilder->ASlot;
+    auto sensorText = slot.sensorInput->text();
+    auto directionText = slot.directionInput->text();
+    auto spinText = slot.spinInput->text();
+
+    int pos = 0;
+    if (QValidator::Acceptable != slot.sensorValidator->validate(sensorText, pos))
+    {
+        // popup wrong input
+        return;
+    }
+    if (QValidator::Acceptable != slot.directionValidator->validate(directionText, pos))
+    {
+        // popup wrong input
+        return;
+    }
+    if (QValidator::Acceptable != slot.spinValidator->validate(spinText, pos))
+    {
+        // popup wrong input
+        return;
+    }
+
+    ARobot *tmp = new ARobot(PLAY_X + 200, PLAY_Y + 200, SIZE_R, playground, (sensorText).toInt(), (directionText).toInt(), (spinText).toInt());
+
+    QBrush brushRob(Qt::blue);
+    brushRob.setColor(Qt::darkMagenta);
+    tmp->setBrush(brushRob);
+    QObject::connect(timer, SIGNAL(timeout()), tmp, SLOT(move()));
+    editScene->addItem(tmp);
+    ARobotVec.push_back(tmp);
+}
+
 void window::editWindowSignal()
 {
     // set up the scene
@@ -74,7 +108,7 @@ void window::editWindowSignal()
     editScene->setSceneRect(0, 0, 1024, 768);
     setScene(editScene);
 
-    QGraphicsRectItem *playground = new QGraphicsRectItem(0, 0, PLAY_W, PLAY_H);
+    playground = new QGraphicsRectItem(0, 0, PLAY_W, PLAY_H);
     playground->setPos(PLAY_X, PLAY_Y);
     QPen pen;
     pen.setColor(Qt::white); // Set the border color (replace with your desired color)
@@ -86,6 +120,7 @@ void window::editWindowSignal()
     connect(editBuilder->bottomSlot.up, SIGNAL(clicked()), this, SLOT(moveUpActive()));
     connect(editBuilder->bottomSlot.right, SIGNAL(clicked()), this, SLOT(rotateRightActive()));
     connect(editBuilder->bottomSlot.left, SIGNAL(clicked()), this, SLOT(rotateLeftActive()));
+    connect(editBuilder->ASlot.buildARobot, SIGNAL(clicked()), this, SLOT(checkARInput()));
 
     QBrush brush;
 
@@ -145,7 +180,7 @@ void window::editWindowSignal()
     connect(editBuilder->bottomSlot.robs[1], &gameButton::clicked, this, [=]()
             { setActiveRCR(RCrob2); });
 
-    QTimer *timer = new QTimer();
+    timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), rob1, SLOT(move()));
     // QObject::connect(timer, SIGNAL(timeout()), rob2, SLOT(move()));
     // QObject::connect(timer, SIGNAL(timeout()), rob3, SLOT(move()));
