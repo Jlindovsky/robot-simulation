@@ -67,6 +67,8 @@ public slots:
     void rotateLeftActive();
     void rotateRightActive();
     void checkARInput();
+    void stopTimer();
+    void startTimer();
     void setActiveRCR(RCRobot *);
     //      void playGame();
 private:

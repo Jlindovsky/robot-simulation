@@ -113,6 +113,17 @@ void editControler::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *sce
     scene->addItem(bottomSlot.robs[1]);
 }
 
+void editControler::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
+{
+    playSlot.pause = new gameButton(QString("pause"), PPANEL_W - 70, 10, 50, 50, parent);
+    playSlot.play = new gameButton(QString("play"), PPANEL_W - 130, 10, 50, 50, parent);
+    playSlot.save = new gameButton(QString("save"), PPANEL_W - 190, 10, 50, 50, parent);
+
+    scene->addItem(playSlot.pause);
+    scene->addItem(playSlot.play);
+    scene->addItem(playSlot.save);
+}
+
 editControler::editControler(QGraphicsScene *scene)
 {
     QGraphicsRectItem *iPanel = new QGraphicsRectItem(0, 0, IPANEL_W, IPANEL_H);
@@ -144,4 +155,5 @@ editControler::editControler(QGraphicsScene *scene)
     buildAREdit(iPanel, scene);
     buildBAREdit(iPanel, scene);
     buildControlsEdit(rPanel, scene);
+    buildPlayEdit(pPanel, scene);
 }

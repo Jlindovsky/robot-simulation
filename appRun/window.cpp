@@ -112,6 +112,15 @@ void window::checkARInput()
     ARobotVec.push_back(tmp);
 }
 
+void window::stopTimer()
+{
+    timer->stop();
+}
+
+void window::startTimer()
+{
+    timer->start(30);
+}
 void window::editWindowSignal()
 {
     // set up the scene
@@ -133,6 +142,8 @@ void window::editWindowSignal()
     connect(editBuilder->bottomSlot.right, SIGNAL(clicked()), this, SLOT(rotateRightActive()));
     connect(editBuilder->bottomSlot.left, SIGNAL(clicked()), this, SLOT(rotateLeftActive()));
     connect(editBuilder->ASlot.buildARobot, SIGNAL(clicked()), this, SLOT(checkARInput()));
+    connect(editBuilder->playSlot.pause, SIGNAL(clicked()), this, SLOT(stopTimer()));
+    connect(editBuilder->playSlot.play, SIGNAL(clicked()), this, SLOT(startTimer()));
 
     QBrush brush;
 

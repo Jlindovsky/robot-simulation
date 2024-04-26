@@ -114,11 +114,13 @@ public:
     void buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *scene);
+    void buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene);
 
     editSlotARobot ASlot;
     editSlotRCRobot RCSlot;
     editSlotBarrier BARSlot;
     bottomSlot bottomSlot;
+    playSlot playSlot;
 
 public slots:
     void getReadyBar();
