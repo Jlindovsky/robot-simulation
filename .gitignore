@@ -8,3 +8,11 @@ build-*
 build/*
 myBuild/
 CMakeLists.txt.user
+*.cmake
+.qt
+.lupdate
+CmakeFiles
+appRun.app
+appRun_autogen
+CMakeCache.txt
+
