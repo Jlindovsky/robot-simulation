@@ -3,6 +3,7 @@
 #include <QIntValidator>
 #include <QLabel>
 #include <QHBoxLayout>
+#include <QMessageBox>
 
 window::window()
 {
@@ -76,16 +77,28 @@ void window::checkARInput()
     if (QValidator::Acceptable != slot.sensorValidator->validate(sensorText, pos))
     {
         // popup wrong input
+        QMessageBox::information(
+            this,
+            tr("Wrong Input"),
+            tr("ERROR, Wrong input. Sensor length is from 0 to 100"));
         return;
     }
     if (QValidator::Acceptable != slot.directionValidator->validate(directionText, pos))
     {
         // popup wrong input
+        QMessageBox::information(
+            this,
+            tr("Wrong Input"),
+            tr("ERROR, Wrong input. Direction is -1 or 1"));
         return;
     }
     if (QValidator::Acceptable != slot.spinValidator->validate(spinText, pos))
     {
         // popup wrong input
+        QMessageBox::information(
+            this,
+            tr("Wrong Input"),
+            tr("ERROR, Wrong input. Spin is from 10 to 180"));
         return;
     }
 
