@@ -102,6 +102,43 @@ void editControler::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *sce
     scene->addItem(bottomSlot.right);
 }
 
+void editControler::gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene)
+{
+    for (int i = 0; i < 17; i++)
+    {
+        for (int j = 0; j < 13; j++)
+        {
+            gameButton *tmp = new gameButton(QString("add"), 3 + i * 50, 3 + j * 50, 44, 44, parent);
+            scene->addItem(tmp);
+            barGrid.push_back(tmp);
+            placeBar(tmp, parent, scene);
+        }
+    }
+}
+
+void editControler::addBar(QGraphicsItem *parent, QGraphicsScene *scene)
+{
+    QBrush brush(Qt::magenta);
+    gameButton *clickedButton = qobject_cast<gameButton *>(sender());
+    if (clickedButton)
+    {
+
+        clickedButton->setBrush(brush);
+        QPointF pos = clickedButton->pos();
+        barrierC *tmp = new barrierC(pos.x() - 3, pos.y() - 3, 50, 50, parent);
+        tmp->setBrush(brush);
+        scene->addItem(tmp);
+        gridRefresh(parent, scene);
+    }
+}
+
+void editControler::dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene *scene)
+{
+
+    delete bar;
+    gridRefresh(parent, scene);
+}
+
 void editControler::buildBarGrid(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     if (inBarEdit)
@@ -113,19 +150,10 @@ void editControler::buildBarGrid(QGraphicsItem *parent, QGraphicsScene *scene)
     }
     BARSlot.buildBarrier->changeText("Close");
     inBarEdit = true;
-    for (int i = 0; i < 17; i++)
-    {
-        for (int j = 0; j < 13; j++)
-        {
-            gameButton *tmp = new gameButton(QString("add"), 3 + i * 50, 3 + j * 50, 44, 44, parent);
-            scene->addItem(tmp);
-            barGrid.push_back(tmp);
-            placeBar(tmp);
-        }
-    }
+    gridRefresh(parent, scene);
 }
 
-void editControler::placeBar(gameButton *button)
+void editControler::placeBar(gameButton *button, QGraphicsItem *parent, QGraphicsScene *scene)
 {
     QList<QGraphicsItem *> colliding_items = button->collidingItems();
     bool hit = false;
@@ -141,6 +169,9 @@ void editControler::placeBar(gameButton *button)
             button->changeText("dlt");
             brush.setColor(Qt::magenta);
             button->setBrush(brush);
+
+            connect(button, &gameButton::clicked, this, [=]()
+                    { dltBar(barrierItem, parent, scene); });
             return;
         }
 
@@ -157,6 +188,9 @@ void editControler::placeBar(gameButton *button)
             return;
         }
     }
+
+    connect(button, &gameButton::clicked, this, [=]()
+            { addBar(parent, scene); });
 }
 
 void editControler::deleteBarGrid()

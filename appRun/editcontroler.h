@@ -93,8 +93,9 @@ public:
     void buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildBarGrid(QGraphicsItem *parent, QGraphicsScene *scene);
-    void placeBar(gameButton *button);
+    void placeBar(gameButton *button, QGraphicsItem *parent, QGraphicsScene *scene);
     void deleteBarGrid();
+    void gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene);
     void refresh(QGraphicsScene *scene);
 
     editSlotARobot ASlot;
@@ -111,6 +112,8 @@ public:
     bool inBarEdit;
 
 public slots:
+    void addBar(QGraphicsItem *parent, QGraphicsScene *scene);
+    void dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene *scene);
 };
 
 #endif // EDITCONTROLER_H

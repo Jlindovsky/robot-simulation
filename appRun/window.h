@@ -49,6 +49,7 @@ public slots:
     void startTimer();
     void setActiveRCR(RCRobot *);
     void clickGrid();
+
     //      void playGame();
 private:
     editControler *editBuilder;

@@ -10,7 +10,7 @@ class barrierC : public QObject, public QGraphicsRectItem
 public:
     barrierC();
     barrierC(qreal x, qreal y, QGraphicsRectItem *parent);
-    barrierC(qreal x, qreal y, qreal w, qreal h, QGraphicsRectItem *parent);
+    barrierC(qreal x, qreal y, qreal w, qreal h, QGraphicsItem *parent);
     virtual ~barrierC();
 
     // void mousePressEvent(QMouseEvent *event) override;

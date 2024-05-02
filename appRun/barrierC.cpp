@@ -8,7 +8,7 @@ barrierC::barrierC(qreal x, qreal y, QGraphicsRectItem *parent)
     // hitbox = new Hitbox(this);
     // Additional initialization code specific to barrierC if needed
 }
-barrierC::barrierC(qreal x, qreal y, qreal w, qreal h, QGraphicsRectItem *parent)
+barrierC::barrierC(qreal x, qreal y, qreal w, qreal h, QGraphicsItem *parent)
     : QGraphicsRectItem(0, 0, w, h, parent)
 {
 
