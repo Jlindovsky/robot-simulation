@@ -5,6 +5,7 @@
 #include <QGraphicsRectItem>
 #include <QBrush>
 #include <QGraphicsSceneMouseEvent>
+#include "global.h"
 
 class gameButton : public QObject, public QGraphicsRectItem
 {
@@ -18,6 +19,7 @@ public:
     // possible extras
     // void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     // void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+    void changeText(const char * textIn);
 signals:
     void clicked();
 

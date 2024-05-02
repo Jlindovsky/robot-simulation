@@ -153,6 +153,12 @@ void window::startTimer()
 {
     timer->start(30);
 }
+
+void window::clickGrid()
+{
+    timer->stop();
+    editBuilder->buildBarGrid(playground, editScene);
+}
 void window::editWindowSignal()
 {
     // set up the scene
@@ -175,13 +181,13 @@ void window::editWindowSignal()
     connect(editBuilder->bottomSlot.left, SIGNAL(clicked()), this, SLOT(rotateLeftActive()));
     connect(editBuilder->ASlot.buildARobot, SIGNAL(clicked()), this, SLOT(checkARInput()));
     connect(editBuilder->RCSlot.buildRCRobot, SIGNAL(clicked()), this, SLOT(checkRCRInput()));
-
+    connect(editBuilder->BARSlot.buildBarrier, SIGNAL(clicked()), this, SLOT(clickGrid()));
     connect(editBuilder->playSlot.pause, SIGNAL(clicked()), this, SLOT(stopTimer()));
     connect(editBuilder->playSlot.play, SIGNAL(clicked()), this, SLOT(startTimer()));
 
     QBrush brush;
 
-    barrierC *edgeTop = new barrierC(0, 0, PLAY_W, 1, playground);
+    barrierC *edgeTop = new barrierC(0, -1, PLAY_W, 1, playground);
     pen.setColor(Qt::black);
     edgeTop->setPen(pen);
     editScene->addItem(edgeTop);
@@ -190,7 +196,7 @@ void window::editWindowSignal()
     edgeBottom->setPen(pen);
     editScene->addItem(edgeBottom);
 
-    barrierC *edgeLeft = new barrierC(0, 0, 1, PLAY_H, playground);
+    barrierC *edgeLeft = new barrierC(-1, 0, 1, PLAY_H, playground);
 
     edgeLeft->setPen(pen);
     editScene->addItem(edgeLeft);
@@ -199,14 +205,14 @@ void window::editWindowSignal()
     edgeRight->setPen(pen);
     editScene->addItem(edgeRight);
 
-    barrierC *bar1 = new barrierC(250, 250, 100, 100, playground);
-    pen.setColor(Qt::magenta);
-    bar1->setPen(pen);
-    editScene->addItem(bar1);
+    // barrierC *bar1 = new barrierC(250, 250, 100, 100, playground);
+    // pen.setColor(Qt::magenta);
+    // bar1->setPen(pen);
+    // editScene->addItem(bar1);
 
-    barrierC *bar2 = new barrierC(50, 50, 100, 100, playground);
-    bar2->setPen(pen);
-    editScene->addItem(bar2);
+    // barrierC *bar2 = new barrierC(50, 50, 100, 100, playground);
+    // bar2->setPen(pen);
+    // editScene->addItem(bar2);
 
     timer = new QTimer();
 

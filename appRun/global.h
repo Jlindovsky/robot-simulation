@@ -1,3 +1,6 @@
+#ifndef GLOBAL_H
+#define GLOBAL_H
+
 #define SIZE_R 50
 #define SIZE_B 75
 // Playground sizes
@@ -27,3 +30,8 @@
 #include <QGraphicsRectItem>
 #include <QDrag>
 #include <QMimeData>
+#include <string>
+
+using namespace std;
+
+#endif

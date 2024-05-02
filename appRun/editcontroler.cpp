@@ -80,20 +80,16 @@ void editControler::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 }
 void editControler::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
-    BARSlot.name = new QGraphicsTextItem(QString("Barrier"));
+    BARSlot.name = new QGraphicsTextItem(QString("Edit Barriers"));
     BARSlot.name->setParent(dynamic_cast<QObject *>(parent));
     BARSlot.name->setPos(50, 480);
     BARSlot.name->setDefaultTextColor(Qt::black);
     BARSlot.bar = new barrierC();
-    BARSlot.buildBarrier = new gameButton(QString("build Barrier"), BARSlot.name->x(), BARSlot.name->y() + 40, 100, 30, parent);
-    connect(BARSlot.buildBarrier, SIGNAL(clicked()), this, SLOT(getReadyBar()));
+    BARSlot.buildBarrier = new gameButton(QString("Open"), BARSlot.name->x(), BARSlot.name->y() + 40, 100, 30, parent);
+
     scene->addItem(BARSlot.name);
     // magic bracho
     scene->addItem(BARSlot.buildBarrier);
-}
-void editControler::getReadyBar()
-{
-    BARSlot.bar = new barrierC();
 }
 
 void editControler::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *scene)
@@ -104,6 +100,72 @@ void editControler::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *sce
     scene->addItem(bottomSlot.up);
     scene->addItem(bottomSlot.left);
     scene->addItem(bottomSlot.right);
+}
+
+void editControler::buildBarGrid(QGraphicsItem *parent, QGraphicsScene *scene)
+{
+    if (inBarEdit)
+    {
+        BARSlot.buildBarrier->changeText("Open");
+        deleteBarGrid();
+        inBarEdit = false;
+        return;
+    }
+    BARSlot.buildBarrier->changeText("Close");
+    inBarEdit = true;
+    for (int i = 0; i < 17; i++)
+    {
+        for (int j = 0; j < 13; j++)
+        {
+            gameButton *tmp = new gameButton(QString("add"), 3 + i * 50, 3 + j * 50, 44, 44, parent);
+            scene->addItem(tmp);
+            barGrid.push_back(tmp);
+            placeBar(tmp);
+        }
+    }
+}
+
+void editControler::placeBar(gameButton *button)
+{
+    QList<QGraphicsItem *> colliding_items = button->collidingItems();
+    bool hit = false;
+    QBrush brush(Qt::magenta);
+    // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
+    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+    {
+        barrierC *barrierItem = dynamic_cast<barrierC *>(colliding_items[i]);
+
+        // Check if the dynamic_cast was successful and the object is a barrierC or its derived class
+        if (barrierItem != nullptr)
+        {
+            button->changeText("dlt");
+            brush.setColor(Qt::magenta);
+            button->setBrush(brush);
+            return;
+        }
+
+        Robot *robotItem = dynamic_cast<Robot *>(colliding_items[i]);
+
+        // Check if the dynamic_cast was successful and the object is a barrierC or its derived class
+        if (robotItem != nullptr)
+        {
+            button->changeText("NO!");
+
+            QBrush brush(Qt::magenta);
+            brush.setColor(Qt::red);
+            button->setBrush(brush);
+            return;
+        }
+    }
+}
+
+void editControler::deleteBarGrid()
+{
+    for (auto i : barGrid)
+    {
+        delete i;
+    }
+    barGrid.clear();
 }
 
 void editControler::refresh(QGraphicsScene *scene)
@@ -148,6 +210,7 @@ void editControler::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 
 editControler::editControler(QGraphicsScene *scene)
 {
+    inBarEdit = false;
     iPanel = new QGraphicsRectItem(0, 0, IPANEL_W, IPANEL_H);
     iPanel->setPos(IPANEL_X, IPANEL_Y);
     QBrush brush;

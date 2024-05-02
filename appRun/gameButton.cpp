@@ -9,12 +9,17 @@ gameButton::gameButton(QString name, int x, int y, int w, int h, QGraphicsItem *
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::darkCyan);
     setBrush(brush);
-    setFlag(QGraphicsItem::ItemIsFocusable,false);
+    setFlag(QGraphicsItem::ItemIsFocusable, false);
     // draw the text
     text = new QGraphicsTextItem(name, this);
     int xPos = rect().width() / 2 - text->boundingRect().width() / 2;
     int yPos = rect().height() / 2 - text->boundingRect().height() / 2;
     text->setPos(xPos, yPos);
+}
+
+void gameButton::changeText(const char *textIn)
+{
+    text->setPlainText(textIn);
 }
 
 void gameButton::mousePressEvent(QGraphicsSceneMouseEvent *event)
