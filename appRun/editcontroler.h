@@ -115,12 +115,17 @@ public:
     void buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene);
+    void refresh(QGraphicsScene *scene);
 
     editSlotARobot ASlot;
     editSlotRCRobot RCSlot;
     editSlotBarrier BARSlot;
     bottomSlot bottomSlot;
     playSlot playSlot;
+
+    QGraphicsRectItem *iPanel;
+    QGraphicsRectItem *rPanel;
+    QGraphicsRectItem *pPanel;
 
 public slots:
     void getReadyBar();

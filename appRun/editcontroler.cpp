@@ -98,19 +98,41 @@ void editControler::getReadyBar()
 
 void editControler::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
-    bottomSlot.up = new gameButton(QString("up"), RPANEL_W - 70, 10, 50, 50, parent);
-    bottomSlot.left = new gameButton(QString("left"), RPANEL_W - 130, 10, 50, 50, parent);
-    bottomSlot.right = new gameButton(QString("right"), RPANEL_W - 190, 10, 50, 50, parent);
+    bottomSlot.up = new gameButton(QString("up"), RPANEL_W - 130, 10, 50, 50, parent);
+    bottomSlot.left = new gameButton(QString("left"), RPANEL_W - 190, 10, 50, 50, parent);
+    bottomSlot.right = new gameButton(QString("right"), RPANEL_W - 70, 10, 50, 50, parent);
     scene->addItem(bottomSlot.up);
     scene->addItem(bottomSlot.left);
     scene->addItem(bottomSlot.right);
-    // fixed first RCRobot in scene
-    gameButton *robButton1 = new gameButton(QString("rob1"), 10, 10, 50, 50, parent);
-    bottomSlot.robs.push_back(robButton1);
-    scene->addItem(bottomSlot.robs[0]);
-    gameButton *robButton2 = new gameButton(QString("rob2"), 10, 70, 50, 50, parent);
-    bottomSlot.robs.push_back(robButton2);
-    scene->addItem(bottomSlot.robs[1]);
+}
+
+void editControler::refresh(QGraphicsScene *scene)
+{
+    for (auto i : (bottomSlot.robs))
+    {
+        delete i;
+    }
+    bottomSlot.robs.clear();
+    int offset_x = 0;
+    int offset_y = 0;
+    int shift = 60;
+    for (size_t i = 0; i < bottomSlot.activable.size(); i++)
+    {
+        string robName = "rob" + to_string(i + 1);
+        gameButton *tmp = new gameButton(QString::fromStdString(robName), 10 + offset_x, 10 + offset_y, 50, 50, rPanel);
+        bottomSlot.robs.push_back(tmp);
+        scene->addItem(tmp);
+
+        if (i % 2)
+        {
+            offset_y -= shift;
+            offset_x += shift;
+        }
+        else
+        {
+            offset_y += shift;
+        }
+    }
 }
 
 void editControler::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
@@ -126,7 +148,7 @@ void editControler::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 
 editControler::editControler(QGraphicsScene *scene)
 {
-    QGraphicsRectItem *iPanel = new QGraphicsRectItem(0, 0, IPANEL_W, IPANEL_H);
+    iPanel = new QGraphicsRectItem(0, 0, IPANEL_W, IPANEL_H);
     iPanel->setPos(IPANEL_X, IPANEL_Y);
     QBrush brush;
     QPen pen;
@@ -137,14 +159,14 @@ editControler::editControler(QGraphicsScene *scene)
     iPanel->setPen(pen);
     scene->addItem(iPanel);
 
-    QGraphicsRectItem *pPanel = new QGraphicsRectItem(0, 0, PPANEL_W, PPANEL_H);
+    pPanel = new QGraphicsRectItem(0, 0, PPANEL_W, PPANEL_H);
     pPanel->setPos(PPANEL_X, PPANEL_Y);
     brush.setStyle(Qt::SolidPattern);
     pPanel->setPen(pen);
     pPanel->setBrush(brush);
     scene->addItem(pPanel);
 
-    QGraphicsRectItem *rPanel = new QGraphicsRectItem(0, 0, RPANEL_W, RPANEL_H);
+    rPanel = new QGraphicsRectItem(0, 0, RPANEL_W, RPANEL_H);
     rPanel->setPos(RPANEL_X, RPANEL_Y);
     brush.setStyle(Qt::SolidPattern);
     rPanel->setBrush(brush);

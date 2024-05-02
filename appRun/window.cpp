@@ -112,6 +112,38 @@ void window::checkARInput()
     ARobotVec.push_back(tmp);
 }
 
+void window::checkRCRInput()
+{
+    auto slot = editBuilder->RCSlot;
+    auto sensorText = slot.sensorInput->text();
+
+    int pos = 0;
+    if (QValidator::Acceptable != slot.sensorValidator->validate(sensorText, pos))
+    {
+        // popup wrong input
+        QMessageBox::information(
+            this,
+            tr("Wrong Input"),
+            tr("ERROR, Wrong input. Sensor length is from 0 to 100"));
+        return;
+    }
+
+    RCRobot *tmp = new RCRobot(PLAY_X + 200, PLAY_Y + 200, SIZE_R, playground, (sensorText).toInt());
+    QBrush brushRob(Qt::blue);
+    brushRob.setColor(Qt::white);
+    tmp->setBrush(brushRob);
+    editBuilder->bottomSlot.activable.push_back(tmp);
+    editScene->addItem(tmp);
+
+    editBuilder->refresh(editScene);
+
+    for (size_t i = 0; i < editBuilder->bottomSlot.activable.size(); i++)
+    {
+        connect(editBuilder->bottomSlot.robs[i], &gameButton::clicked, this, [=]()
+                { setActiveRCR(editBuilder->bottomSlot.activable[i]); });
+    }
+}
+
 void window::stopTimer()
 {
     timer->stop();
@@ -132,8 +164,8 @@ void window::editWindowSignal()
     playground = new QGraphicsRectItem(0, 0, PLAY_W, PLAY_H);
     playground->setPos(PLAY_X, PLAY_Y);
     QPen pen;
-    pen.setColor(Qt::white); // Set the border color (replace with your desired color)
-    pen.setWidth(4);         // Set the border width (replace with your desired width)
+    pen.setColor(Qt::white);
+    pen.setWidth(4);
     playground->setPen(pen);
     editScene->addItem(playground);
 
@@ -142,6 +174,8 @@ void window::editWindowSignal()
     connect(editBuilder->bottomSlot.right, SIGNAL(clicked()), this, SLOT(rotateRightActive()));
     connect(editBuilder->bottomSlot.left, SIGNAL(clicked()), this, SLOT(rotateLeftActive()));
     connect(editBuilder->ASlot.buildARobot, SIGNAL(clicked()), this, SLOT(checkARInput()));
+    connect(editBuilder->RCSlot.buildRCRobot, SIGNAL(clicked()), this, SLOT(checkRCRInput()));
+
     connect(editBuilder->playSlot.pause, SIGNAL(clicked()), this, SLOT(stopTimer()));
     connect(editBuilder->playSlot.play, SIGNAL(clicked()), this, SLOT(startTimer()));
 
@@ -174,43 +208,7 @@ void window::editWindowSignal()
     bar2->setPen(pen);
     editScene->addItem(bar2);
 
-    ARobot *rob1 = new ARobot(150, 150, 50, playground, 40, 1, 30);
-    QBrush brushRob(Qt::blue);
-    brushRob.setColor(Qt::darkMagenta);
-    rob1->setBrush(brushRob);
-
-    // ARobot *rob2 = new ARobot(450, 450, 50, playground, 30, -1, 40);
-    // brushRob.setColor(Qt::yellow);
-    // rob2->setBrush(brushRob);
-
-    // ARobot *rob3 = new ARobot(450, 100, 50, playground, 20, 1, 50);
-    // brushRob.setColor(Qt::green);
-    // rob3->setBrush(brushRob);
-
-    RCRobot *RCrob1 = new RCRobot(250, 100, 50, playground, 20);
-    brushRob.setColor(Qt::white);
-    RCrob1->setBrush(brushRob);
-    editBuilder->bottomSlot.activable.push_back(RCrob1);
-    // connect rob button
-    connect(editBuilder->bottomSlot.robs[0], &gameButton::clicked, this, [=]()
-            { setActiveRCR(RCrob1); });
-
-    RCRobot *RCrob2 = new RCRobot(20, 200, 50, playground, 20);
-    brushRob.setColor(Qt::white);
-    RCrob2->setBrush(brushRob);
-    editBuilder->bottomSlot.activable.push_back(RCrob2);
-    // connect rob button
-    connect(editBuilder->bottomSlot.robs[1], &gameButton::clicked, this, [=]()
-            { setActiveRCR(RCrob2); });
-
     timer = new QTimer();
-    QObject::connect(timer, SIGNAL(timeout()), rob1, SLOT(move()));
-    // QObject::connect(timer, SIGNAL(timeout()), rob2, SLOT(move()));
-    // QObject::connect(timer, SIGNAL(timeout()), rob3, SLOT(move()));
+
     timer->start(30);
-    editScene->addItem(rob1);
-    // editScene->addItem(rob2);
-    // editScene->addItem(rob3);
-    editScene->addItem(RCrob1);
-    editScene->addItem(RCrob2);
 }

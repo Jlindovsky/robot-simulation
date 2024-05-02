@@ -1,5 +1,4 @@
 #include "robot.h"
-
 Robot::Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent)
     : QGraphicsEllipseItem(0, 0, w, w, parent)
 {
@@ -39,6 +38,5 @@ void Robot::calculateHit(int step1)
 
 void Robot::move()
 {
-    qDebug()<<"parent function";
+    qDebug() << "parent function";
 }
-
