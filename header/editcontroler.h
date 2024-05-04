@@ -65,7 +65,7 @@ struct editSlotBarrier
     barrierC *bar;
 };
 
-struct bottomSlot
+struct bSlot
 {
     // active robots
     vector<RCRobot *> activable;
@@ -75,7 +75,7 @@ struct bottomSlot
     gameButton *right;
 };
 
-struct playSlot
+struct pSlot
 {
     gameButton *play;
     gameButton *pause;
@@ -101,8 +101,8 @@ public:
     editSlotARobot ASlot;
     editSlotRCRobot RCSlot;
     editSlotBarrier BARSlot;
-    bottomSlot bottomSlot;
-    playSlot playSlot;
+    bSlot bottomSlot;
+    pSlot playSlot;
 
     QGraphicsRectItem *iPanel;
     QGraphicsRectItem *rPanel;
