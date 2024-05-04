@@ -5,7 +5,6 @@
 #include "barrierC.h"
 #include "global.h"
 
-
 class Robot : public QObject, public QGraphicsEllipseItem
 {
     Q_OBJECT
@@ -29,26 +28,3 @@ protected:
 };
 
 #endif
-
-/*
- /
-/alpha
-_|_
- |
-    if()
-    0-90
-    x+  y+
-    elseif
-    90-180
-    x-  y+
-    elseif
-    180-270
-    x-  y-
-    else
-    270-359
-    x+ y-
-
-    |
-    |
-----|
-*/

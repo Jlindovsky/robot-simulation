@@ -24,6 +24,10 @@
 #define RPANEL_W 850
 #define RPANEL_H 168
 
+// Spawn coordinates
+#define SPAWN_X 375
+#define SPAWN_Y 275
+
 #include <QtWidgets>
 #include <QApplication>
 #include <QGraphicsScene>
@@ -51,7 +55,6 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QMessageBox>
-
 
 // std libs
 #include <vector>

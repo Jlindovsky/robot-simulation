@@ -11,6 +11,7 @@ window::window()
     welcomeScene = new QGraphicsScene();
     welcomeScene->setSceneRect(0, 0, 1024, 768);
     setScene(welcomeScene);
+    gridOpen = false;
 }
 
 window::~window()
@@ -28,7 +29,7 @@ void window::mainWindow()
     gameButton *loadGameButton = new gameButton(QString("new but blue"), 400, 475, 200, 50);
     QBrush brush(Qt::blue);
     loadGameButton->setBrush(brush);
-    connect(loadGameButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
+    connect(loadGameButton, SIGNAL(clicked()), this, SLOT(loadFromFile()));
     welcomeScene->addItem(loadGameButton);
 }
 void window::setActiveRCR(RCRobot *rob)
@@ -97,7 +98,7 @@ void window::checkARInput()
         return;
     }
 
-    ARobot *tmp = new ARobot(PLAY_X + 200, PLAY_Y + 200, SIZE_R, playground, (sensorText).toInt(), (directionText).toInt(), (spinText).toInt());
+    ARobot *tmp = new ARobot(SPAWN_X + 25, SPAWN_Y + 25, SIZE_R, playground, (sensorText).toInt(), (directionText).toInt(), (spinText).toInt());
 
     QBrush brushRob(Qt::blue);
     brushRob.setColor(Qt::darkMagenta);
@@ -123,7 +124,7 @@ void window::checkRCRInput()
         return;
     }
 
-    RCRobot *tmp = new RCRobot(PLAY_X + 200, PLAY_Y + 200, SIZE_R, playground, (sensorText).toInt());
+    RCRobot *tmp = new RCRobot(SPAWN_X + 25, SPAWN_Y + 25, SIZE_R, playground, (sensorText).toInt());
     QBrush brushRob(Qt::blue);
     brushRob.setColor(Qt::white);
     tmp->setBrush(brushRob);
@@ -146,17 +147,25 @@ void window::stopTimer()
 
 void window::startTimer()
 {
-    timer->start(30);
+    if (!gridOpen)
+    {
+        timer->start(30);
+    }
 }
 
 void window::clickGrid()
 {
+    gridOpen = !gridOpen;
     timer->stop();
     editBuilder->buildBarGrid(playground, editScene);
 }
 
 void window::saveGame()
 {
+    if (timer->isActive())
+    {
+        return;
+    }
     QJsonArray jsonArray;
 
     // Iterate over each barrierC object in BARSlot.bars vector
@@ -212,6 +221,67 @@ void window::saveGame()
     qDebug() << "Current working directory:" << QDir::currentPath();
 }
 
+void window::loadFromFile()
+{
+
+    editWindowSignal();
+
+    QString fileName = "game.json";
+    QFile file(fileName);
+
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Failed to open" << fileName << "for reading:" << file.errorString();
+        return;
+    }
+
+    QByteArray jsonData = file.readAll();
+    file.close();
+
+    QJsonParseError parseError;
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &parseError);
+
+    if (parseError.error != QJsonParseError::NoError)
+    {
+        qDebug() << "Failed to parse JSON:" << parseError.errorString();
+        return;
+    }
+
+    if (!jsonDoc.isArray())
+    {
+        qDebug() << "JSON document is not an array";
+        return;
+    }
+
+    QJsonArray jsonArray = jsonDoc.array();
+
+    for (const QJsonValue &value : jsonArray)
+    {
+        QJsonObject obj = value.toObject();
+        int x = obj["x"].toInt();
+        int y = obj["y"].toInt();
+        QString type = obj["type"].toString();
+
+        if (type == "Barrier")
+        {
+            qDebug() << "bArIeR " << x << " and " << y;
+        }
+        else if (type == "RC Robot")
+        {
+            qDebug() << "RobotR " << x << " and " << y;
+        }
+        else if (type == "Automatic Robot")
+        {
+            qDebug() << "ARBOT " << x << " and " << y;
+        }
+        else
+        {
+            qDebug() << "wrong type of item";
+            exit(EXIT_FAILURE);
+        }
+    }
+}
+
 void window::editWindowSignal()
 {
     // set up the scene
@@ -258,6 +328,9 @@ void window::editWindowSignal()
     barrierC *edgeRight = new barrierC(PLAY_W, 0, 1, PLAY_H, playground);
     edgeRight->setPen(pen);
     editScene->addItem(edgeRight);
+
+    ARobot *Spawn = new ARobot(SPAWN_X, SPAWN_Y, 100, playground, 0, 0, 0);
+    editScene->addItem(Spawn);
 
     timer = new QTimer();
 

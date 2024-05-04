@@ -17,6 +17,7 @@ public:
 
 public slots:
     void editWindowSignal();
+    void loadFromFile();
     void moveUpActive();
     void rotateLeftActive();
     void rotateRightActive();
@@ -34,5 +35,5 @@ private:
     vector<ARobot *> ARobotVec;
     QGraphicsRectItem *playground;
     QTimer *timer;
-    bool loading;
+    bool gridOpen;
 };

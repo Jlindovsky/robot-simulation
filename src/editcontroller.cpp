@@ -4,7 +4,7 @@ void editController::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     RCSlot.name = new QGraphicsTextItem(QString("RC Robot"));
     RCSlot.name->setParent(dynamic_cast<QObject *>(parent));
-    RCSlot.name->setPos(50, 320);
+    RCSlot.name->setPos(35, 320);
     RCSlot.name->setDefaultTextColor(Qt::black);
 
     RCSlot.sensorText = new QGraphicsTextItem(QString("Set sensor lenght"));
@@ -30,7 +30,7 @@ void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     ASlot.name = new QGraphicsTextItem(QString("Automatic Robot"));
     ASlot.name->setParent(dynamic_cast<QObject *>(parent));
-    ASlot.name->setPos(50, 0);
+    ASlot.name->setPos(35, 0);
     ASlot.name->setDefaultTextColor(Qt::black);
 
     ASlot.sensorText = new QGraphicsTextItem(QString("Set sensor lenght"));
@@ -82,7 +82,7 @@ void editController::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     BARSlot.name = new QGraphicsTextItem(QString("Edit Barriers"));
     BARSlot.name->setParent(dynamic_cast<QObject *>(parent));
-    BARSlot.name->setPos(50, 480);
+    BARSlot.name->setPos(35, 480);
     BARSlot.name->setDefaultTextColor(Qt::black);
     BARSlot.buildBarrier = new gameButton(QString("Open"), BARSlot.name->x(), BARSlot.name->y() + 40, 100, 30, parent);
 
@@ -241,9 +241,9 @@ void editController::refresh(QGraphicsScene *scene)
 
 void editController::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
-    playSlot.pause = new gameButton(QString("pause"), PPANEL_W - 70, 10, 50, 50, parent);
-    playSlot.play = new gameButton(QString("play"), PPANEL_W - 130, 10, 50, 50, parent);
-    playSlot.save = new gameButton(QString("save"), PPANEL_W - 190, 10, 50, 50, parent);
+    playSlot.pause = new gameButton(QString("pause"), 10, 10, 50, 50, parent);
+    playSlot.play = new gameButton(QString("play"), 65, 10, 50, 50, parent);
+    playSlot.save = new gameButton(QString("save"), 120, 10, 50, 50, parent);
 
     scene->addItem(playSlot.pause);
     scene->addItem(playSlot.play);
