@@ -11,7 +11,7 @@ class Robot : public QObject, public QGraphicsEllipseItem
 public:
     Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent);
     void calculateHit(int step);
-    QJsonObject save();
+    virtual QJsonObject save() = 0;
 public slots:
     virtual void move();
 signals:

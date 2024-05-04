@@ -97,17 +97,8 @@ void window::checkARInput()
             tr("ERROR, Wrong input. Spin is from 10 to 180"));
         return;
     }
-
-    ARobot *tmp = new ARobot(SPAWN_X + 25, SPAWN_Y + 25, SIZE_R, playground, (sensorText).toInt(), (directionText).toInt(), (spinText).toInt());
-
-    QBrush brushRob(Qt::blue);
-    brushRob.setColor(Qt::darkMagenta);
-    tmp->setBrush(brushRob);
-    QObject::connect(timer, SIGNAL(timeout()), tmp, SLOT(move()));
-    editScene->addItem(tmp);
-    ARobotVec.push_back(tmp);
+    editBuilder->buildARobot(playground, editScene, SPAWN_X + 25, SPAWN_Y + 25, (sensorText).toInt(), (directionText).toInt(), (spinText).toInt(),timer);
 }
-
 void window::checkRCRInput()
 {
     auto slot = editBuilder->RCSlot;
@@ -123,20 +114,14 @@ void window::checkRCRInput()
             tr("ERROR, Wrong input. Sensor length is from 0 to 100"));
         return;
     }
-
-    RCRobot *tmp = new RCRobot(SPAWN_X + 25, SPAWN_Y + 25, SIZE_R, playground, (sensorText).toInt());
-    QBrush brushRob(Qt::blue);
-    brushRob.setColor(Qt::white);
-    tmp->setBrush(brushRob);
-    editBuilder->bottomSlot.activable.push_back(tmp);
-    editScene->addItem(tmp);
-
+    editBuilder->buildRCRobot(playground, editScene, SPAWN_X + 25, SPAWN_Y + 25, (sensorText).toInt());
     editBuilder->refresh(editScene);
 
-    for (size_t i = 0; i < editBuilder->bottomSlot.activable.size(); i++)
+    for (size_t i = 0; i < editBuilder->rcRobots.size(); i++)
     {
+        qDebug()<<"connect robot to button " ;//<< typeid(editBuilder->rcRobots[i]);
         connect(editBuilder->bottomSlot.robs[i], &gameButton::clicked, this, [=]()
-                { setActiveRCR(editBuilder->bottomSlot.activable[i]); });
+                { setActiveRCR(editBuilder->rcRobots[i]); });
     }
 }
 
@@ -172,30 +157,21 @@ void window::saveGame()
     for (const barrierC *bar : editBuilder->BARSlot.bars)
     {
         QJsonObject barObject;
-        int x = bar->x(); // Get the x position of the barrierC
-        int y = bar->y(); // Get the y position of the barrierC
-        barObject["x"] = x;
-        barObject["y"] = y;
-        barObject["type"] = "Barrier"; // Add your text here
+        barObject["x"] = bar->x();
+        barObject["y"] = bar->y();
+        ;
+        barObject["type"] = "Barrier";
         jsonArray.append(barObject);
     }
 
-    for (const RCRobot *rob : editBuilder->bottomSlot.activable)
+    for (RCRobot *rob : editBuilder->rcRobots)
     {
-        QJsonObject barObject;
-        int x = rob->x(); // Get the x position of the barrierC
-        int y = rob->y(); // Get the y position of the barrierC
-        barObject["x"] = x;
-        barObject["y"] = y;
-        barObject["sensor"] = rob->sensor;
-        barObject["type"] = "RC Robot"; // Add your text here
-        jsonArray.append(barObject);
+        jsonArray.append(rob->save());
     }
 
-    for (const ARobot *rob : ARobotVec)
+    for (ARobot *rob : editBuilder->aRobots)
     {
-
-        jsonArray.append(barObject);
+        jsonArray.append(rob->save());
     }
 
     QJsonDocument jsonDoc(jsonArray);
@@ -256,6 +232,10 @@ void window::loadFromFile()
         QJsonObject obj = value.toObject();
         int x = obj["x"].toInt();
         int y = obj["y"].toInt();
+        int sensor = obj["sensor"].toInt();
+
+        int spin = obj["spin"].toInt();
+        int directionOfSpin = obj["direction"].toInt();
         QString type = obj["type"].toString();
 
         if (type == "Barrier")
@@ -264,17 +244,25 @@ void window::loadFromFile()
         }
         else if (type == "RC Robot")
         {
-            editBuilder->buildRCRobot(playground, editScene, x, y);
+            editBuilder->buildRCRobot(playground, editScene, x, y, sensor);
         }
         else if (type == "Automatic Robot")
         {
-            editBuilder->buildARobot(playground, editScene, x, y);
+            editBuilder->buildARobot(playground, editScene, x, y, sensor, directionOfSpin, spin,timer);
         }
         else
         {
             qDebug() << "wrong type of item";
             exit(EXIT_FAILURE);
         }
+    }
+    editBuilder->refresh(editScene);
+
+    for (size_t i = 0; i < editBuilder->rcRobots.size(); i++)
+    {
+        qDebug()<<"connect robot to button " ;//<< typeid(editBuilder->rcRobots[i]);
+        connect(editBuilder->bottomSlot.robs[i], &gameButton::clicked, this, [=]()
+                { setActiveRCR(editBuilder->rcRobots[i]); });
     }
 }
 

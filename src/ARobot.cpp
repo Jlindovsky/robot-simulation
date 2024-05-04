@@ -5,7 +5,18 @@ ARobot::ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorI
     sensor = sensorIn;
     directionOfSpin = directionOfSpinIn; // tmp
     spin = spinIn;                       // tmp
-    step = sensorIn/2;
+    step = sensorIn / 2;
+}
+QJsonObject ARobot::save()
+{
+    QJsonObject barObject;
+    int x = this->x(); 
+    int y = this->y(); 
+    barObject["x"] = x;
+    barObject["y"] = y;
+    barObject["sensor"] = sensor;
+    barObject["type"] = "Automatic Robot"; 
+    return barObject;
 }
 
 void ARobot::move()
@@ -25,7 +36,7 @@ void ARobot::move()
 
             angle = ((angle + (directionOfSpin * spin)) + 360) % 360;
             hit = true;
-           // qDebug() << "Hit!" << ((colliding_items[i])) << Qt::endl;
+            // qDebug() << "Hit!" << ((colliding_items[i])) << Qt::endl;
         }
     }
     setPos(previousLocation);
@@ -33,5 +44,5 @@ void ARobot::move()
     {
         calculateHit(step);
     }
-    //generate direction
+    // generate direction
 }

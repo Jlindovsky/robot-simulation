@@ -9,6 +9,19 @@ RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int senso
     step = sensorIN/2;
 }
 
+QJsonObject RCRobot::save()
+{
+    QJsonObject barObject;
+    int x = this->x(); 
+    int y = this->y(); 
+    barObject["x"] = x;
+    barObject["y"] = y;
+    barObject["sensor"] = sensor;
+    barObject["spin"] = spin;
+    barObject["direction"] = directionOfSpin;
+    barObject["type"] = "RC Robot"; 
+    return barObject;
+}
 
 
 void RCRobot::moveUp()

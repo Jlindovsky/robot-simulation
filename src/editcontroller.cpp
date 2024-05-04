@@ -220,7 +220,7 @@ void editController::refresh(QGraphicsScene *scene)
     int offset_x = 0;
     int offset_y = 0;
     int shift = 60;
-    for (size_t i = 0; i < bottomSlot.activable.size(); i++)
+    for (size_t i = 0; i < rcRobots.size(); i++)
     {
         string robName = "rob" + to_string(i + 1);
         gameButton *tmp = new gameButton(QString::fromStdString(robName), 10 + offset_x, 10 + offset_y, 50, 50, rPanel);
@@ -285,39 +285,45 @@ editController::editController(QGraphicsScene *scene)
     buildPlayEdit(pPanel, scene);
 }
 
-void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y)
+void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensor, int directionOfSpin, int spin,QTimer *timer)
 {
     if (x > PLAY_W || x < PLAY_X || y > PLAY_H || y < PLAY_Y)
     {
         qDebug() << "Invalid position of Automatic Robot from file!\n";
         exit(EXIT_FAILURE);
     }
-    ARobot *tmp = new ARobot(x, y, SIZE_R, parent, 0, 0, 0);
+    QBrush brushRob(Qt::darkMagenta);
+    ARobot *tmp = new ARobot(x, y, SIZE_R, parent, sensor, directionOfSpin, spin);
+    tmp->setBrush(brushRob);
     aRobots.push_back(tmp);
+    QObject::connect(timer, SIGNAL(timeout()), tmp, SLOT(move()));
     scene->addItem(tmp);
 }
 
-void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y)
+void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensorIn)
 {
     if (x > PLAY_W || x < PLAY_X || y > PLAY_H || y < PLAY_Y)
     {
-        qDebug() << "Invalid position of Remote Control Robot from file!\n";
+        qDebug() << "Invalid position of Remote Control Robot\n";
         exit(EXIT_FAILURE);
     }
-    RCRobot *tmp = new RCRobot(x, y, SIZE_R, parent, 0);
+    QBrush brushRob(Qt::white);
+    RCRobot *tmp = new RCRobot(x, y, SIZE_R, parent, sensorIn);
+    tmp->setBrush(brushRob);
     rcRobots.push_back(tmp);
     scene->addItem(tmp);
 }
 
 void editController::buildBar(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y)
 {
-
     if (x % 50 || y % 50 || x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
     {
-        qDebug() << "Invalid position of Barrier from file!\n";
+        qDebug() << "Invalid position of Barrier \n";
         exit(EXIT_FAILURE);
     }
+    QBrush brush(Qt::magenta);
     barrierC *tmp = new barrierC(x, y, 50, 50, parent);
+    tmp->setBrush(brush);
     BARSlot.bars.push_back(tmp);
     scene->addItem(tmp);
 }

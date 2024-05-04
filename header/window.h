@@ -32,7 +32,6 @@ public slots:
 private:
     editController *editBuilder;
     RCRobot *activeRCR;
-    vector<ARobot *> ARobotVec;
     QGraphicsRectItem *playground;
     QTimer *timer;
     bool gridOpen;

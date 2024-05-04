@@ -17,6 +17,8 @@ public:
     void moveUp();
     void rotateLeft();
     void rotateRight();
+    QJsonObject save()override;
+    
 };
 
 #endif
