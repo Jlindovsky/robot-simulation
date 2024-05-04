@@ -90,10 +90,10 @@ public:
     void deleteBarGrid();
     void gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene);
     void refresh(QGraphicsScene *scene);
-    
-    void buildRCRobot(QGraphicsItem *parent, QGraphicsScene *scene,int x,int y);
-    void buildARobot(QGraphicsItem *parent, QGraphicsScene *scene,int x,int y);
-    void buildBar(QGraphicsItem *parent, QGraphicsScene *scene,int x,int y);
+
+    void buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y);
+    void buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y);
+    void buildBar(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y);
 
     editSlotARobot ASlot;
     editSlotRCRobot RCSlot;

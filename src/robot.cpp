@@ -40,3 +40,16 @@ void Robot::move()
 {
     qDebug() << "parent function";
 }
+
+QJsonObject Robot::save()
+{
+    QJsonObject barObject;
+    int x = rob->x(); // Get the x position of the barrierC
+    int y = rob->y(); // Get the y position of the barrierC
+    barObject["x"] = x;
+    barObject["y"] = y;
+    barObject["sensor"] = rob->sensor;
+    barObject["spin"] = rob->spin;
+    barObject["direction"] = rob->directionOfSpin;
+    barObject["type"] = "Automatic Robot"; // Add your text here
+}

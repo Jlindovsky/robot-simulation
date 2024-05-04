@@ -285,7 +285,7 @@ editController::editController(QGraphicsScene *scene)
     buildPlayEdit(pPanel, scene);
 }
 
-void editController::buildARobot(QGraphicsItem *parent, QGraphicsScene *scene, int x, int y)
+void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y)
 {
     if (x > PLAY_W || x < PLAY_X || y > PLAY_H || y < PLAY_Y)
     {
@@ -297,26 +297,27 @@ void editController::buildARobot(QGraphicsItem *parent, QGraphicsScene *scene, i
     scene->addItem(tmp);
 }
 
-void editController::buildRCRobot(QGraphicsItem *parent, QGraphicsScene *scene, int x, int y)
+void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y)
 {
     if (x > PLAY_W || x < PLAY_X || y > PLAY_H || y < PLAY_Y)
     {
         qDebug() << "Invalid position of Remote Control Robot from file!\n";
         exit(EXIT_FAILURE);
     }
-    RCRobot *tmp = new RCRobot(x, y, SIZE_R, parent, 0, 0, 0);
+    RCRobot *tmp = new RCRobot(x, y, SIZE_R, parent, 0);
     rcRobots.push_back(tmp);
     scene->addItem(tmp);
 }
 
-void editController::buildBar(QGraphicsItem *parent, QGraphicsScene *scene, int x, int y);
+void editController::buildBar(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y)
 {
-    if (x%50 || y%50 || x > PLAY_W || x < PLAY_X || y > PLAY_H || y < PLAY_Y)
+
+    if (x % 50 || y % 50 || x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
     {
         qDebug() << "Invalid position of Barrier from file!\n";
         exit(EXIT_FAILURE);
     }
-    barrierC * tmp = new barrierC(x,y,50,50,parent);
-    rcRobots.push_back(tmp);
+    barrierC *tmp = new barrierC(x, y, 50, 50, parent);
+    BARSlot.bars.push_back(tmp);
     scene->addItem(tmp);
 }

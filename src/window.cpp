@@ -187,18 +187,14 @@ void window::saveGame()
         int y = rob->y(); // Get the y position of the barrierC
         barObject["x"] = x;
         barObject["y"] = y;
+        barObject["sensor"] = rob->sensor;
         barObject["type"] = "RC Robot"; // Add your text here
         jsonArray.append(barObject);
     }
 
     for (const ARobot *rob : ARobotVec)
     {
-        QJsonObject barObject;
-        int x = rob->x(); // Get the x position of the barrierC
-        int y = rob->y(); // Get the y position of the barrierC
-        barObject["x"] = x;
-        barObject["y"] = y;
-        barObject["type"] = "Automatic Robot"; // Add your text here
+
         jsonArray.append(barObject);
     }
 
@@ -264,15 +260,15 @@ void window::loadFromFile()
 
         if (type == "Barrier")
         {
-            qDebug() << "bArIeR " << x << " and " << y;
+            editBuilder->buildBar(playground, editScene, x, y);
         }
         else if (type == "RC Robot")
         {
-            qDebug() << "RobotR " << x << " and " << y;
+            editBuilder->buildRCRobot(playground, editScene, x, y);
         }
         else if (type == "Automatic Robot")
         {
-            qDebug() << "ARBOT " << x << " and " << y;
+            editBuilder->buildARobot(playground, editScene, x, y);
         }
         else
         {
