@@ -1,5 +1,4 @@
 *.json
-makefile
 *.o
 app
 .DS*
