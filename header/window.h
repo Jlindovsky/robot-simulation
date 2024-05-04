@@ -1,19 +1,7 @@
-#include "editcontroler.h"
+#include "editController.h"
 #include "global.h"
 
-
-typedef struct inputData
-{
-    inputType which;
-    union data
-    {
-        barrierC *bar;
-        Robot *ar;
-        Robot *rcr;
-    };
-} inputData;
-
-// UI controler
+// UI controller
 class window : public QGraphicsView
 {
     Q_OBJECT
@@ -23,13 +11,12 @@ public:
     void mainWindow();
     void editWindow();
     void playWindow();
-    // void keyPressEvent(QKeyEvent*event)override; maybe some other time
+
     QGraphicsScene *welcomeScene;
     QGraphicsScene *editScene;
 
 public slots:
     void editWindowSignal();
-    void clickInEdit(inputData *, int, int);
     void moveUpActive();
     void rotateLeftActive();
     void rotateRightActive();
@@ -41,9 +28,8 @@ public slots:
     void clickGrid();
     void saveGame();
 
-    //      void playGame();
 private:
-    editControler *editBuilder;
+    editController *editBuilder;
     RCRobot *activeRCR;
     vector<ARobot *> ARobotVec;
     QGraphicsRectItem *playground;

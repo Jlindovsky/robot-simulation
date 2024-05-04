@@ -228,7 +228,7 @@ void window::editWindowSignal()
     playground->setPen(pen);
     editScene->addItem(playground);
 
-    editBuilder = new editControler(editScene);
+    editBuilder = new editController(editScene);
     connect(editBuilder->bottomSlot.up, SIGNAL(clicked()), this, SLOT(moveUpActive()));
     connect(editBuilder->bottomSlot.right, SIGNAL(clicked()), this, SLOT(rotateRightActive()));
     connect(editBuilder->bottomSlot.left, SIGNAL(clicked()), this, SLOT(rotateLeftActive()));
@@ -262,16 +262,4 @@ void window::editWindowSignal()
     timer = new QTimer();
 
     timer->start(30);
-}
-
-void window::clickInEdit(inputData * gamePiece,int x , int y)
-{
-    if((x>=PLAY_X || x <= PLAY_X + PLAY_W - SIZE_B) && (y>=0 || y<=PLAY_H - SIZE_B))
-    {
-        //clicked inside of playground
-    }
-    else if((x>= 0 || x< IPANEL_W) && (y>=0 || y<=IPANEL_H))
-    {
-        //clicked in I panel 
-    }
 }

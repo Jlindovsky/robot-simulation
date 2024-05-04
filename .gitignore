@@ -6,7 +6,6 @@ app
 build-*
 build/*
 myBuild/
-CMakeLists.txt.user
 *.cmake
 .qt
 .lupdate
@@ -16,4 +15,4 @@ appRun_autogen
 CMakeCache.txt
 
 makefile
-CMakeLists.txt
+*.txt

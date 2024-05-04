@@ -1,6 +1,6 @@
-#include "../header/editcontroler.h"
+#include "../header/editController.h"
 
-void editControler::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
+void editController::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     RCSlot.name = new QGraphicsTextItem(QString("RC Robot"));
     RCSlot.name->setParent(dynamic_cast<QObject *>(parent));
@@ -26,7 +26,7 @@ void editControler::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     // magic bracho
     scene->addItem(RCSlot.buildRCRobot);
 }
-void editControler::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
+void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     ASlot.name = new QGraphicsTextItem(QString("Automatic Robot"));
     ASlot.name->setParent(dynamic_cast<QObject *>(parent));
@@ -78,7 +78,7 @@ void editControler::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     // magic bracho
     scene->addItem(ASlot.buildARobot);
 }
-void editControler::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
+void editController::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     BARSlot.name = new QGraphicsTextItem(QString("Edit Barriers"));
     BARSlot.name->setParent(dynamic_cast<QObject *>(parent));
@@ -91,7 +91,7 @@ void editControler::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     scene->addItem(BARSlot.buildBarrier);
 }
 
-void editControler::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *scene)
+void editController::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     bottomSlot.up = new gameButton(QString("up"), RPANEL_W - 130, 10, 50, 50, parent);
     bottomSlot.left = new gameButton(QString("left"), RPANEL_W - 190, 10, 50, 50, parent);
@@ -101,7 +101,7 @@ void editControler::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *sce
     scene->addItem(bottomSlot.right);
 }
 
-void editControler::gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene)
+void editController::gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     for (int i = 0; i < 17; i++)
     {
@@ -115,7 +115,7 @@ void editControler::gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene)
     }
 }
 
-void editControler::addBar(QGraphicsItem *parent, QGraphicsScene *scene)
+void editController::addBar(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     QBrush brush(Qt::magenta);
     gameButton *clickedButton = qobject_cast<gameButton *>(sender());
@@ -132,7 +132,7 @@ void editControler::addBar(QGraphicsItem *parent, QGraphicsScene *scene)
     }
 }
 
-void editControler::dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene *scene)
+void editController::dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene *scene)
 {
     // Find the iterator pointing to the barrierC object to delete
     auto it = remove_if(BARSlot.bars.begin(), BARSlot.bars.end(), [&](barrierC *b)
@@ -147,7 +147,7 @@ void editControler::dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene 
     }
 }
 
-void editControler::buildBarGrid(QGraphicsItem *parent, QGraphicsScene *scene)
+void editController::buildBarGrid(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     if (inBarEdit)
     {
@@ -161,7 +161,7 @@ void editControler::buildBarGrid(QGraphicsItem *parent, QGraphicsScene *scene)
     gridRefresh(parent, scene);
 }
 
-void editControler::placeBar(gameButton *button, QGraphicsItem *parent, QGraphicsScene *scene)
+void editController::placeBar(gameButton *button, QGraphicsItem *parent, QGraphicsScene *scene)
 {
     QList<QGraphicsItem *> colliding_items = button->collidingItems();
     bool hit = false;
@@ -201,7 +201,7 @@ void editControler::placeBar(gameButton *button, QGraphicsItem *parent, QGraphic
             { addBar(parent, scene); });
 }
 
-void editControler::deleteBarGrid()
+void editController::deleteBarGrid()
 {
     for (auto i : barGrid)
     {
@@ -210,7 +210,7 @@ void editControler::deleteBarGrid()
     barGrid.clear();
 }
 
-void editControler::refresh(QGraphicsScene *scene)
+void editController::refresh(QGraphicsScene *scene)
 {
     for (auto i : (bottomSlot.robs))
     {
@@ -239,7 +239,7 @@ void editControler::refresh(QGraphicsScene *scene)
     }
 }
 
-void editControler::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
+void editController::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     playSlot.pause = new gameButton(QString("pause"), PPANEL_W - 70, 10, 50, 50, parent);
     playSlot.play = new gameButton(QString("play"), PPANEL_W - 130, 10, 50, 50, parent);
@@ -250,7 +250,7 @@ void editControler::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
     scene->addItem(playSlot.save);
 }
 
-editControler::editControler(QGraphicsScene *scene)
+editController::editController(QGraphicsScene *scene)
 {
     inBarEdit = false;
     iPanel = new QGraphicsRectItem(0, 0, IPANEL_W, IPANEL_H);

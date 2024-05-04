@@ -1,6 +1,5 @@
-#ifndef EDITCONTROLER_H
-#define EDITCONTROLER_H
-
+#ifndef EDITcontroller_H
+#define EDITcontroller_H
 
 #include "barrierC.h"
 #include "robot.h"
@@ -8,7 +7,6 @@
 #include "RCRobot.h"
 #include "gameButton.h"
 #include "global.h"
-
 
 enum inputType
 {
@@ -77,11 +75,11 @@ struct pSlot
     gameButton *save;
 };
 
-class editControler : public QObject
+class editController : public QObject
 {
     Q_OBJECT
 public:
-    editControler(QGraphicsScene *scene);
+    editController(QGraphicsScene *scene);
     void buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene);
@@ -111,4 +109,4 @@ public slots:
     void dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene *scene);
 };
 
-#endif // EDITCONTROLER_H
+#endif // EDITcontroller_H

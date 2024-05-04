@@ -17,7 +17,7 @@ find_package(Qt5 COMPONENTS Core Widgets Network REQUIRED)
 set(SOURCE_FILES
   src/ARobot.cpp
   src/barrierC.cpp
-  src/editcontroler.cpp
+  src/editController.cpp
   src/gameButton.cpp  # Include gameButton.cpp
   src/RCRobot.cpp
   src/robot.cpp
@@ -25,7 +25,7 @@ set(SOURCE_FILES
   src/main.cpp
   header/ARobot.h
   header/barrierC.h
-  header/editcontroler.h
+  header/editController.h
   header/gameButton.h
   header/RCRobot.h
   header/robot.h
