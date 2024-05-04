@@ -1,7 +1,6 @@
 #ifndef BARRIERC_H
 #define BARRIERC_H
-#include <QGraphicsRectItem>
-#include <QObject>
+
 #include "global.h"
 
 class barrierC : public QObject, public QGraphicsRectItem

@@ -1,19 +1,12 @@
 #ifndef EDITCONTROLER_H
 #define EDITCONTROLER_H
 
-#include <QObject>
-#include <QLineEdit>
-#include <QGraphicsScene>
-#include <QGraphicsView>
 
 #include "barrierC.h"
 #include "robot.h"
 #include "ARobot.h"
 #include "RCRobot.h"
 #include "gameButton.h"
-#include <vector>
-#include <qvalidator.h>
-using namespace std;
 
 enum inputType
 {

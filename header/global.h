@@ -23,6 +23,7 @@
 #define RPANEL_Y 650
 #define RPANEL_W 850
 #define RPANEL_H 168
+
 #include <QtWidgets>
 #include <QApplication>
 #include <QGraphicsScene>
@@ -36,7 +37,26 @@
 #include <QJsonObject>
 #include <QFile>
 #include <algorithm>
+#include <QObject>
+#include <QLineEdit>
+#include <QBrush>
+#include <QGraphicsSceneMouseEvent>
+#include <QKeyEvent>
+#include <QPen>
+#include <QTimer>
+#include <QList>
+#include <QLocale>
+#include <QTranslator>
+#include <QIntValidator>
+#include <QLabel>
+#include <QHBoxLayout>
+#include <QMessageBox>
 
+
+// std libs
+#include <vector>
+#include <qvalidator.h>
+#include <typeinfo>
 using namespace std;
 
 #endif

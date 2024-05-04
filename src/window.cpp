@@ -1,9 +1,4 @@
 #include "window.h"
-#include <QLineEdit>
-#include <QIntValidator>
-#include <QLabel>
-#include <QHBoxLayout>
-#include <QMessageBox>
 
 window::window()
 {

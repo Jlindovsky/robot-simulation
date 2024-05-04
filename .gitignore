@@ -15,3 +15,5 @@ appRun.app
 appRun_autogen
 CMakeCache.txt
 
+makefile
+CMakeLists.txt

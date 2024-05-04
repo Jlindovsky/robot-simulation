@@ -1,14 +1,4 @@
 
-#include <QObject>
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QGraphicsItem>
-#include <QMouseEvent>
-#include <QKeyEvent>
-#include <QList>
-#include <QPen>
-#include <QTimer>
-
 #include "editcontroler.h"
 // lib refactor
 

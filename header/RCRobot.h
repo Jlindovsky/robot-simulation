@@ -2,7 +2,6 @@
 #define RCROBOT_H
 
 #include "robot.h"
-#include <QKeyEvent>
 
 #define UPARROW 16777235
 #define LARROW 16777234

@@ -1,10 +1,6 @@
 #ifndef GAMEBUTTON_H
 #define GAMEBUTTON_H
 
-#include <QObject>
-#include <QGraphicsRectItem>
-#include <QBrush>
-#include <QGraphicsSceneMouseEvent>
 #include "global.h"
 
 class gameButton : public QObject, public QGraphicsRectItem
