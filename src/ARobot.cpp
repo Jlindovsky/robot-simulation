@@ -1,4 +1,4 @@
-#include "ARobot.h"
+#include "../header/ARobot.h"
 
 ARobot::ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIn, int directionOfSpinIn, int spinIn) : Robot(x, y, w, parent)
 {

@@ -1,4 +1,4 @@
-#include "editcontroler.h"
+#include "../header/editcontroler.h"
 
 void editControler::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {

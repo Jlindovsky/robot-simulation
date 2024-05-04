@@ -7,6 +7,8 @@
 #include "ARobot.h"
 #include "RCRobot.h"
 #include "gameButton.h"
+#include "global.h"
+
 
 enum inputType
 {

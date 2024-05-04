@@ -1,4 +1,4 @@
-#include "barrierC.h"
+#include "../header/barrierC.h"
 
 barrierC::barrierC(qreal x, qreal y, QGraphicsRectItem *parent)
     : QGraphicsRectItem(0, 0, SIZE_B, SIZE_B, parent)

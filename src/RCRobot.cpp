@@ -1,4 +1,4 @@
-#include "RCRobot.h"
+#include "../header/RCRobot.h"
 
 RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIN)
     : Robot(x, y, w, parent)

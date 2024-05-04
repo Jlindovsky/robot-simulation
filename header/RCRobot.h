@@ -2,6 +2,8 @@
 #define RCROBOT_H
 
 #include "robot.h"
+#include "global.h"
+
 
 #define UPARROW 16777235
 #define LARROW 16777234

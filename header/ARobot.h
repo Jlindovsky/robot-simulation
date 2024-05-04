@@ -2,6 +2,8 @@
 #define AROBOT_H
 
 #include "robot.h"
+#include "global.h"
+
 
 class ARobot : public Robot
 {

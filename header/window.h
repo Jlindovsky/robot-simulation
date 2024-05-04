@@ -1,6 +1,6 @@
-
 #include "editcontroler.h"
-// lib refactor
+#include "global.h"
+
 
 typedef struct inputData
 {

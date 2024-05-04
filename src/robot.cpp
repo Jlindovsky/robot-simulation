@@ -1,4 +1,4 @@
-#include "robot.h"
+#include "../header/robot.h"
 Robot::Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent)
     : QGraphicsEllipseItem(0, 0, w, w, parent)
 {

@@ -3,6 +3,8 @@
 #define ROBOT_H
 
 #include "barrierC.h"
+#include "global.h"
+
 
 class Robot : public QObject, public QGraphicsEllipseItem
 {

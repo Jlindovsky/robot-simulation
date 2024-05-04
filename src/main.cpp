@@ -1,5 +1,7 @@
 
-#include "window.h"
+#include "../header/window.h"
+#include "../header/global.h"
+
 
 window * game;
 

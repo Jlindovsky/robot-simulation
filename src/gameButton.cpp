@@ -1,4 +1,4 @@
-#include "gameButton.h"
+#include "../header/gameButton.h"
 
 gameButton::gameButton(QString name, int x, int y, int w, int h, QGraphicsItem *parent)
 {
