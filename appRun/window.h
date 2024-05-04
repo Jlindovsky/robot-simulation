@@ -49,6 +49,7 @@ public slots:
     void startTimer();
     void setActiveRCR(RCRobot *);
     void clickGrid();
+    void saveGame();
 
     //      void playGame();
 private:
@@ -57,4 +58,5 @@ private:
     vector<ARobot *> ARobotVec;
     QGraphicsRectItem *playground;
     QTimer *timer;
+    bool loading;
 };

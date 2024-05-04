@@ -159,6 +159,64 @@ void window::clickGrid()
     timer->stop();
     editBuilder->buildBarGrid(playground, editScene);
 }
+
+void window::saveGame()
+{
+    QJsonArray jsonArray;
+
+    // Iterate over each barrierC object in BARSlot.bars vector
+    for (const barrierC *bar : editBuilder->BARSlot.bars)
+    {
+        QJsonObject barObject;
+        int x = bar->x(); // Get the x position of the barrierC
+        int y = bar->y(); // Get the y position of the barrierC
+        barObject["x"] = x;
+        barObject["y"] = y;
+        barObject["type"] = "Barrier"; // Add your text here
+        jsonArray.append(barObject);
+    }
+
+    for (const RCRobot *rob : editBuilder->bottomSlot.activable)
+    {
+        QJsonObject barObject;
+        int x = rob->x(); // Get the x position of the barrierC
+        int y = rob->y(); // Get the y position of the barrierC
+        barObject["x"] = x;
+        barObject["y"] = y;
+        barObject["type"] = "RC Robot"; // Add your text here
+        jsonArray.append(barObject);
+    }
+
+    for (const ARobot *rob : ARobotVec)
+    {
+        QJsonObject barObject;
+        int x = rob->x(); // Get the x position of the barrierC
+        int y = rob->y(); // Get the y position of the barrierC
+        barObject["x"] = x;
+        barObject["y"] = y;
+        barObject["type"] = "Automatic Robot"; // Add your text here
+        jsonArray.append(barObject);
+    }
+
+    QJsonDocument jsonDoc(jsonArray);
+
+    QString fileName = "game.json";
+
+    QFile file(fileName);
+    if (file.open(QIODevice::WriteOnly))
+    {
+        file.write(jsonDoc.toJson());
+        file.close();
+        qDebug() << "Game barriers data saved to" << fileName;
+    }
+    else
+    {
+        qDebug() << "Failed to open" << fileName << "for writing:" << file.errorString();
+    }
+
+    qDebug() << "Current working directory:" << QDir::currentPath();
+}
+
 void window::editWindowSignal()
 {
     // set up the scene
@@ -184,6 +242,7 @@ void window::editWindowSignal()
     connect(editBuilder->BARSlot.buildBarrier, SIGNAL(clicked()), this, SLOT(clickGrid()));
     connect(editBuilder->playSlot.pause, SIGNAL(clicked()), this, SLOT(stopTimer()));
     connect(editBuilder->playSlot.play, SIGNAL(clicked()), this, SLOT(startTimer()));
+    connect(editBuilder->playSlot.save, SIGNAL(clicked()), this, SLOT(saveGame()));
 
     QBrush brush;
 
@@ -204,15 +263,6 @@ void window::editWindowSignal()
     barrierC *edgeRight = new barrierC(PLAY_W, 0, 1, PLAY_H, playground);
     edgeRight->setPen(pen);
     editScene->addItem(edgeRight);
-
-    // barrierC *bar1 = new barrierC(250, 250, 100, 100, playground);
-    // pen.setColor(Qt::magenta);
-    // bar1->setPen(pen);
-    // editScene->addItem(bar1);
-
-    // barrierC *bar2 = new barrierC(50, 50, 100, 100, playground);
-    // bar2->setPen(pen);
-    // editScene->addItem(bar2);
 
     timer = new QTimer();
 

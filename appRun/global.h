@@ -31,6 +31,11 @@
 #include <QDrag>
 #include <QMimeData>
 #include <string>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QFile>
+#include <algorithm>
 
 using namespace std;
 

@@ -84,7 +84,6 @@ void editControler::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     BARSlot.name->setParent(dynamic_cast<QObject *>(parent));
     BARSlot.name->setPos(50, 480);
     BARSlot.name->setDefaultTextColor(Qt::black);
-    BARSlot.bar = new barrierC();
     BARSlot.buildBarrier = new gameButton(QString("Open"), BARSlot.name->x(), BARSlot.name->y() + 40, 100, 30, parent);
 
     scene->addItem(BARSlot.name);
@@ -129,14 +128,23 @@ void editControler::addBar(QGraphicsItem *parent, QGraphicsScene *scene)
         tmp->setBrush(brush);
         scene->addItem(tmp);
         gridRefresh(parent, scene);
+        BARSlot.bars.push_back(tmp);
     }
 }
 
 void editControler::dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene *scene)
 {
+    // Find the iterator pointing to the barrierC object to delete
+    auto it = remove_if(BARSlot.bars.begin(), BARSlot.bars.end(), [&](barrierC *b)
+                        { return b == bar; });
 
-    delete bar;
-    gridRefresh(parent, scene);
+    // If the barrierC object was found, erase it from the vector
+    if (it != BARSlot.bars.end())
+    {
+        delete bar;             // Delete the object
+        BARSlot.bars.erase(it); // Erase it from the vector
+        gridRefresh(parent, scene);
+    }
 }
 
 void editControler::buildBarGrid(QGraphicsItem *parent, QGraphicsScene *scene)
