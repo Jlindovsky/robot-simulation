@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 3.5)
 
 project(icp24)
 
+set(Qt5_DIR /opt/homebrew/Cellar/qt@5/5.15.13_1/lib/cmake/Qt5)
+
 # Find the Qt libraries
-find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Core Widgets Network REQUIRED)
 
 # Add header files directory
 include_directories(header)
@@ -25,4 +27,4 @@ set(SOURCE_FILES
 add_executable(icp24 ${SOURCE_FILES})
 
 # Link Qt libraries
-target_link_libraries(icp24 Qt5::Core Qt5::Widgets)
+target_link_libraries(icp24 Qt5::Core Qt5::Widgets Qt5::Network)

@@ -9,7 +9,7 @@ all:$(TARGET)
 
 $(TARGET):
 	mkdir -p build
-	cd build && cmake .. && make
+	cd build &&  cmake .. && make
 clean:
 	rm -rf $(BUILD_DIR) $(DOC) $(ZIPFILE)
 
