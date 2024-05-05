@@ -34,34 +34,34 @@ void window::mainWindow()
 }
 void window::setActiveRCR(RCRobot *rob)
 {
-    QPen peero;
+    QPen pero;
     if (activeRCR != nullptr)
     {
-        peero.setColor(Qt::black);
-        peero.setWidth(0);
-        activeRCR->setPen(peero);
+        pero.setColor(Qt::black);
+        pero.setWidth(0);
+        activeRCR->setPen(pero);
     }
-    peero.setColor(Qt::green);
-    peero.setWidth(4);
+    pero.setColor(Qt::green);
+    pero.setWidth(4);
     activeRCR = rob;
-    activeRCR->setPen(peero);
+    activeRCR->setPen(pero);
 }
 
 void window::setActiveR(Robot *rob)
 {
     qDebug() << "setting active";
-    QPen peero;
+    QPen pero;
 
     if (activeR != nullptr)
     {
-        peero.setColor(Qt::black);
-        peero.setWidth(0);
-        activeR->setPen(peero);
+        pero.setColor(Qt::black);
+        pero.setWidth(0);
+        activeR->setPen(pero);
     }
-    peero.setColor(Qt::green);
-    peero.setWidth(4);
+    pero.setColor(Qt::green);
+    pero.setWidth(4);
     activeR = rob;
-    activeR->setPen(peero);
+    activeR->setPen(pero);
 }
 void window::moveUpActive()
 {
@@ -82,7 +82,18 @@ void window::rotateRightActive()
 void window::deleteBot()
 {
     editBuilder->deleteRob(activeR);
+    editBuilder->refreshPause(editScene);
     activeR = nullptr;
+    for (size_t i = 0; i < editBuilder->bottomSlot.rcRobs.size(); i++)
+    {
+        connect(editBuilder->bottomSlot.rcRobs[i], &gameButton::clicked, this, [=]()
+                { setActiveR(editBuilder->rcRobots[i]); });
+    }
+    for (size_t i = 0; i < editBuilder->bottomSlot.aRobs.size(); i++)
+    {
+        connect(editBuilder->bottomSlot.aRobs[i], &gameButton::clicked, this, [=]()
+                { setActiveR(editBuilder->aRobots[i]); });
+    }
 }
 
 void window::checkARInput()
@@ -121,6 +132,21 @@ void window::checkARInput()
         return;
     }
     editBuilder->buildARobot(playground, editScene, SPAWN_X + 25, SPAWN_Y + 25, (sensorText).toInt(), (directionText).toInt(), (spinText).toInt(), timer);
+    // if pause refresh buttons for deletion
+    if (!timer->isActive())
+    {
+        editBuilder->refreshPause(editScene);
+        for (size_t i = 0; i < editBuilder->bottomSlot.rcRobs.size(); i++)
+        {
+            connect(editBuilder->bottomSlot.rcRobs[i], &gameButton::clicked, this, [=]()
+                    { setActiveR(editBuilder->rcRobots[i]); });
+        }
+        for (size_t i = 0; i < editBuilder->bottomSlot.aRobs.size(); i++)
+        {
+            connect(editBuilder->bottomSlot.aRobs[i], &gameButton::clicked, this, [=]()
+                    { setActiveR(editBuilder->aRobots[i]); });
+        }
+    }
 }
 void window::checkRCRInput()
 {
@@ -138,12 +164,28 @@ void window::checkRCRInput()
         return;
     }
     editBuilder->buildRCRobot(playground, editScene, SPAWN_X + 25, SPAWN_Y + 25, (sensorText).toInt());
-    editBuilder->refresh(editScene);
-
-    for (size_t i = 0; i < editBuilder->rcRobots.size(); i++)
+    if (timer->isActive())
     {
-        connect(editBuilder->bottomSlot.rcRobs[i], &gameButton::clicked, this, [=]()
-                { setActiveRCR(editBuilder->rcRobots[i]); });
+        editBuilder->refresh(editScene);
+        for (size_t i = 0; i < editBuilder->rcRobots.size(); i++)
+        {
+            connect(editBuilder->bottomSlot.rcRobs[i], &gameButton::clicked, this, [=]()
+                    { setActiveRCR(editBuilder->rcRobots[i]); });
+        }
+    }
+    else
+    {
+        editBuilder->refreshPause(editScene);
+        for (size_t i = 0; i < editBuilder->bottomSlot.rcRobs.size(); i++)
+        {
+            connect(editBuilder->bottomSlot.rcRobs[i], &gameButton::clicked, this, [=]()
+                    { setActiveR(editBuilder->rcRobots[i]); });
+        }
+        for (size_t i = 0; i < editBuilder->bottomSlot.aRobs.size(); i++)
+        {
+            connect(editBuilder->bottomSlot.aRobs[i], &gameButton::clicked, this, [=]()
+                    { setActiveR(editBuilder->aRobots[i]); });
+        }
     }
 }
 
@@ -188,6 +230,7 @@ void window::stopTimer()
     {
         pen.setWidth(0);
         activeRCR->setPen(pen);
+        activeRCR = nullptr;
     }
     editBuilder->refreshPause(editScene);
     for (size_t i = 0; i < editBuilder->bottomSlot.rcRobs.size(); i++)
@@ -228,9 +271,43 @@ void window::startTimer()
 
 void window::clickGrid()
 {
-    gridOpen = !gridOpen;
-    stopTimer();
-    editBuilder->buildBarGrid(playground, editScene);
+    if (gridOpen)
+    {
+        gridOpen = false;
+        editBuilder->BARSlot.buildBarrier->changeText("Open");
+        editBuilder->deleteBarGrid();
+        // bar grid is closed now we can delete robots
+        QBrush brush(Qt::darkCyan);
+        editBuilder->bottomSlot.dlt->setBrush(brush);
+        editBuilder->ASlot.buildARobot->setBrush(brush);
+        editBuilder->RCSlot.buildRCRobot->setBrush(brush);
+        editBuilder->playSlot.pause->setBrush(brush);
+        editBuilder->playSlot.play->setBrush(brush);
+        connect(editBuilder->bottomSlot.dlt, SIGNAL(clicked()), this, SLOT(deleteBot()));
+        connect(editBuilder->ASlot.buildARobot, SIGNAL(clicked()), this, SLOT(checkARInput()));
+        connect(editBuilder->RCSlot.buildRCRobot, SIGNAL(clicked()), this, SLOT(checkRCRInput()));
+        connect(editBuilder->playSlot.pause, SIGNAL(clicked()), this, SLOT(stopTimer()));
+        connect(editBuilder->playSlot.play, SIGNAL(clicked()), this, SLOT(startTimer()));
+    }
+    else
+    {
+        stopTimer();
+        gridOpen = true;
+        editBuilder->BARSlot.buildBarrier->changeText("Close");
+        // disconnect deletion of robots
+        QBrush brush(Qt::gray);
+        editBuilder->bottomSlot.dlt->setBrush(brush);
+        editBuilder->ASlot.buildARobot->setBrush(brush);
+        editBuilder->RCSlot.buildRCRobot->setBrush(brush);
+        editBuilder->playSlot.pause->setBrush(brush);
+        editBuilder->playSlot.play->setBrush(brush);
+        disconnect(editBuilder->bottomSlot.dlt, SIGNAL(clicked()), this, SLOT(deleteBot()));
+        disconnect(editBuilder->ASlot.buildARobot, SIGNAL(clicked()), this, SLOT(checkARInput()));
+        disconnect(editBuilder->RCSlot.buildRCRobot, SIGNAL(clicked()), this, SLOT(checkRCRInput()));
+        disconnect(editBuilder->playSlot.pause, SIGNAL(clicked()), this, SLOT(stopTimer()));
+        disconnect(editBuilder->playSlot.play, SIGNAL(clicked()), this, SLOT(startTimer()));
+        editBuilder->gridRefresh(playground, editScene);
+    }
 }
 
 void window::saveGame()

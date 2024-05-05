@@ -140,31 +140,15 @@ void editController::addBar(QGraphicsItem *parent, QGraphicsScene *scene)
 
 void editController::dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene *scene)
 {
-    // Find the iterator pointing to the barrierC object to delete
     auto it = remove_if(BARSlot.bars.begin(), BARSlot.bars.end(), [&](barrierC *b)
                         { return b == bar; });
 
-    // If the barrierC object was found, erase it from the vector
     if (it != BARSlot.bars.end())
     {
-        delete bar;             // Delete the object
-        BARSlot.bars.erase(it); // Erase it from the vector
+        delete bar;             
+        BARSlot.bars.erase(it); 
         gridRefresh(parent, scene);
     }
-}
-
-void editController::buildBarGrid(QGraphicsItem *parent, QGraphicsScene *scene)
-{
-    if (inBarEdit)
-    {
-        BARSlot.buildBarrier->changeText("Open");
-        deleteBarGrid();
-        inBarEdit = false;
-        return;
-    }
-    BARSlot.buildBarrier->changeText("Close");
-    inBarEdit = true;
-    gridRefresh(parent, scene);
 }
 
 void editController::placeBar(gameButton *button, QGraphicsItem *parent, QGraphicsScene *scene)
@@ -257,7 +241,13 @@ void editController::refreshPause(QGraphicsScene *scene)
         delete i;
     }
     bottomSlot.rcRobs.clear();
-
+    for (auto i : (bottomSlot.aRobs))
+    {
+        delete i;
+    }
+    bottomSlot.aRobs.clear();
+    
+    
     int offset_x = 0;
     int offset_y = 0;
     int shift = 60;
@@ -312,6 +302,7 @@ void editController::deleteRob(Robot *activeR)
         {
             aRobots.erase(it);
             delete aRobotToDelete;
+            return;
         }
     }
     else if (rcRobotToDelete)
@@ -321,6 +312,7 @@ void editController::deleteRob(Robot *activeR)
         {
             rcRobots.erase(it);
             delete rcRobotToDelete;
+            return;
         }
     }
 }
@@ -340,7 +332,6 @@ void editController::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 
 editController::editController(QGraphicsScene *scene)
 {
-    inBarEdit = false;
     iPanel = new QGraphicsRectItem(0, 0, IPANEL_W, IPANEL_H);
     iPanel->setPos(IPANEL_X, IPANEL_Y);
     QBrush brush;

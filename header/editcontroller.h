@@ -110,7 +110,6 @@ public:
     vector<gameButton *> barGrid;
     vector<ARobot *> aRobots;
     vector<RCRobot *> rcRobots;
-    bool inBarEdit;
 
 public slots:
     void addBar(QGraphicsItem *parent, QGraphicsScene *scene);
