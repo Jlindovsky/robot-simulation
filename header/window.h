@@ -11,6 +11,8 @@ public:
     void mainWindow();
     void editWindow();
     void playWindow();
+    void disconnectButtons();
+    void connectButtons();
 
     QGraphicsScene *welcomeScene;
     QGraphicsScene *editScene;
@@ -26,12 +28,15 @@ public slots:
     void stopTimer();
     void startTimer();
     void setActiveRCR(RCRobot *);
+    void setActiveR(Robot *);
     void clickGrid();
     void saveGame();
+    void deleteBot();
 
 private:
     editController *editBuilder;
     RCRobot *activeRCR;
+    Robot *activeR;
     QGraphicsRectItem *playground;
     QTimer *timer;
     bool gridOpen;

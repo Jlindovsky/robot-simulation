@@ -6,23 +6,20 @@ RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int senso
     sensor = sensorIN;
     directionOfSpin = 1;
     spin = 30;
-    step = sensorIN/2;
+    step = sensorIN / 2;
 }
 
 QJsonObject RCRobot::save()
 {
     QJsonObject barObject;
-    int x = this->x(); 
-    int y = this->y(); 
+    int x = this->x();
+    int y = this->y();
     barObject["x"] = x;
     barObject["y"] = y;
     barObject["sensor"] = sensor;
-    barObject["spin"] = spin;
-    barObject["direction"] = directionOfSpin;
-    barObject["type"] = "RC Robot"; 
+    barObject["type"] = "RC Robot";
     return barObject;
 }
-
 
 void RCRobot::moveUp()
 {
@@ -38,7 +35,6 @@ void RCRobot::moveUp()
         if (barrierItem != nullptr && typeid(*barrierItem) == typeid(barrierC))
         {
             setPos(previousLocation);
-            qDebug() << "Hit! wont move";
             return;
         }
     }

@@ -60,10 +60,12 @@ struct editSlotBarrier
 
 struct bSlot
 {
-    vector<gameButton *> robs;
+    vector<gameButton *> rcRobs;
+    vector<gameButton *> aRobs;
     gameButton *up;
     gameButton *left;
     gameButton *right;
+    gameButton *dlt;
 };
 
 struct pSlot
@@ -88,6 +90,8 @@ public:
     void deleteBarGrid();
     void gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene);
     void refresh(QGraphicsScene *scene);
+    void refreshPause(QGraphicsScene *scene);
+    void deleteRob(Robot *activeR);
 
     void buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensorIn);
     void buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensor, int directionOfSpin, int spin, QTimer *timer);

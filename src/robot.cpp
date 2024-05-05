@@ -38,3 +38,16 @@ void Robot::move()
 {
     qDebug() << "parent function";
 }
+
+void Robot::moveUp()
+{
+    qDebug() << "parent function";
+}
+void Robot::rotateLeft()
+{
+    qDebug() << "parent function";
+}
+void Robot::rotateRight()
+{
+    qDebug() << "parent function";
+}

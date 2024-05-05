@@ -34,17 +34,34 @@ void window::mainWindow()
 }
 void window::setActiveRCR(RCRobot *rob)
 {
-    qDebug() << "activate";
     QPen peero;
-    peero.setColor(Qt::green);
     if (activeRCR != nullptr)
     {
+        peero.setColor(Qt::black);
         peero.setWidth(0);
         activeRCR->setPen(peero);
     }
+    peero.setColor(Qt::green);
     peero.setWidth(4);
     activeRCR = rob;
     activeRCR->setPen(peero);
+}
+
+void window::setActiveR(Robot *rob)
+{
+    qDebug() << "setting active";
+    QPen peero;
+
+    if (activeR != nullptr)
+    {
+        peero.setColor(Qt::black);
+        peero.setWidth(0);
+        activeR->setPen(peero);
+    }
+    peero.setColor(Qt::green);
+    peero.setWidth(4);
+    activeR = rob;
+    activeR->setPen(peero);
 }
 void window::moveUpActive()
 {
@@ -60,6 +77,12 @@ void window::rotateRightActive()
 {
     if (activeRCR)
         activeRCR->rotateRight();
+}
+
+void window::deleteBot()
+{
+    editBuilder->deleteRob(activeR);
+    activeR = nullptr;
 }
 
 void window::checkARInput()
@@ -97,7 +120,7 @@ void window::checkARInput()
             tr("ERROR, Wrong input. Spin is from 10 to 180"));
         return;
     }
-    editBuilder->buildARobot(playground, editScene, SPAWN_X + 25, SPAWN_Y + 25, (sensorText).toInt(), (directionText).toInt(), (spinText).toInt(),timer);
+    editBuilder->buildARobot(playground, editScene, SPAWN_X + 25, SPAWN_Y + 25, (sensorText).toInt(), (directionText).toInt(), (spinText).toInt(), timer);
 }
 void window::checkRCRInput()
 {
@@ -119,29 +142,94 @@ void window::checkRCRInput()
 
     for (size_t i = 0; i < editBuilder->rcRobots.size(); i++)
     {
-        qDebug()<<"connect robot to button " ;//<< typeid(editBuilder->rcRobots[i]);
-        connect(editBuilder->bottomSlot.robs[i], &gameButton::clicked, this, [=]()
+        connect(editBuilder->bottomSlot.rcRobs[i], &gameButton::clicked, this, [=]()
                 { setActiveRCR(editBuilder->rcRobots[i]); });
     }
 }
 
+void window::connectButtons()
+{
+    QBrush brush(Qt::darkCyan);
+    editBuilder->bottomSlot.up->setBrush(brush);
+    editBuilder->bottomSlot.right->setBrush(brush);
+    editBuilder->bottomSlot.left->setBrush(brush);
+    connect(editBuilder->bottomSlot.up, SIGNAL(clicked()), this, SLOT(moveUpActive()));
+    connect(editBuilder->bottomSlot.right, SIGNAL(clicked()), this, SLOT(rotateRightActive()));
+    connect(editBuilder->bottomSlot.left, SIGNAL(clicked()), this, SLOT(rotateLeftActive()));
+    brush.setColor(Qt::gray);
+    editBuilder->playSlot.save->setBrush(brush);
+    disconnect(editBuilder->playSlot.save, SIGNAL(clicked()), this, SLOT(saveGame()));
+    editBuilder->bottomSlot.dlt->setBrush(brush);
+    disconnect(editBuilder->bottomSlot.dlt, SIGNAL(clicked()), this, SLOT(deleteBot()));
+}
+
+void window::disconnectButtons()
+{
+    QBrush brush(Qt::gray);
+    editBuilder->bottomSlot.up->setBrush(brush);
+    editBuilder->bottomSlot.right->setBrush(brush);
+    editBuilder->bottomSlot.left->setBrush(brush);
+    disconnect(editBuilder->bottomSlot.up, SIGNAL(clicked()), this, SLOT(moveUpActive()));
+    disconnect(editBuilder->bottomSlot.right, SIGNAL(clicked()), this, SLOT(rotateRightActive()));
+    disconnect(editBuilder->bottomSlot.left, SIGNAL(clicked()), this, SLOT(rotateLeftActive()));
+    brush.setColor(Qt::darkCyan);
+    editBuilder->playSlot.save->setBrush(brush);
+    editBuilder->bottomSlot.dlt->setBrush(brush);
+    connect(editBuilder->playSlot.save, SIGNAL(clicked()), this, SLOT(saveGame()));
+    connect(editBuilder->bottomSlot.dlt, SIGNAL(clicked()), this, SLOT(deleteBot()));
+}
+
 void window::stopTimer()
 {
+    QPen pen;
     timer->stop();
+    disconnectButtons();
+    if (activeRCR != nullptr)
+    {
+        pen.setWidth(0);
+        activeRCR->setPen(pen);
+    }
+    editBuilder->refreshPause(editScene);
+    for (size_t i = 0; i < editBuilder->bottomSlot.rcRobs.size(); i++)
+    {
+        connect(editBuilder->bottomSlot.rcRobs[i], &gameButton::clicked, this, [=]()
+                { setActiveR(editBuilder->rcRobots[i]); });
+    }
+    for (size_t i = 0; i < editBuilder->bottomSlot.aRobs.size(); i++)
+    {
+        connect(editBuilder->bottomSlot.aRobs[i], &gameButton::clicked, this, [=]()
+                { setActiveR(editBuilder->aRobots[i]); });
+    }
 }
 
 void window::startTimer()
 {
+
     if (!gridOpen)
     {
+        if (activeR != nullptr)
+        {
+            QPen pen;
+            pen.setColor(Qt::black);
+            pen.setWidth(0);
+            activeR->setPen(pen);
+        }
         timer->start(30);
+        connectButtons();
+
+        editBuilder->refresh(editScene);
+        for (size_t i = 0; i < editBuilder->rcRobots.size(); i++)
+        {
+            connect(editBuilder->bottomSlot.rcRobs[i], &gameButton::clicked, this, [=]()
+                    { setActiveRCR(editBuilder->rcRobots[i]); });
+        }
     }
 }
 
 void window::clickGrid()
 {
     gridOpen = !gridOpen;
-    timer->stop();
+    stopTimer();
     editBuilder->buildBarGrid(playground, editScene);
 }
 
@@ -151,43 +239,110 @@ void window::saveGame()
     {
         return;
     }
-    QJsonArray jsonArray;
 
-    // Iterate over each barrierC object in BARSlot.bars vector
-    for (const barrierC *bar : editBuilder->BARSlot.bars)
+    QDir currentDir = QDir::current();
+    QString examplesDirPath = currentDir.absoluteFilePath("examples");
+
+    if (!currentDir.cd("examples"))
     {
-        QJsonObject barObject;
-        barObject["x"] = bar->x();
-        barObject["y"] = bar->y();
-        ;
-        barObject["type"] = "Barrier";
-        jsonArray.append(barObject);
+        qDebug() << "Failed to access examples directory.";
+        return;
     }
 
-    for (RCRobot *rob : editBuilder->rcRobots)
+    QStringList filters;
+    filters << "*.json";
+    currentDir.setNameFilters(filters);
+    currentDir.setFilter(QDir::Files | QDir::NoSymLinks);
+
+    QFileInfoList fileList = currentDir.entryInfoList();
+    bool jsonExists = !fileList.isEmpty();
+
+    QString fileName;
+
+    if (jsonExists)
     {
-        jsonArray.append(rob->save());
+        QString promptMessage = "JSON file(s) found in the examples directory:\n";
+        QStringList fileNames;
+        for (const QFileInfo &fileInfo : fileList)
+        {
+            promptMessage += fileInfo.fileName() + "\n";
+            fileNames << fileInfo.fileName();
+        }
+        int choice = QMessageBox::question(
+            this,
+            tr("JSON File Exists"),
+            promptMessage + "Do you want to rewrite an existing JSON file?",
+            QMessageBox::Yes | QMessageBox::No);
+
+        if (choice == QMessageBox::Yes)
+        {
+            bool ok;
+            QString selectedFileName = QInputDialog::getItem(
+                this,
+                tr("Select JSON File to Rewrite"),
+                "Select the JSON file you want to rewrite:",
+                fileNames,
+                0,
+                false,
+                &ok);
+
+            if (ok)
+            {
+                fileName = selectedFileName;
+            }
+            else
+            {
+                return; // Cancel the save operation
+            }
+        }
     }
 
-    for (ARobot *rob : editBuilder->aRobots)
+    if (fileName.isEmpty())
     {
-        jsonArray.append(rob->save());
+        fileName = QInputDialog::getText(
+            this,
+            tr("Save JSON File"),
+            tr("Enter the name of the JSON file to save:"),
+            QLineEdit::Normal,
+            "game.json");
     }
 
-    QJsonDocument jsonDoc(jsonArray);
+    if (fileName.isEmpty())
+        return; // Cancel the save operation
 
-    QString fileName = "game.json";
-
-    QFile file(fileName);
+    QFile file(currentDir.absoluteFilePath(fileName));
     if (file.open(QIODevice::WriteOnly))
     {
+        QJsonArray jsonArray;
+
+        // Iterate over each barrierC object in BARSlot.bars vector
+        for (const barrierC *bar : editBuilder->BARSlot.bars)
+        {
+            QJsonObject barObject;
+            barObject["x"] = bar->x();
+            barObject["y"] = bar->y();
+            barObject["type"] = "Barrier";
+            jsonArray.append(barObject);
+        }
+
+        for (RCRobot *rob : editBuilder->rcRobots)
+        {
+            jsonArray.append(rob->save());
+        }
+
+        for (ARobot *rob : editBuilder->aRobots)
+        {
+            jsonArray.append(rob->save());
+        }
+
+        QJsonDocument jsonDoc(jsonArray);
         file.write(jsonDoc.toJson());
         file.close();
-        qDebug() << "Game barriers data saved to" << fileName;
+        qDebug() << "Game data saved to" << file.fileName();
     }
     else
     {
-        qDebug() << "Failed to open" << fileName << "for writing:" << file.errorString();
+        qDebug() << "Failed to open" << file.fileName() << "for writing:" << file.errorString();
     }
 
     qDebug() << "Current working directory:" << QDir::currentPath();
@@ -195,11 +350,63 @@ void window::saveGame()
 
 void window::loadFromFile()
 {
-
     editWindowSignal();
 
-    QString fileName = "game.json";
-    QFile file(fileName);
+    QDir currentDir = QDir::current();
+    QString examplesDirPath = currentDir.absoluteFilePath("examples");
+
+    if (!currentDir.cd("examples"))
+    {
+        qDebug() << "Failed to access examples directory.";
+        return;
+    }
+
+    QStringList filters;
+    filters << "*.json";
+    currentDir.setNameFilters(filters);
+    currentDir.setFilter(QDir::Files | QDir::NoSymLinks);
+
+    QFileInfoList fileList = currentDir.entryInfoList();
+    bool jsonExists = !fileList.isEmpty();
+
+    QString fileName;
+
+    if (jsonExists)
+    {
+        QString promptMessage = "JSON file(s) found in the examples directory:\n";
+        QStringList fileNames;
+        for (const QFileInfo &fileInfo : fileList)
+        {
+            promptMessage += fileInfo.fileName() + "\n";
+            fileNames << fileInfo.fileName();
+        }
+        bool ok;
+        QString selectedFileName = QInputDialog::getItem(
+            this,
+            tr("Select JSON File"),
+            promptMessage + "Select the JSON file you want to load:",
+            fileNames,
+            0,
+            false,
+            &ok);
+
+        if (ok)
+        {
+            fileName = selectedFileName;
+        }
+        else
+        {
+            return; // Cancel the load operation
+        }
+    }
+
+    if (fileName.isEmpty())
+    {
+        qDebug() << "No JSON file selected for loading.";
+        return; // Cancel the load operation
+    }
+
+    QFile file(currentDir.absoluteFilePath(fileName));
 
     if (!file.open(QIODevice::ReadOnly))
     {
@@ -248,7 +455,7 @@ void window::loadFromFile()
         }
         else if (type == "Automatic Robot")
         {
-            editBuilder->buildARobot(playground, editScene, x, y, sensor, directionOfSpin, spin,timer);
+            editBuilder->buildARobot(playground, editScene, x, y, sensor, directionOfSpin, spin, timer);
         }
         else
         {
@@ -260,8 +467,7 @@ void window::loadFromFile()
 
     for (size_t i = 0; i < editBuilder->rcRobots.size(); i++)
     {
-        qDebug()<<"connect robot to button " ;//<< typeid(editBuilder->rcRobots[i]);
-        connect(editBuilder->bottomSlot.robs[i], &gameButton::clicked, this, [=]()
+        connect(editBuilder->bottomSlot.rcRobs[i], &gameButton::clicked, this, [=]()
                 { setActiveRCR(editBuilder->rcRobots[i]); });
     }
 }
@@ -291,7 +497,6 @@ void window::editWindowSignal()
     connect(editBuilder->BARSlot.buildBarrier, SIGNAL(clicked()), this, SLOT(clickGrid()));
     connect(editBuilder->playSlot.pause, SIGNAL(clicked()), this, SLOT(stopTimer()));
     connect(editBuilder->playSlot.play, SIGNAL(clicked()), this, SLOT(startTimer()));
-    connect(editBuilder->playSlot.save, SIGNAL(clicked()), this, SLOT(saveGame()));
 
     QBrush brush;
 

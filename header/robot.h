@@ -14,6 +14,9 @@ public:
     virtual QJsonObject save() = 0;
 public slots:
     virtual void move();
+    virtual void moveUp();
+    virtual void rotateLeft();
+    virtual void rotateRight();
 signals:
     void clicked();
 

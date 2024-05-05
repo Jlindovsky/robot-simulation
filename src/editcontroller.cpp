@@ -96,6 +96,12 @@ void editController::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *sc
     bottomSlot.up = new gameButton(QString("up"), RPANEL_W - 130, 10, 50, 50, parent);
     bottomSlot.left = new gameButton(QString("left"), RPANEL_W - 190, 10, 50, 50, parent);
     bottomSlot.right = new gameButton(QString("right"), RPANEL_W - 70, 10, 50, 50, parent);
+
+    bottomSlot.dlt = new gameButton("Delete", RPANEL_W - 190, 70, 170, 40, parent);
+    QBrush brush(Qt::gray);
+    bottomSlot.dlt->setBrush(brush);
+
+    scene->addItem(bottomSlot.dlt);
     scene->addItem(bottomSlot.up);
     scene->addItem(bottomSlot.left);
     scene->addItem(bottomSlot.right);
@@ -212,11 +218,16 @@ void editController::deleteBarGrid()
 
 void editController::refresh(QGraphicsScene *scene)
 {
-    for (auto i : (bottomSlot.robs))
+    for (auto i : (bottomSlot.rcRobs))
     {
         delete i;
     }
-    bottomSlot.robs.clear();
+    for (auto i : (bottomSlot.aRobs))
+    {
+        delete i;
+    }
+    bottomSlot.rcRobs.clear();
+    bottomSlot.aRobs.clear();
     int offset_x = 0;
     int offset_y = 0;
     int shift = 60;
@@ -224,7 +235,7 @@ void editController::refresh(QGraphicsScene *scene)
     {
         string robName = "rob" + to_string(i + 1);
         gameButton *tmp = new gameButton(QString::fromStdString(robName), 10 + offset_x, 10 + offset_y, 50, 50, rPanel);
-        bottomSlot.robs.push_back(tmp);
+        bottomSlot.rcRobs.push_back(tmp);
         scene->addItem(tmp);
 
         if (i % 2)
@@ -239,11 +250,88 @@ void editController::refresh(QGraphicsScene *scene)
     }
 }
 
+void editController::refreshPause(QGraphicsScene *scene)
+{
+    for (auto i : (bottomSlot.rcRobs))
+    {
+        delete i;
+    }
+    bottomSlot.rcRobs.clear();
+
+    int offset_x = 0;
+    int offset_y = 0;
+    int shift = 60;
+    int j = 0;
+    for (size_t i = 0; i < rcRobots.size(); i++)
+    {
+        string robName = "RC" + to_string(i + 1);
+        gameButton *tmp = new gameButton(QString::fromStdString(robName), 10 + offset_x, 10 + offset_y, 50, 50, rPanel);
+        bottomSlot.rcRobs.push_back(tmp);
+        scene->addItem(tmp);
+
+        if (j % 2)
+        {
+            offset_y -= shift;
+            offset_x += shift;
+        }
+        else
+        {
+            offset_y += shift;
+        }
+        j++;
+    }
+
+    for (size_t i = 0; i < aRobots.size(); i++)
+    {
+        string robName = "Aut" + to_string(i + 1);
+        gameButton *tmp = new gameButton(QString::fromStdString(robName), 10 + offset_x, 10 + offset_y, 50, 50, rPanel);
+        bottomSlot.aRobs.push_back(tmp);
+        scene->addItem(tmp);
+
+        if (j % 2)
+        {
+            offset_y -= shift;
+            offset_x += shift;
+        }
+        else
+        {
+            offset_y += shift;
+        }
+        j++;
+    }
+}
+void editController::deleteRob(Robot *activeR)
+{
+    ARobot *aRobotToDelete = dynamic_cast<ARobot *>(activeR);
+    RCRobot *rcRobotToDelete = dynamic_cast<RCRobot *>(activeR);
+
+    if (aRobotToDelete)
+    {
+        auto it = find(aRobots.begin(), aRobots.end(), aRobotToDelete);
+        if (it != aRobots.end())
+        {
+            aRobots.erase(it);
+            delete aRobotToDelete;
+        }
+    }
+    else if (rcRobotToDelete)
+    {
+        auto it = find(rcRobots.begin(), rcRobots.end(), rcRobotToDelete);
+        if (it != rcRobots.end())
+        {
+            rcRobots.erase(it);
+            delete rcRobotToDelete;
+        }
+    }
+}
+
 void editController::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     playSlot.pause = new gameButton(QString("pause"), 10, 10, 50, 50, parent);
     playSlot.play = new gameButton(QString("play"), 65, 10, 50, 50, parent);
     playSlot.save = new gameButton(QString("save"), 120, 10, 50, 50, parent);
+    QBrush brush(Qt::gray);
+    playSlot.save->setBrush(brush);
 
     scene->addItem(playSlot.pause);
     scene->addItem(playSlot.play);
@@ -285,7 +373,7 @@ editController::editController(QGraphicsScene *scene)
     buildPlayEdit(pPanel, scene);
 }
 
-void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensor, int directionOfSpin, int spin,QTimer *timer)
+void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensor, int directionOfSpin, int spin, QTimer *timer)
 {
     if (x > PLAY_W || x < PLAY_X || y > PLAY_H || y < PLAY_Y)
     {
