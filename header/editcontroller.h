@@ -1,5 +1,5 @@
-#ifndef EDITcontroller_H
-#define EDITcontroller_H
+#ifndef EDITCONTROLLER_H
+#define EDITCONTROLLER_H
 
 #include "barrierC.h"
 #include "robot.h"
@@ -116,4 +116,4 @@ public slots:
     void dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene *scene);
 };
 
-#endif // EDITcontroller_H
+#endif // EDITCONTROLLER_H

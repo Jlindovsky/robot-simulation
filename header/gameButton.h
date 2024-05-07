@@ -9,7 +9,7 @@ class gameButton : public QObject, public QGraphicsRectItem
 public:
     // constructors
     gameButton(QString name, int x, int y, int w, int h, QGraphicsItem *parent = NULL);
-
+    ~gameButton();
     // public methods (events)
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     // possible extras
