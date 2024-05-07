@@ -110,7 +110,7 @@ void window::checkARInput()
         QMessageBox::information(
             this,
             tr("Wrong Input"),
-            tr("ERROR, Wrong input. Sensor length is from 0 to 100"));
+            tr("ERROR, Wrong input. Sensor length is from 0 to 50"));
         return;
     }
     if (QValidator::Acceptable != slot.directionValidator->validate(directionText, pos))
@@ -160,7 +160,7 @@ void window::checkRCRInput()
         QMessageBox::information(
             this,
             tr("Wrong Input"),
-            tr("ERROR, Wrong input. Sensor length is from 0 to 100"));
+            tr("ERROR, Wrong input. Sensor length is from 0 to 50"));
         return;
     }
     editBuilder->buildRCRobot(playground, editScene, SPAWN_X + 25, SPAWN_Y + 25, (sensorText).toInt());

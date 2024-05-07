@@ -7,18 +7,18 @@ void editController::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     RCSlot.name->setPos(35, 320);
     RCSlot.name->setDefaultTextColor(Qt::black);
 
-    RCSlot.sensorText = new QGraphicsTextItem(QString("Set sensor lenght"));
+    RCSlot.sensorText = new QGraphicsTextItem(QString("Set sensor length"));
     RCSlot.sensorText->setParent(dynamic_cast<QObject *>(parent));
     RCSlot.sensorText->setPos(RCSlot.name->x(), RCSlot.name->y() + 40);
     RCSlot.sensorText->setDefaultTextColor(Qt::black);
 
     RCSlot.sensorInput = new QLineEdit;
-    RCSlot.sensorInput->setPlaceholderText("0-100");
-    RCSlot.sensorValidator = new QIntValidator(0, 100);
+    RCSlot.sensorInput->setPlaceholderText("  0 - 50");
+    RCSlot.sensorValidator = new QIntValidator(0, 50);
     RCSlot.sensorInput->setValidator(RCSlot.sensorValidator);
     RCSlot.sensorInput->setGeometry(RCSlot.name->x(), RCSlot.name->y() + 80, 100, 30); // Adjust position and size as needed
 
-    RCSlot.buildRCRobot = new gameButton(QString("build RCRobot"), RCSlot.name->x(), RCSlot.name->y() + 120, 100, 30, parent);
+    RCSlot.buildRCRobot = new gameButton(QString("Build RCRobot"), RCSlot.name->x(), RCSlot.name->y() + 120, 100, 30, parent);
 
     scene->addItem(RCSlot.name);
     scene->addItem(RCSlot.sensorText);
@@ -33,40 +33,40 @@ void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     ASlot.name->setPos(35, 0);
     ASlot.name->setDefaultTextColor(Qt::black);
 
-    ASlot.sensorText = new QGraphicsTextItem(QString("Set sensor lenght"));
+    ASlot.sensorText = new QGraphicsTextItem(QString("Set sensor length"));
     ASlot.sensorText->setParent(dynamic_cast<QObject *>(parent));
     ASlot.sensorText->setPos(ASlot.name->x(), ASlot.name->y() + 40);
     ASlot.sensorText->setDefaultTextColor(Qt::black);
 
     ASlot.sensorInput = new QLineEdit;
-    ASlot.sensorInput->setPlaceholderText("0-100");
-    ASlot.sensorValidator = new QIntValidator(0, 100);
+    ASlot.sensorInput->setPlaceholderText("  0 - 50");
+    ASlot.sensorValidator = new QIntValidator(0, 50);
     ASlot.sensorInput->setValidator(ASlot.sensorValidator);
     ASlot.sensorInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 80, 100, 30); // Adjust position and size as needed
 
-    ASlot.directionText = new QGraphicsTextItem(QString("Set direction"));
+    ASlot.directionText = new QGraphicsTextItem(QString("  Set direction"));
     ASlot.directionText->setParent(dynamic_cast<QObject *>(parent));
     ASlot.directionText->setPos(ASlot.name->x(), ASlot.name->y() + 120);
     ASlot.directionText->setDefaultTextColor(Qt::black);
 
     ASlot.directionInput = new QLineEdit;
-    ASlot.directionInput->setPlaceholderText("-1 and 1");
+    ASlot.directionInput->setPlaceholderText("  -1 and 1");
     ASlot.directionValidator = new QIntValidator(-1, 1);
     ASlot.directionInput->setValidator(ASlot.directionValidator);
     ASlot.directionInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 160, 100, 30);
 
-    ASlot.spinText = new QGraphicsTextItem(QString("Set spin size"));
+    ASlot.spinText = new QGraphicsTextItem(QString("  Set spin size"));
     ASlot.spinText->setParent(dynamic_cast<QObject *>(parent));
     ASlot.spinText->setPos(ASlot.name->x(), ASlot.name->y() + 200);
     ASlot.spinText->setDefaultTextColor(Qt::black);
 
     ASlot.spinInput = new QLineEdit;
-    ASlot.spinInput->setPlaceholderText("10 - 180");
+    ASlot.spinInput->setPlaceholderText("  10 - 180");
     ASlot.spinValidator = new QIntValidator(10, 180);
     ASlot.spinInput->setValidator(ASlot.spinValidator);
     ASlot.spinInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 240, 100, 30);
 
-    ASlot.buildARobot = new gameButton(QString("build ARobot"), ASlot.name->x(), ASlot.name->y() + 280, 100, 30, parent);
+    ASlot.buildARobot = new gameButton(QString("Build ARobot"), ASlot.name->x(), ASlot.name->y() + 280, 100, 30, parent);
 
     scene->addItem(ASlot.name);
     scene->addItem(ASlot.sensorText);
@@ -87,7 +87,6 @@ void editController::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     BARSlot.buildBarrier = new gameButton(QString("Open"), BARSlot.name->x(), BARSlot.name->y() + 40, 100, 30, parent);
 
     scene->addItem(BARSlot.name);
-    // magic bracho
     scene->addItem(BARSlot.buildBarrier);
 }
 
@@ -97,7 +96,7 @@ void editController::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *sc
     bottomSlot.left = new gameButton(QString("left"), RPANEL_W - 190, 10, 50, 50, parent);
     bottomSlot.right = new gameButton(QString("right"), RPANEL_W - 70, 10, 50, 50, parent);
 
-    bottomSlot.dlt = new gameButton("Delete", RPANEL_W - 190, 70, 170, 40, parent);
+    bottomSlot.dlt = new gameButton("delete", RPANEL_W - 190, 70, 170, 40, parent);
     QBrush brush(Qt::gray);
     bottomSlot.dlt->setBrush(brush);
 
@@ -430,7 +429,6 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
                 break;
             }
         }
-
         // Center the dialog relative to the scene
         QPoint dialogPos = parent->scenePos().toPoint() - QPoint(dialog.width() / 2, dialog.height() / 2);
         dialog.move(dialogPos);
