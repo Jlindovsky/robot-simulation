@@ -145,8 +145,8 @@ void editController::dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene
 
     if (it != BARSlot.bars.end())
     {
-        delete bar;             
-        BARSlot.bars.erase(it); 
+        delete bar;
+        BARSlot.bars.erase(it);
         gridRefresh(parent, scene);
     }
 }
@@ -161,7 +161,7 @@ void editController::placeBar(gameButton *button, QGraphicsItem *parent, QGraphi
     {
         barrierC *barrierItem = dynamic_cast<barrierC *>(colliding_items[i]);
 
-        // Check if the dynamic_cast was successful and the object is a barrierC or its derived class
+        // Check if the dynamic_cast was successful and the object is a barrierC 
         if (barrierItem != nullptr)
         {
             button->changeText("dlt");
@@ -175,7 +175,7 @@ void editController::placeBar(gameButton *button, QGraphicsItem *parent, QGraphi
 
         Robot *robotItem = dynamic_cast<Robot *>(colliding_items[i]);
 
-        // Check if the dynamic_cast was successful and the object is a barrierC or its derived class
+        // Check if the dynamic_cast was successful and the object is a one of Robot's derived classes
         if (robotItem != nullptr)
         {
             button->changeText("NO!");
@@ -217,7 +217,7 @@ void editController::refresh(QGraphicsScene *scene)
     int shift = 60;
     for (size_t i = 0; i < rcRobots.size(); i++)
     {
-        string robName = "rob" + to_string(i + 1);
+        string robName = "RC" + to_string(i + 1);
         gameButton *tmp = new gameButton(QString::fromStdString(robName), 10 + offset_x, 10 + offset_y, 50, 50, rPanel);
         bottomSlot.rcRobs.push_back(tmp);
         scene->addItem(tmp);
@@ -246,8 +246,7 @@ void editController::refreshPause(QGraphicsScene *scene)
         delete i;
     }
     bottomSlot.aRobs.clear();
-    
-    
+
     int offset_x = 0;
     int offset_y = 0;
     int shift = 60;
@@ -366,6 +365,34 @@ editController::editController(QGraphicsScene *scene)
 
 void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensor, int directionOfSpin, int spin, QTimer *timer)
 {
+    if (aRobots.size() >= 10)
+    {
+        QDialog dialog;
+        dialog.setModal(true);                                                 // Set modal to ensure it blocks interaction with the scene
+        dialog.setWindowFlags(dialog.windowFlags() | Qt::FramelessWindowHint); // Hide window frame
+        dialog.hide();                                                         // Hide the dialog
+
+        // Create and show the message box
+        QMessageBox::information(&dialog, "Can't add Robots", "You have reached the limit for number of robots");
+
+        // Make sure the dialog is deleted after the message box is closed
+        QObject::connect(&dialog, &QDialog::finished, &dialog, &QObject::deleteLater);
+
+        // Re-parent the dialog to the scene's views to ensure it appears on top
+        foreach (QWidget *widget, QApplication::topLevelWidgets())
+        {
+            if (widget->inherits("QGraphicsView"))
+            {
+                dialog.setParent(widget);
+                break;
+            }
+        }
+
+        // Center the dialog relative to the scene
+        QPoint dialogPos = parent->scenePos().toPoint() - QPoint(dialog.width() / 2, dialog.height() / 2);
+        dialog.move(dialogPos);
+        dialog.exec(); // Show the message box
+    }
     if (x > PLAY_W || x < PLAY_X || y > PLAY_H || y < PLAY_Y)
     {
         qDebug() << "Invalid position of Automatic Robot from file!\n";
@@ -381,6 +408,34 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
 
 void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensorIn)
 {
+    if (rcRobots.size() >= 10)
+    {
+        QDialog dialog;
+        dialog.setModal(true);                                                 // Set modal to ensure it blocks interaction with the scene
+        dialog.setWindowFlags(dialog.windowFlags() | Qt::FramelessWindowHint); // Hide window frame
+        dialog.hide();                                                         // Hide the dialog
+
+        // Create and show the message box
+        QMessageBox::information(&dialog, "Can't add Robots", "You have reached the limit for number of robots");
+
+        // Make sure the dialog is deleted after the message box is closed
+        QObject::connect(&dialog, &QDialog::finished, &dialog, &QObject::deleteLater);
+
+        // Re-parent the dialog to the scene's views to ensure it appears on top
+        foreach (QWidget *widget, QApplication::topLevelWidgets())
+        {
+            if (widget->inherits("QGraphicsView"))
+            {
+                dialog.setParent(widget);
+                break;
+            }
+        }
+
+        // Center the dialog relative to the scene
+        QPoint dialogPos = parent->scenePos().toPoint() - QPoint(dialog.width() / 2, dialog.height() / 2);
+        dialog.move(dialogPos);
+        dialog.exec(); // Show the message box
+    }
     if (x > PLAY_W || x < PLAY_X || y > PLAY_H || y < PLAY_Y)
     {
         qDebug() << "Invalid position of Remote Control Robot\n";
