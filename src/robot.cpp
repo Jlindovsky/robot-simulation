@@ -1,12 +1,16 @@
 #include "../header/robot.h"
 
 /**
- * @brief Construct a new Robot:: Robot object
- * 
- * @param x 
- * @param y 
- * @param w 
- * @param parent 
+ * @brief Construct a new Robot object.
+ *
+ * @param x The x-coordinate of the robot's position.
+ * @param y The y-coordinate of the robot's position.
+ * @param w The width (diameter) of the robot.
+ * @param parent The parent item of the robot.
+ *
+ * This constructor initializes a new Robot object with the specified position and dimensions.
+ * The robot is represented by an ellipse item with the given diameter.
+ * The angle is initialized to 270 degrees (facing upwards), and the position is set relative to its parent item.
  */
 Robot::Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent)
     : QGraphicsEllipseItem(0, 0, w, w, parent)
@@ -17,9 +21,14 @@ Robot::Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent)
 }
 
 /**
- * @brief 
- * 
- * @param step1 
+ * @brief Calculate the new position based on the current angle and step size.
+ *
+ * @param step1 The step size to move the robot.
+ *
+ * This method calculates the new position of the robot based on its current angle of orientation
+ * and the specified step size. It converts the angle to radians, then calculates the horizontal
+ * and vertical displacement using trigonometric functions. Finally, it updates the position of the
+ * robot accordingly.
  */
 void Robot::calculateHit(int step1)
 {

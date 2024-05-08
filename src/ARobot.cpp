@@ -1,15 +1,19 @@
 #include "../header/ARobot.h"
 
 /**
- * @brief Construct a new ARobot::ARobot object
+ * @brief Construct a new ARobot::ARobot object.
  *
- * @param x
- * @param y
- * @param w
- * @param parent
- * @param sensorIn
- * @param directionOfSpinIn
- * @param spinIn
+ * This constructor initializes an ARobot object with the specified position, dimensions,
+ * and parent QGraphicsRectItem. It also sets the sensor length, direction of spin, spin,
+ * and step size for the ARobot.
+ *
+ * @param x The x-coordinate of the ARobot's top-left corner.
+ * @param y The y-coordinate of the ARobot's top-left corner.
+ * @param w The width of the ARobot.
+ * @param parent The parent QGraphicsRectItem to which the ARobot belongs.
+ * @param sensorIn The length of the sensor of the ARobot.
+ * @param directionOfSpinIn The direction of spin of the ARobot (temporary).
+ * @param spinIn The spin of the ARobot (temporary).
  */
 ARobot::ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIn, int directionOfSpinIn, int spinIn) : Robot(x, y, w, parent)
 {
@@ -20,9 +24,12 @@ ARobot::ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorI
 }
 
 /**
- * @brief
+ * @brief Save function to serialize ARobot object into a JSON object.
  *
- * @return QJsonObject
+ * This function serializes the ARobot object into a QJsonObject, representing its state.
+ * It includes the position (x, y), sensor length, spin, direction of spin, and type of the ARobot.
+ *
+ * @return QJsonObject The serialized representation of the ARobot.
  */
 QJsonObject ARobot::save()
 {
@@ -39,8 +46,13 @@ QJsonObject ARobot::save()
 }
 
 /**
- * @brief
+ * @brief Move function to update the position of the ARobot.
  *
+ * This function updates the position of the ARobot based on its current state. It calculates
+ * the hit by calling the calculateHit function with the sensor length, checks for collisions
+ * with other items, and adjusts the position accordingly. If a collision occurs with a barrierC
+ * object, it updates the angle of the ARobot's movement. If no collision occurs, it continues
+ * moving the ARobot based on its step size.
  */
 void ARobot::move()
 {
@@ -66,5 +78,4 @@ void ARobot::move()
     {
         calculateHit(step);
     }
-    // generate direction
 }

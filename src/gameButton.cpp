@@ -1,15 +1,18 @@
 #include "../header/gameButton.h"
 
-
 /**
- * @brief Construct a new game Button::game Button object
- * 
- * @param name 
- * @param x 
- * @param y 
- * @param w 
- * @param h 
- * @param parent 
+ * @brief Construct a new gameButton object.
+ *
+ * This constructor initializes a gameButton object with the specified name, position,
+ * width, height, and parent QGraphicsItem. It sets up the appearance of the button
+ * and positions the text label in the center.
+ *
+ * @param name The text displayed on the button.
+ * @param x The x-coordinate of the button's top-left corner.
+ * @param y The y-coordinate of the button's top-left corner.
+ * @param w The width of the button.
+ * @param h The height of the button.
+ * @param parent The parent QGraphicsItem to which the button belongs.
  */
 gameButton::gameButton(QString name, int x, int y, int w, int h, QGraphicsItem *parent)
 {
@@ -28,8 +31,11 @@ gameButton::gameButton(QString name, int x, int y, int w, int h, QGraphicsItem *
 }
 
 /**
- * @brief Destroy the game Button::game Button object
- * 
+ * @brief Destroy the gameButton object.
+ *
+ * This destructor is responsible for deallocating any resources
+ * held by the gameButton object upon its destruction, particularly
+ * the QGraphicsTextItem used for displaying the button's text.
  */
 gameButton::~gameButton()
 {
@@ -37,9 +43,11 @@ gameButton::~gameButton()
 }
 
 /**
- * @brief 
- * 
- * @param textIn 
+ * @brief Change the text displayed on the gameButton.
+ *
+ * This function updates the text displayed on the gameButton to the provided text.
+ *
+ * @param textIn The new text to be displayed on the gameButton.
  */
 void gameButton::changeText(const char *textIn)
 {
@@ -47,9 +55,12 @@ void gameButton::changeText(const char *textIn)
 }
 
 /**
- * @brief 
- * 
- * @param event 
+ * @brief Handle the mouse press event for the gameButton.
+ *
+ * This function is called when the mouse is pressed on the gameButton.
+ * It emits the clicked() signal to indicate that the button has been clicked.
+ *
+ * @param event A pointer to the QGraphicsSceneMouseEvent object representing the mouse press event.
  */
 void gameButton::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {

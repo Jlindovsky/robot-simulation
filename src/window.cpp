@@ -97,7 +97,6 @@ void window::setActiveRCR(RCRobot *rob)
  */
 void window::setActiveR(Robot *rob)
 {
-    qDebug() << "setting active";
     QPen pen;
 
     if (activeR != nullptr)

@@ -1,13 +1,15 @@
 #include "../header/RCRobot.h"
 
 /**
- * @brief Construct a new RCRobot::RCRobot object
+ * @brief Construct a new RCRobot object.
  *
- * @param x
- * @param y
- * @param w
- * @param parent
- * @param sensorIN
+ * Initializes a new RCRobot object with the specified parameters.
+ *
+ * @param x The x-coordinate of the RCRobot's position.
+ * @param y The y-coordinate of the RCRobot's position.
+ * @param w The width of the RCRobot.
+ * @param parent The parent QGraphicsRectItem of the RCRobot.
+ * @param sensorIN The sensor input value for the RCRobot.
  */
 RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIN)
     : Robot(x, y, w, parent)
@@ -19,9 +21,13 @@ RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int senso
 }
 
 /**
- * @brief
+ * @brief Save the current state of the RCRobot.
  *
- * @return QJsonObject
+ * This function saves the current state of the RCRobot as a QJsonObject,
+ * including its position and sensor value. The saved data can be used to
+ * restore the RCRobot's state later.
+ *
+ * @return QJsonObject representing the RCRobot's state.
  */
 QJsonObject RCRobot::save()
 {
@@ -36,8 +42,10 @@ QJsonObject RCRobot::save()
 }
 
 /**
- * @brief
+ * @brief Move the RCRobot up.
  *
+ * This function moves the RCRobot upward by a distance determined by its sensor value.
+ * It calculates collisions with barriers and prevents movement if a collision occurs.
  */
 void RCRobot::moveUp()
 {
@@ -59,8 +67,9 @@ void RCRobot::moveUp()
 }
 
 /**
- * @brief
+ * @brief Rotate the RCRobot to the left.
  *
+ * This function rotates the RCRobot to the left by the specified spin angle.
  */
 void RCRobot::rotateLeft()
 {
@@ -68,8 +77,9 @@ void RCRobot::rotateLeft()
 }
 
 /**
- * @brief
+ * @brief Rotate the RCRobot to the right.
  *
+ * This function rotates the RCRobot to the right by the specified spin angle.
  */
 void RCRobot::rotateRight()
 {
