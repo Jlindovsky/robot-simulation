@@ -385,11 +385,11 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
         // Center the dialog relative to the scene
         QPoint dialogPos = parent->scenePos().toPoint() - QPoint(dialog.width() / 2, dialog.height() / 2);
         dialog.move(dialogPos);
-        dialog.exec(); // Show the message box
+        dialog.exec(); 
     }
-    if (x > PLAY_W || x < PLAY_X || y > PLAY_H || y < PLAY_Y)
+    if ( x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
     {
-        qDebug() << "Invalid position of Automatic Robot from file!\n";
+        qDebug() << "Invalid position of Automatic Robot from file!\nPOS:" <<x<<" | "<<y<<"\n";
         exit(EXIT_FAILURE);
     }
     QBrush brushRob(Qt::darkMagenta);
@@ -429,7 +429,7 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
         dialog.move(dialogPos);
         dialog.exec(); // Show the message box
     }
-    if (x > PLAY_W || x < PLAY_X || y > PLAY_H || y < PLAY_Y)
+    if ( x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
     {
         qDebug() << "Invalid position of Remote Control Robot\n";
         exit(EXIT_FAILURE);

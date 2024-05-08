@@ -5,14 +5,7 @@
 
 window * game;
 
-void handleKill(int num)
-{
-    if(num == SIGINT)
-    {
-        qDebug()<<"exiting..";
-        delete game;
-    }
-}
+
 
 int main(int argc, char *argv[])
 {
@@ -21,6 +14,6 @@ int main(int argc, char *argv[])
     game = new window;
     game->show();
     game->mainWindow();
-    signal(SIGINT,handleKill);
+
     return a.exec();
 }
