@@ -8,17 +8,6 @@
 #include "gameButton.h"
 #include "global.h"
 
-/**
- * @brief
- *
- */
-enum inputType
-{
-    BAR,
-    AR,
-    RCR,
-    NTH
-};
 
 /**
  * @brief

@@ -1,10 +1,13 @@
 #include "../header/editController.h"
 
 /**
- * @brief
+ * @brief Builds the interface for creating an Remote Control Robot(RCRobot).
  *
- * @param parent
- * @param scene
+ * This function constructs the user interface elements for creation
+ * of an Remote Control Robot(RCRobot).
+ *
+ * @param parent The parent item to which the interface elements will be added.
+ * @param scene The QGraphicsScene where the interface elements will be displayed.
  */
 void editController::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
@@ -29,14 +32,16 @@ void editController::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     scene->addItem(RCSlot.name);
     scene->addItem(RCSlot.sensorText);
     scene->addWidget(RCSlot.sensorInput);
-    // scene->addItem(RCSlot.buildRCRobot);
 }
 
 /**
- * @brief
+ * @brief Builds the interface for creating an Automatic Robot(ARobot).
  *
- * @param parent
- * @param scene
+ * This function constructs the user interface elements for creation
+ * of an Automatic Robot(ARobot).
+ *
+ * @param parent The parent item to which the interface elements will be added.
+ * @param scene The QGraphicsScene where the interface elements will be displayed.
  */
 void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
@@ -53,7 +58,7 @@ void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     ASlot.sensorInput = make_unique<QLineEdit>();
     ASlot.sensorInput->setPlaceholderText("  0 - 50");
     ASlot.sensorValidator = make_unique<QIntValidator>(0, 50);
-    // extract unique pointer qualities
+    // extract from unique pointer 
     ASlot.sensorInput->setValidator(&*(ASlot.sensorValidator));
     ASlot.sensorInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 80, 100, 30); // Adjust position and size as needed
 
@@ -65,6 +70,7 @@ void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     ASlot.directionInput = make_unique<QLineEdit>();
     ASlot.directionInput->setPlaceholderText("  -1 or 1");
     ASlot.directionValidator = make_unique<QIntValidator>(-1, 1);
+    // extract from unique pointer 
     ASlot.directionInput->setValidator(&*(ASlot.directionValidator));
     ASlot.directionInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 160, 100, 30);
 
@@ -76,11 +82,13 @@ void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     ASlot.spinInput = make_unique<QLineEdit>();
     ASlot.spinInput->setPlaceholderText("  10 - 180");
     ASlot.spinValidator = make_unique<QIntValidator>(10, 180);
+    // extract from unique pointer 
     ASlot.spinInput->setValidator(&*(ASlot.spinValidator));
     ASlot.spinInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 240, 100, 30);
 
     ASlot.buildARobot = new gameButton(QString("Build ARobot"), ASlot.name->x(), ASlot.name->y() + 280, 100, 30, parent);
 
+    // extracting from unique pointers and adding them to scene
     scene->addItem(&*(ASlot.name));
     scene->addItem(&*(ASlot.sensorText));
     scene->addWidget(&*(ASlot.sensorInput));
@@ -91,10 +99,13 @@ void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 }
 
 /**
- * @brief
+ * @brief Builds the interface for creating an barrier(barrierC).
  *
- * @param parent
- * @param scene
+ * This function constructs the user interface elements for creation
+ * of an barrier(barrierC).
+ *
+ * @param parent The parent item to which the interface elements will be added.
+ * @param scene The QGraphicsScene where the interface elements will be displayed.
  */
 void editController::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
@@ -105,14 +116,16 @@ void editController::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     BARSlot.buildBarrier = new gameButton(QString("Open"), BARSlot.name->x(), BARSlot.name->y() + 40, 100, 30, parent);
 
     scene->addItem(BARSlot.name);
-    // scene->addItem(BARSlot.buildBarrier);
 }
 
 /**
- * @brief
+ * @brief Builds the interface for controls.
  *
- * @param parent
- * @param scene
+ * This function constructs the user interface elements for 
+ * RCRobot controls and delete button
+ *
+ * @param parent The parent item to which the interface elements will be added.
+ * @param scene The QGraphicsScene where the interface elements will be displayed.(Redundant historic reasons)
  */
 void editController::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
@@ -123,18 +136,15 @@ void editController::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *sc
     bottomSlot.dlt = new gameButton("delete", RPANEL_W - 190, 70, 170, 40, parent);
     QBrush brush(Qt::gray);
     bottomSlot.dlt->setBrush(brush);
-
-    // scene->addItem(bottomSlot.dlt);
-    // scene->addItem(bottomSlot.up);
-    // scene->addItem(bottomSlot.left);
-    // scene->addItem(bottomSlot.right);
 }
 
 /**
- * @brief
+ * @brief Builds the grid of buttons(gameButton) for creating an barrier(barrierC).
  *
- * @param parent
- * @param scene
+ * buttons are connected externally
+ *
+ * @param parent The parent item to which the interface elements will be added.
+ * @param scene The QGraphicsScene where the interface elements will be displayed.
  */
 void editController::gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene)
 {
@@ -143,7 +153,6 @@ void editController::gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene)
         for (int j = 0; j < 13; j++)
         {
             gameButton *tmp = new gameButton(QString("add"), 3 + i * 50, 3 + j * 50, 44, 44, parent);
-            // scene->addItem(tmp);
             barGrid.push_back(tmp);
             placeBar(tmp, parent, scene);
         }
@@ -162,23 +171,22 @@ void editController::addBar(QGraphicsItem *parent, QGraphicsScene *scene)
     gameButton *clickedButton = qobject_cast<gameButton *>(sender());
     if (clickedButton)
     {
-
         clickedButton->setBrush(brush);
         QPointF pos = clickedButton->pos();
         barrierC *tmp = new barrierC(pos.x() - 3, pos.y() - 3, 50, 50, parent);
         tmp->setBrush(brush);
-        // scene->addItem(tmp);
+        
         gridRefresh(parent, scene);
         BARSlot.bars.push_back(tmp);
     }
 }
 
 /**
- * @brief
+ * @brief Deletes the specified barrier item and refreshes the grid layout.
  *
- * @param bar
- * @param parent
- * @param scene
+ * @param bar Pointer to the barrier item to be deleted.
+ * @param parent Pointer to the parent QGraphicsItem.
+ * @param scene Pointer to the QGraphicsScene.
  */
 void editController::dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene *scene)
 {
@@ -194,18 +202,22 @@ void editController::dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene
 }
 
 /**
- * @brief
+ * @brief Detects collisions between the given button and other items, adjusting its behavior accordingly.
  *
- * @param button
- * @param parent
- * @param scene
+ * If the button collides with a barrierC item, it changes its text to "dlt" enabling deletion of the barrier item upon click.
+ * If it collides with a Robot object or its derived classes it changes its text to "NO!" and leave button without action.
+ * Otherwise, it connects the button to a slot for adding a barrier upon click.
+ *
+ * @param button Pointer to the gameButton object to be designed and/or connected.
+ * @param parent Pointer to the parent QGraphicsItem.
+ * @param scene Pointer to the QGraphicsScene.
  */
+
 void editController::placeBar(gameButton *button, QGraphicsItem *parent, QGraphicsScene *scene)
 {
     QList<QGraphicsItem *> colliding_items = button->collidingItems();
     bool hit = false;
     QBrush brush(Qt::magenta);
-    // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
     {
         barrierC *barrierItem = dynamic_cast<barrierC *>(colliding_items[i]);
@@ -241,8 +253,7 @@ void editController::placeBar(gameButton *button, QGraphicsItem *parent, QGraphi
 }
 
 /**
- * @brief
- *
+ * @brief deletes all grid buttons 
  */
 void editController::deleteBarGrid()
 {
@@ -254,9 +265,9 @@ void editController::deleteBarGrid()
 }
 
 /**
- * @brief
+ * @brief Refreshes the graphics scene by clearing and updating robot buttons while game is running.
  *
- * @param scene
+ * @param scene Pointer to the QGraphicsScene.
  */
 void editController::refresh(QGraphicsScene *scene)
 {
@@ -278,7 +289,6 @@ void editController::refresh(QGraphicsScene *scene)
         string robName = "RC" + to_string(i + 1);
         gameButton *tmp = new gameButton(QString::fromStdString(robName), 10 + offset_x, 10 + offset_y, 50, 50, rPanel);
         bottomSlot.rcRobs.push_back(tmp);
-        // scene->addItem(tmp);
 
         if (i % 2)
         {
@@ -293,9 +303,9 @@ void editController::refresh(QGraphicsScene *scene)
 }
 
 /**
- * @brief
+ * @brief Refreshes the graphics scene by clearing and updating robot buttons while game is paused.
  *
- * @param scene
+ * @param scene Pointer to the QGraphicsScene.
  */
 void editController::refreshPause(QGraphicsScene *scene)
 {
@@ -319,7 +329,6 @@ void editController::refreshPause(QGraphicsScene *scene)
         string robName = "RC" + to_string(i + 1);
         gameButton *tmp = new gameButton(QString::fromStdString(robName), 10 + offset_x, 10 + offset_y, 50, 50, rPanel);
         bottomSlot.rcRobs.push_back(tmp);
-        // scene->addItem(tmp);
 
         if (j % 2)
         {
@@ -338,7 +347,6 @@ void editController::refreshPause(QGraphicsScene *scene)
         string robName = "AR" + to_string(i + 1);
         gameButton *tmp = new gameButton(QString::fromStdString(robName), 10 + offset_x, 10 + offset_y, 50, 50, rPanel);
         bottomSlot.aRobs.push_back(tmp);
-        // scene->addItem(tmp);
 
         if (j % 2)
         {
@@ -353,9 +361,9 @@ void editController::refreshPause(QGraphicsScene *scene)
     }
 }
 /**
- * @brief
+ * @brief Deletes the specified robot from the appropriate container and deallocates memory.
  *
- * @param activeR
+ * @param activeR Pointer to the robot to be deleted.
  */
 void editController::deleteRob(Robot *activeR)
 {
@@ -385,10 +393,10 @@ void editController::deleteRob(Robot *activeR)
 }
 
 /**
- * @brief
+ * @brief Builds the buttons for controlling the play mode.
  *
- * @param parent
- * @param scene
+ * @param parent Pointer to the parent QGraphicsItem.
+ * @param scene Pointer to the QGraphicsScene where the buttons will be added.
  */
 void editController::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
@@ -397,14 +405,10 @@ void editController::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
     playSlot.save = new gameButton(QString("save"), 120, 10, 50, 50, parent);
     QBrush brush(Qt::gray);
     playSlot.save->setBrush(brush);
-
-    // scene->addItem(playSlot.pause);
-    // scene->addItem(playSlot.play);
-    // scene->addItem(playSlot.save);
 }
 
 /**
- * @brief Construct a new edit Controller::edit Controller object
+ * @brief Construct a new edit Controller::edit Controller object and fills all of its panels with corresponding buttons and texts
  *
  * @param scene
  */
@@ -439,16 +443,13 @@ editController::editController(QGraphicsScene *scene)
 }
 
 /**
- * @brief
+ * @brief Verifies and builds a automatic robot(ARobot) at the specified position on the scene.
  *
- * @param parent
- * @param scene
- * @param x
- * @param y
- * @param sensor
- * @param directionOfSpin
- * @param spin
- * @param timer
+ * @param parent Pointer to the parent QGraphicsRectItem.
+ * @param scene Pointer to the QGraphicsScene where the robot will be added.
+ * @param x The x-coordinate of the robot's position.
+ * @param y The y-coordinate of the robot's position.
+ * @param sensorIn The sensor length of the robot.
  */
 void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensor, int directionOfSpin, int spin, QTimer *timer)
 {
@@ -494,22 +495,22 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
 }
 
 /**
- * @brief
+ * @brief Verifies and builds a remote control robot(RCRobot) at the specified position on the scene.
  *
- * @param parent
- * @param scene
- * @param x
- * @param y
- * @param sensorIn
+ * @param parent Pointer to the parent QGraphicsRectItem.
+ * @param scene Pointer to the QGraphicsScene where the robot will be added.
+ * @param x The x-coordinate of the robot's position.
+ * @param y The y-coordinate of the robot's position.
+ * @param sensorIn The sensor length of the robot.
  */
 void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensorIn)
 {
     if (rcRobots.size() >= 10)
     {
         QDialog dialog;
-        dialog.setModal(true);                                                 // Set modal to ensure it blocks interaction with the scene
-        dialog.setWindowFlags(dialog.windowFlags() | Qt::FramelessWindowHint); // Hide window frame
-        dialog.hide();                                                         // Hide the dialog
+        dialog.setModal(true);                                                 
+        dialog.setWindowFlags(dialog.windowFlags() | Qt::FramelessWindowHint); 
+        dialog.hide();                                                         
 
         // Create and show the message box
         QMessageBox::information(&dialog, "Can't add Robots", "You have reached the limit for number of robots");
@@ -529,7 +530,7 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
         // Center the dialog relative to the scene
         QPoint dialogPos = parent->scenePos().toPoint() - QPoint(dialog.width() / 2, dialog.height() / 2);
         dialog.move(dialogPos);
-        dialog.exec(); // Show the message box
+        dialog.exec(); 
     }
     if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
     {
@@ -540,16 +541,16 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
     RCRobot *tmp = new RCRobot(x, y, SIZE_R, parent, sensorIn);
     tmp->setBrush(brushRob);
     rcRobots.push_back(tmp);
-    // scene->addItem(tmp);
+    
 }
 
 /**
- * @brief
+ * @brief Verifies and builds a barrier at the specified position on the scene .
  *
- * @param parent
- * @param scene
- * @param x
- * @param y
+ * @param parent Pointer to the parent QGraphicsRectItem.
+ * @param scene Pointer to the QGraphicsScene where the barrier will be added.
+ * @param x The x-coordinate of the barrier's position.
+ * @param y The y-coordinate of the barrier's position.
  */
 void editController::buildBar(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y)
 {
@@ -562,5 +563,5 @@ void editController::buildBar(QGraphicsRectItem *parent, QGraphicsScene *scene, 
     barrierC *tmp = new barrierC(x, y, 50, 50, parent);
     tmp->setBrush(brush);
     BARSlot.bars.push_back(tmp);
-    // scene->addItem(tmp);
+    
 }

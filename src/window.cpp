@@ -193,13 +193,13 @@ void window::checkARInput()
             tr("ERROR, Wrong input. Sensor length is from 0 to 50"));
         return;
     }
-    if (QValidator::Acceptable != slot->directionValidator->validate(directionText, pos))
+    if (QValidator::Acceptable != slot->directionValidator->validate(directionText, pos) || pos == 0)
     {
         // popup wrong input
         QMessageBox::information(
             this,
             tr("Wrong Input"),
-            tr("ERROR, Wrong input. Direction is -1 or 1"));
+            tr("ERROR, Wrong input. Direction is either -1 or 1"));
         return;
     }
     if (QValidator::Acceptable != slot->spinValidator->validate(spinText, pos))
