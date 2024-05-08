@@ -72,7 +72,6 @@ void RCRobot::moveUp()
 {
     calculateHit(sensor);
     QList<QGraphicsItem *> colliding_items = collidingItems();
-    bool hit = false;
     // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
     {

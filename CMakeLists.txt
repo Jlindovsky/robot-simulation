@@ -10,6 +10,14 @@ set(Qt5_DIR /opt/homebrew/Cellar/qt@5/5.15.13_1/lib/cmake/Qt5)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Enable all warnings
+add_compile_options(-Wall)
+
+# Treat warnings as errors
+add_compile_options(-Werror)
+
+# Enable pedantic mode
+add_compile_options(-pedantic)
 # Find the Qt libraries
 find_package(Qt5 COMPONENTS Core Widgets Network REQUIRED)
 

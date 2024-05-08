@@ -216,7 +216,6 @@ void editController::dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene
 void editController::placeBar(gameButton *button, QGraphicsItem *parent, QGraphicsScene *scene)
 {
     QList<QGraphicsItem *> colliding_items = button->collidingItems();
-    bool hit = false;
     QBrush brush(Qt::magenta);
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
     {

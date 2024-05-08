@@ -674,15 +674,13 @@ void window::loadFromFile()
         }
         else if (type == "RC Robot")
         {
-            if (!obj.contains("angle") || !obj.contains("sensor") || !obj.contains("spin") || !obj.contains("direction"))
+            if (!obj.contains("angle") || !obj.contains("sensor") )
             {
                 qDebug() << "missing param for robot";
                 continue;
             }
             int angle = obj["angle"].toInt();
             int sensor = obj["sensor"].toInt();
-            int spin = obj["spin"].toInt();
-            int directionOfSpin = obj["direction"].toInt();
             editBuilder->buildRCRobot(playground, editScene, x, y, sensor, angle);
         }
         else if (type == "Automatic Robot")
