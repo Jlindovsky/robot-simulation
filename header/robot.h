@@ -5,6 +5,10 @@
 #include "barrierC.h"
 #include "global.h"
 
+/**
+ * @brief 
+ * 
+ */
 class Robot : public QObject, public QGraphicsEllipseItem
 {
     Q_OBJECT

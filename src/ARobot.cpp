@@ -1,5 +1,16 @@
 #include "../header/ARobot.h"
 
+/**
+ * @brief Construct a new ARobot::ARobot object
+ *
+ * @param x
+ * @param y
+ * @param w
+ * @param parent
+ * @param sensorIn
+ * @param directionOfSpinIn
+ * @param spinIn
+ */
 ARobot::ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIn, int directionOfSpinIn, int spinIn) : Robot(x, y, w, parent)
 {
     sensor = sensorIn;
@@ -7,6 +18,12 @@ ARobot::ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorI
     spin = spinIn;                       // tmp
     step = sensorIn / 2;
 }
+
+/**
+ * @brief
+ *
+ * @return QJsonObject
+ */
 QJsonObject ARobot::save()
 {
     QJsonObject barObject;
@@ -21,6 +38,10 @@ QJsonObject ARobot::save()
     return barObject;
 }
 
+/**
+ * @brief
+ *
+ */
 void ARobot::move()
 {
     calculateHit(sensor);

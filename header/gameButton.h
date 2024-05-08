@@ -3,6 +3,10 @@
 
 #include "global.h"
 
+/**
+ * @brief
+ *
+ */
 class gameButton : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
@@ -15,7 +19,7 @@ public:
     // possible extras
     // void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     // void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-    void changeText(const char * textIn);
+    void changeText(const char *textIn);
 signals:
     void clicked();
 

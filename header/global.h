@@ -1,32 +1,72 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-#define SIZE_R 50
-#define SIZE_B 75
-// Playground sizes
-#define PLAY_X 174
-#define PLAY_Y 0
-#define PLAY_W 850
-#define PLAY_H 650
-// InsertPanel sizes
-#define IPANEL_X 0
-#define IPANEL_Y 0
-#define IPANEL_W 174
-#define IPANEL_H 650
-// PlayStop panel sizes
-#define PPANEL_X 0
-#define PPANEL_Y 650
-#define PPANEL_W 174
-#define PPANEL_H 168
-// RC panel sizes
-#define RPANEL_X 174
-#define RPANEL_Y 650
-#define RPANEL_W 850
-#define RPANEL_H 168
+/**
+ * @file
+ * @brief Definitions of various sizes and coordinates used in the program.
+ */
 
-// Spawn coordinates
-#define SPAWN_X 375
-#define SPAWN_Y 275
+/**
+ * @defgroup SizesAndCoordinates Sizes and Coordinates
+ * @brief Definitions of sizes and coordinates used in the program.
+ * @{
+ */
+
+/** @brief Size of the robot component */
+#define SIZE_R 50
+
+/** @brief Size of the barrier component */
+#define SIZE_B 75
+
+/**
+ * @brief Sizes and coordinates of the playground area.
+ * @{
+ */
+#define PLAY_X 174 /**< X coordinate of the playground */
+#define PLAY_Y 0   /**< Y coordinate of the playground */
+#define PLAY_W 850 /**< Width of the playground */
+#define PLAY_H 650 /**< Height of the playground */
+/** @} */
+
+/**
+ * @brief Sizes and coordinates of the InsertPanel.
+ * @{
+ */
+#define IPANEL_X 0   /**< X coordinate of the InsertPanel */
+#define IPANEL_Y 0   /**< Y coordinate of the InsertPanel */
+#define IPANEL_W 174 /**< Width of the InsertPanel */
+#define IPANEL_H 650 /**< Height of the InsertPanel */
+/** @} */
+
+/**
+ * @brief Sizes and coordinates of the PlayStop panel.
+ * @{
+ */
+#define PPANEL_X 0   /**< X coordinate of the PlayStop panel */
+#define PPANEL_Y 650 /**< Y coordinate of the PlayStop panel */
+#define PPANEL_W 174 /**< Width of the PlayStop panel */
+#define PPANEL_H 168 /**< Height of the PlayStop panel */
+/** @} */
+
+/**
+ * @brief Sizes and coordinates of the RC panel.
+ * @{
+ */
+#define RPANEL_X 174 /**< X coordinate of the RC panel */
+#define RPANEL_Y 650 /**< Y coordinate of the RC panel */
+#define RPANEL_W 850 /**< Width of the RC panel */
+#define RPANEL_H 168 /**< Height of the RC panel */
+/** @} */
+
+/**
+ * @brief Spawn coordinates.
+ * @{
+ */
+#define SPAWN_X 375 /**< X coordinate of the spawn point */
+#define SPAWN_Y 275 /**< Y coordinate of the spawn point */
+/** @} */
+
+/** @} */
 
 #include <QtWidgets>
 #include <QApplication>

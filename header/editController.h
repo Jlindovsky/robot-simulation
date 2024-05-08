@@ -8,6 +8,10 @@
 #include "gameButton.h"
 #include "global.h"
 
+/**
+ * @brief
+ *
+ */
 enum inputType
 {
     BAR,
@@ -16,6 +20,10 @@ enum inputType
     NTH
 };
 
+/**
+ * @brief
+ *
+ */
 struct editSlotARobot
 {
     unique_ptr<QGraphicsTextItem> name;

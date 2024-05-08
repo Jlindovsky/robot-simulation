@@ -1,4 +1,13 @@
 #include "../header/robot.h"
+
+/**
+ * @brief Construct a new Robot:: Robot object
+ * 
+ * @param x 
+ * @param y 
+ * @param w 
+ * @param parent 
+ */
 Robot::Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent)
     : QGraphicsEllipseItem(0, 0, w, w, parent)
 {
@@ -7,6 +16,11 @@ Robot::Robot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent)
     this->setPos(mapToParent(x, y));
 }
 
+/**
+ * @brief 
+ * 
+ * @param step1 
+ */
 void Robot::calculateHit(int step1)
 {
     previousLocation = pos();
@@ -34,19 +48,37 @@ void Robot::calculateHit(int step1)
     }
 }
 
+/**
+ * @brief 
+ * 
+ */
 void Robot::move()
 {
     qDebug() << "parent function";
 }
 
+/**
+ * @brief 
+ * 
+ */
 void Robot::moveUp()
 {
     qDebug() << "parent function";
 }
+
+/**
+ * @brief 
+ * 
+ */
 void Robot::rotateLeft()
 {
     qDebug() << "parent function";
 }
+
+/**
+ * @brief 
+ * 
+ */
 void Robot::rotateRight()
 {
     qDebug() << "parent function";

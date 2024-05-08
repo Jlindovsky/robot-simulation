@@ -1,5 +1,9 @@
 #include "../header/window.h"
 
+/**
+ * @brief Construct a new window::window object
+ *
+ */
 window::window()
 {
     // set up the screen
@@ -21,6 +25,10 @@ window::window()
     spawn = nullptr;
 }
 
+/**
+ * @brief Destroy the window::window object
+ *
+ */
 window::~window()
 {
     delete welcomeScene;
@@ -33,6 +41,10 @@ window::~window()
     delete spawn;
 }
 
+/**
+ * @brief
+ *
+ */
 void window::mainWindow()
 {
     gameButton *newGameButton = new gameButton(QString("new"), 400, 275, 200, 50);
@@ -45,6 +57,12 @@ void window::mainWindow()
     connect(loadGameButton, SIGNAL(clicked()), this, SLOT(loadFromFile()));
     welcomeScene->addItem(loadGameButton);
 }
+
+/**
+ * @brief
+ *
+ * @param rob
+ */
 void window::setActiveRCR(RCRobot *rob)
 {
     QPen pen;
@@ -60,6 +78,11 @@ void window::setActiveRCR(RCRobot *rob)
     activeRCR->setPen(pen);
 }
 
+/**
+ * @brief
+ *
+ * @param rob
+ */
 void window::setActiveR(Robot *rob)
 {
     qDebug() << "setting active";
@@ -76,22 +99,41 @@ void window::setActiveR(Robot *rob)
     activeR = rob;
     activeR->setPen(pen);
 }
+
+/**
+ * @brief
+ *
+ */
 void window::moveUpActive()
 {
     if (activeRCR)
         activeRCR->moveUp();
 }
+
+/**
+ * @brief
+ *
+ */
 void window::rotateLeftActive()
 {
     if (activeRCR)
         activeRCR->rotateLeft();
 }
+
+/**
+ * @brief
+ *
+ */
 void window::rotateRightActive()
 {
     if (activeRCR)
         activeRCR->rotateRight();
 }
 
+/**
+ * @brief
+ *
+ */
 void window::deleteBot()
 {
     editBuilder->deleteRob(activeR);
@@ -109,6 +151,10 @@ void window::deleteBot()
     }
 }
 
+/**
+ * @brief
+ *
+ */
 void window::checkARInput()
 {
     editSlotARobot *slot = &(editBuilder->ASlot);
@@ -161,6 +207,11 @@ void window::checkARInput()
         }
     }
 }
+
+/**
+ * @brief
+ *
+ */
 void window::checkRCRInput()
 {
     auto slot = editBuilder->RCSlot;
@@ -202,6 +253,10 @@ void window::checkRCRInput()
     }
 }
 
+/**
+ * @brief
+ *
+ */
 void window::connectButtons()
 {
     QBrush brush(Qt::darkCyan);
@@ -218,6 +273,10 @@ void window::connectButtons()
     disconnect(editBuilder->bottomSlot.dlt, SIGNAL(clicked()), this, SLOT(deleteBot()));
 }
 
+/**
+ * @brief
+ *
+ */
 void window::disconnectButtons()
 {
     QBrush brush(Qt::gray);
@@ -234,6 +293,10 @@ void window::disconnectButtons()
     connect(editBuilder->bottomSlot.dlt, SIGNAL(clicked()), this, SLOT(deleteBot()));
 }
 
+/**
+ * @brief
+ *
+ */
 void window::stopTimer()
 {
     QPen pen;
@@ -258,6 +321,10 @@ void window::stopTimer()
     }
 }
 
+/**
+ * @brief
+ *
+ */
 void window::startTimer()
 {
 
@@ -282,6 +349,10 @@ void window::startTimer()
     }
 }
 
+/**
+ * @brief
+ *
+ */
 void window::clickGrid()
 {
     if (gridOpen)
@@ -323,6 +394,10 @@ void window::clickGrid()
     }
 }
 
+/**
+ * @brief
+ *
+ */
 void window::saveGame()
 {
     if (timer->isActive())
@@ -438,6 +513,10 @@ void window::saveGame()
     qDebug() << "Current working directory:" << QDir::currentPath();
 }
 
+/**
+ * @brief
+ *
+ */
 void window::loadFromFile()
 {
     editWindowSignal();
@@ -562,6 +641,10 @@ void window::loadFromFile()
     }
 }
 
+/**
+ * @brief
+ *
+ */
 void window::editWindowSignal()
 {
     // set up the scene

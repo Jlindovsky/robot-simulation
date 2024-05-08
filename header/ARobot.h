@@ -4,7 +4,10 @@
 #include "robot.h"
 #include "global.h"
 
-
+/**
+ * @brief 
+ * 
+ */
 class ARobot : public Robot
 {
 public:

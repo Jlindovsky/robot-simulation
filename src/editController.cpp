@@ -1,5 +1,11 @@
 #include "../header/editController.h"
 
+/**
+ * @brief
+ *
+ * @param parent
+ * @param scene
+ */
 void editController::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     RCSlot.name = new QGraphicsTextItem(QString("RC Robot"));
@@ -25,6 +31,13 @@ void editController::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     scene->addWidget(RCSlot.sensorInput);
     // scene->addItem(RCSlot.buildRCRobot);
 }
+
+/**
+ * @brief
+ *
+ * @param parent
+ * @param scene
+ */
 void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     ASlot.name = make_unique<QGraphicsTextItem>(QString("Automatic Robot"));
@@ -76,6 +89,13 @@ void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     scene->addItem(&*(ASlot.spinText));
     scene->addWidget(&*(ASlot.spinInput));
 }
+
+/**
+ * @brief
+ *
+ * @param parent
+ * @param scene
+ */
 void editController::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     BARSlot.name = new QGraphicsTextItem(QString("Edit Barriers"));
@@ -88,6 +108,12 @@ void editController::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     scene->addItem(BARSlot.buildBarrier);
 }
 
+/**
+ * @brief
+ *
+ * @param parent
+ * @param scene
+ */
 void editController::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     bottomSlot.up = new gameButton(QString("up"), RPANEL_W - 130, 10, 50, 50, parent);
@@ -104,6 +130,12 @@ void editController::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *sc
     scene->addItem(bottomSlot.right);
 }
 
+/**
+ * @brief
+ *
+ * @param parent
+ * @param scene
+ */
 void editController::gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     for (int i = 0; i < 17; i++)
@@ -118,6 +150,12 @@ void editController::gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene)
     }
 }
 
+/**
+ * @brief
+ *
+ * @param parent
+ * @param scene
+ */
 void editController::addBar(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     qDebug() << "prdime\n";
@@ -136,6 +174,13 @@ void editController::addBar(QGraphicsItem *parent, QGraphicsScene *scene)
     }
 }
 
+/**
+ * @brief
+ *
+ * @param bar
+ * @param parent
+ * @param scene
+ */
 void editController::dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene *scene)
 {
     auto it = remove_if(BARSlot.bars.begin(), BARSlot.bars.end(), [&](barrierC *b)
@@ -149,6 +194,13 @@ void editController::dltBar(barrierC *bar, QGraphicsItem *parent, QGraphicsScene
     }
 }
 
+/**
+ * @brief
+ *
+ * @param button
+ * @param parent
+ * @param scene
+ */
 void editController::placeBar(gameButton *button, QGraphicsItem *parent, QGraphicsScene *scene)
 {
     QList<QGraphicsItem *> colliding_items = button->collidingItems();
@@ -159,7 +211,7 @@ void editController::placeBar(gameButton *button, QGraphicsItem *parent, QGraphi
     {
         barrierC *barrierItem = dynamic_cast<barrierC *>(colliding_items[i]);
 
-        // Check if the dynamic_cast was successful and the object is a barrierC 
+        // Check if the dynamic_cast was successful and the object is a barrierC
         if (barrierItem != nullptr)
         {
             button->changeText("dlt");
@@ -189,6 +241,10 @@ void editController::placeBar(gameButton *button, QGraphicsItem *parent, QGraphi
             { addBar(parent, scene); });
 }
 
+/**
+ * @brief
+ *
+ */
 void editController::deleteBarGrid()
 {
     for (auto i : barGrid)
@@ -198,6 +254,11 @@ void editController::deleteBarGrid()
     barGrid.clear();
 }
 
+/**
+ * @brief
+ *
+ * @param scene
+ */
 void editController::refresh(QGraphicsScene *scene)
 {
     for (auto i : (bottomSlot.rcRobs))
@@ -232,6 +293,11 @@ void editController::refresh(QGraphicsScene *scene)
     }
 }
 
+/**
+ * @brief
+ *
+ * @param scene
+ */
 void editController::refreshPause(QGraphicsScene *scene)
 {
     for (auto i : (bottomSlot.rcRobs))
@@ -287,6 +353,11 @@ void editController::refreshPause(QGraphicsScene *scene)
         j++;
     }
 }
+/**
+ * @brief
+ *
+ * @param activeR
+ */
 void editController::deleteRob(Robot *activeR)
 {
     ARobot *aRobotToDelete = dynamic_cast<ARobot *>(activeR);
@@ -314,6 +385,12 @@ void editController::deleteRob(Robot *activeR)
     }
 }
 
+/**
+ * @brief
+ *
+ * @param parent
+ * @param scene
+ */
 void editController::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
     playSlot.pause = new gameButton(QString("pause"), 10, 10, 50, 50, parent);
@@ -327,6 +404,11 @@ void editController::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
     // scene->addItem(playSlot.save);
 }
 
+/**
+ * @brief Construct a new edit Controller::edit Controller object
+ *
+ * @param scene
+ */
 editController::editController(QGraphicsScene *scene)
 {
     iPanel = new QGraphicsRectItem(0, 0, IPANEL_W, IPANEL_H);
@@ -357,6 +439,18 @@ editController::editController(QGraphicsScene *scene)
     buildPlayEdit(pPanel, scene);
 }
 
+/**
+ * @brief
+ *
+ * @param parent
+ * @param scene
+ * @param x
+ * @param y
+ * @param sensor
+ * @param directionOfSpin
+ * @param spin
+ * @param timer
+ */
 void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensor, int directionOfSpin, int spin, QTimer *timer)
 {
     if (aRobots.size() >= 10)
@@ -385,11 +479,11 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
         // Center the dialog relative to the scene
         QPoint dialogPos = parent->scenePos().toPoint() - QPoint(dialog.width() / 2, dialog.height() / 2);
         dialog.move(dialogPos);
-        dialog.exec(); 
+        dialog.exec();
     }
-    if ( x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
+    if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
     {
-        qDebug() << "Invalid position of Automatic Robot from file!\nPOS:" <<x<<" | "<<y<<"\n";
+        qDebug() << "Invalid position of Automatic Robot from file!\nPOS:" << x << " | " << y << "\n";
         exit(EXIT_FAILURE);
     }
     QBrush brushRob(Qt::darkMagenta);
@@ -400,6 +494,15 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
     // scene->addItem(tmp);
 }
 
+/**
+ * @brief
+ *
+ * @param parent
+ * @param scene
+ * @param x
+ * @param y
+ * @param sensorIn
+ */
 void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensorIn)
 {
     if (rcRobots.size() >= 10)
@@ -429,7 +532,7 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
         dialog.move(dialogPos);
         dialog.exec(); // Show the message box
     }
-    if ( x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
+    if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
     {
         qDebug() << "Invalid position of Remote Control Robot\n";
         exit(EXIT_FAILURE);
@@ -441,6 +544,14 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
     // scene->addItem(tmp);
 }
 
+/**
+ * @brief
+ *
+ * @param parent
+ * @param scene
+ * @param x
+ * @param y
+ */
 void editController::buildBar(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y)
 {
     if (x % 50 || y % 50 || x > PLAY_W || x < 0 || y > PLAY_H || y < 0)

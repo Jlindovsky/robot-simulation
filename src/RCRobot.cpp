@@ -1,5 +1,14 @@
 #include "../header/RCRobot.h"
 
+/**
+ * @brief Construct a new RCRobot::RCRobot object
+ *
+ * @param x
+ * @param y
+ * @param w
+ * @param parent
+ * @param sensorIN
+ */
 RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIN)
     : Robot(x, y, w, parent)
 {
@@ -9,6 +18,11 @@ RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int senso
     step = sensorIN / 2;
 }
 
+/**
+ * @brief
+ *
+ * @return QJsonObject
+ */
 QJsonObject RCRobot::save()
 {
     QJsonObject barObject;
@@ -21,6 +35,10 @@ QJsonObject RCRobot::save()
     return barObject;
 }
 
+/**
+ * @brief
+ *
+ */
 void RCRobot::moveUp()
 {
     calculateHit(sensor);
@@ -39,10 +57,20 @@ void RCRobot::moveUp()
         }
     }
 }
+
+/**
+ * @brief
+ *
+ */
 void RCRobot::rotateLeft()
 {
     angle = (angle - spin + 360) % 360;
 }
+
+/**
+ * @brief
+ *
+ */
 void RCRobot::rotateRight()
 {
     angle = (angle + spin + 360) % 360;

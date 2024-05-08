@@ -3,6 +3,10 @@
 
 #include "global.h"
 
+/**
+ * @brief 
+ * 
+ */
 class barrierC : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT

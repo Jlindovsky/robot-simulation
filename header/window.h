@@ -1,7 +1,10 @@
 #include "editController.h"
 #include "global.h"
 
-// UI controller
+/**
+ * @brief 
+ * 
+ */
 class window : public QGraphicsView
 {
     Q_OBJECT
