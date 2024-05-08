@@ -58,7 +58,7 @@ void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     ASlot.sensorInput = make_unique<QLineEdit>();
     ASlot.sensorInput->setPlaceholderText("  0 - 50");
     ASlot.sensorValidator = make_unique<QIntValidator>(0, 50);
-    // extract from unique pointer 
+    // extract from unique pointer
     ASlot.sensorInput->setValidator(&*(ASlot.sensorValidator));
     ASlot.sensorInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 80, 100, 30); // Adjust position and size as needed
 
@@ -70,7 +70,7 @@ void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     ASlot.directionInput = make_unique<QLineEdit>();
     ASlot.directionInput->setPlaceholderText("  -1 or 1");
     ASlot.directionValidator = make_unique<QIntValidator>(-1, 1);
-    // extract from unique pointer 
+    // extract from unique pointer
     ASlot.directionInput->setValidator(&*(ASlot.directionValidator));
     ASlot.directionInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 160, 100, 30);
 
@@ -82,7 +82,7 @@ void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     ASlot.spinInput = make_unique<QLineEdit>();
     ASlot.spinInput->setPlaceholderText("  10 - 180");
     ASlot.spinValidator = make_unique<QIntValidator>(10, 180);
-    // extract from unique pointer 
+    // extract from unique pointer
     ASlot.spinInput->setValidator(&*(ASlot.spinValidator));
     ASlot.spinInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 240, 100, 30);
 
@@ -121,7 +121,7 @@ void editController::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 /**
  * @brief Builds the interface for controls.
  *
- * This function constructs the user interface elements for 
+ * This function constructs the user interface elements for
  * RCRobot controls and delete button
  *
  * @param parent The parent item to which the interface elements will be added.
@@ -175,7 +175,7 @@ void editController::addBar(QGraphicsItem *parent, QGraphicsScene *scene)
         QPointF pos = clickedButton->pos();
         barrierC *tmp = new barrierC(pos.x() - 3, pos.y() - 3, 50, 50, parent);
         tmp->setBrush(brush);
-        
+
         gridRefresh(parent, scene);
         BARSlot.bars.push_back(tmp);
     }
@@ -253,7 +253,7 @@ void editController::placeBar(gameButton *button, QGraphicsItem *parent, QGraphi
 }
 
 /**
- * @brief deletes all grid buttons 
+ * @brief deletes all grid buttons
  */
 void editController::deleteBarGrid()
 {
@@ -457,7 +457,7 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
         QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
         return;
     }
-    if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0 )
+    if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
     {
         qDebug() << "Invalid position of Automatic Robot from file!\nPOS:" << x << " | " << y << "\n";
         return;
@@ -467,7 +467,8 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
     tmp->setBrush(brushRob);
     aRobots.push_back(tmp);
 
-    connect(timer, &QTimer::timeout, tmp, [=]{tmp->move();});
+    connect(timer, &QTimer::timeout, tmp, [=]
+            { tmp->move(); });
 }
 
 /**
@@ -480,7 +481,7 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
  * @param sensorIn The sensor length of the robot.
  * @param angle The spin of the robot.
  */
-void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensor, int directionOfSpin, int spin, QTimer *timer,int angleIN)
+void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensor, int directionOfSpin, int spin, QTimer *timer, int angleIN)
 {
     if (aRobots.size() >= 10)
     {
@@ -493,11 +494,12 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
         return;
     }
     QBrush brushRob(Qt::darkMagenta);
-    ARobot *tmp = new ARobot(x, y, SIZE_R, parent, sensor, directionOfSpin, spin,angleIN);
+    ARobot *tmp = new ARobot(x, y, SIZE_R, parent, sensor, directionOfSpin, spin, angleIN);
     tmp->setBrush(brushRob);
     aRobots.push_back(tmp);
 
-    connect(timer, &QTimer::timeout, tmp, [=]{tmp->move();});
+    connect(timer, &QTimer::timeout, tmp, [=]
+            { tmp->move(); });
 }
 
 /**
@@ -510,7 +512,7 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
  * @param sensorIn The sensor length of the robot.
  * @param angle The spin of the robot.
  */
-void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensorIn,int angleIN)
+void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensorIn, int angleIN)
 {
     if (rcRobots.size() >= 10)
     {
@@ -523,7 +525,7 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
         return;
     }
     QBrush brushRob(Qt::white);
-    RCRobot *tmp = new RCRobot(x, y, SIZE_R, parent, sensorIn,angleIN%360);
+    RCRobot *tmp = new RCRobot(x, y, SIZE_R, parent, sensorIn, angleIN % 360);
     tmp->setBrush(brushRob);
     rcRobots.push_back(tmp);
 }
@@ -542,12 +544,11 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
     {
         QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
         return;
-
     }
     if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
     {
         qDebug() << "Invalid position of Remote Control Robot\n";
-                return;
+        return;
     }
     QBrush brushRob(Qt::white);
     RCRobot *tmp = new RCRobot(x, y, SIZE_R, parent, sensorIn);
@@ -568,12 +569,10 @@ void editController::buildBar(QGraphicsRectItem *parent, QGraphicsScene *scene, 
     if (x % 50 || y % 50 || x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
     {
         qDebug() << "Invalid position of Barrier \n";
-                return;
-
+        return;
     }
     QBrush brush(Qt::magenta);
     barrierC *tmp = new barrierC(x, y, 50, 50, parent);
     tmp->setBrush(brush);
     BARSlot.bars.push_back(tmp);
-    
 }

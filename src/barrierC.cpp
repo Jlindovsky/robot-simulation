@@ -43,4 +43,3 @@ barrierC::barrierC(qreal x, qreal y, qreal w, qreal h, QGraphicsItem *parent)
  * and position at the origin (0, 0).
  */
 barrierC::barrierC() : QGraphicsRectItem(0, 0, SIZE_B, SIZE_B) {}
-

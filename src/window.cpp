@@ -213,7 +213,6 @@ void window::checkARInput()
             tr("Wrong Input"),
             tr(msg.c_str()));
         return;
-
     }
     editBuilder->buildARobot(playground, editScene, SPAWN_X + 25, SPAWN_Y + 25, (sensorText).toInt(), (directionText).toInt(), (spinText).toInt(), timer);
     // if pause refresh buttons for deletion
@@ -660,7 +659,7 @@ void window::loadFromFile()
     for (const QJsonValue &value : jsonArray)
     {
         QJsonObject obj = value.toObject();
-        if (!obj.contains("y") || !obj.contains("x") || !obj.contains("type") )
+        if (!obj.contains("y") || !obj.contains("x") || !obj.contains("type"))
         {
             qDebug() << "missing basic param for object (x|y|type)";
             continue;
