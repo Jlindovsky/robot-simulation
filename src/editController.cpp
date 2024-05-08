@@ -23,60 +23,58 @@ void editController::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     scene->addItem(RCSlot.name);
     scene->addItem(RCSlot.sensorText);
     scene->addWidget(RCSlot.sensorInput);
-    // magic bracho
-    scene->addItem(RCSlot.buildRCRobot);
+    // scene->addItem(RCSlot.buildRCRobot);
 }
 void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
-    ASlot.name = new QGraphicsTextItem(QString("Automatic Robot"));
+    ASlot.name = make_unique<QGraphicsTextItem>(QString("Automatic Robot"));
     ASlot.name->setParent(dynamic_cast<QObject *>(parent));
     ASlot.name->setPos(35, 0);
     ASlot.name->setDefaultTextColor(Qt::black);
 
-    ASlot.sensorText = new QGraphicsTextItem(QString("Set sensor length"));
+    ASlot.sensorText = make_unique<QGraphicsTextItem>(QString("Set sensor length"));
     ASlot.sensorText->setParent(dynamic_cast<QObject *>(parent));
     ASlot.sensorText->setPos(ASlot.name->x(), ASlot.name->y() + 40);
     ASlot.sensorText->setDefaultTextColor(Qt::black);
 
-    ASlot.sensorInput = new QLineEdit;
+    ASlot.sensorInput = make_unique<QLineEdit>();
     ASlot.sensorInput->setPlaceholderText("  0 - 50");
-    ASlot.sensorValidator = new QIntValidator(0, 50);
-    ASlot.sensorInput->setValidator(ASlot.sensorValidator);
+    ASlot.sensorValidator = make_unique<QIntValidator>(0, 50);
+    // extract unique pointer qualities
+    ASlot.sensorInput->setValidator(&*(ASlot.sensorValidator));
     ASlot.sensorInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 80, 100, 30); // Adjust position and size as needed
 
-    ASlot.directionText = new QGraphicsTextItem(QString("  Set direction"));
+    ASlot.directionText = make_unique<QGraphicsTextItem>(QString("  Set direction"));
     ASlot.directionText->setParent(dynamic_cast<QObject *>(parent));
     ASlot.directionText->setPos(ASlot.name->x(), ASlot.name->y() + 120);
     ASlot.directionText->setDefaultTextColor(Qt::black);
 
-    ASlot.directionInput = new QLineEdit;
+    ASlot.directionInput = make_unique<QLineEdit>();
     ASlot.directionInput->setPlaceholderText("  -1 and 1");
-    ASlot.directionValidator = new QIntValidator(-1, 1);
-    ASlot.directionInput->setValidator(ASlot.directionValidator);
+    ASlot.directionValidator = make_unique<QIntValidator>(-1, 1);
+    ASlot.directionInput->setValidator(&*(ASlot.directionValidator));
     ASlot.directionInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 160, 100, 30);
 
-    ASlot.spinText = new QGraphicsTextItem(QString("  Set spin size"));
+    ASlot.spinText = make_unique<QGraphicsTextItem>(QString("  Set spin size"));
     ASlot.spinText->setParent(dynamic_cast<QObject *>(parent));
     ASlot.spinText->setPos(ASlot.name->x(), ASlot.name->y() + 200);
     ASlot.spinText->setDefaultTextColor(Qt::black);
 
-    ASlot.spinInput = new QLineEdit;
+    ASlot.spinInput = make_unique<QLineEdit>();
     ASlot.spinInput->setPlaceholderText("  10 - 180");
-    ASlot.spinValidator = new QIntValidator(10, 180);
-    ASlot.spinInput->setValidator(ASlot.spinValidator);
+    ASlot.spinValidator = make_unique<QIntValidator>(10, 180);
+    ASlot.spinInput->setValidator(&*(ASlot.spinValidator));
     ASlot.spinInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 240, 100, 30);
 
     ASlot.buildARobot = new gameButton(QString("Build ARobot"), ASlot.name->x(), ASlot.name->y() + 280, 100, 30, parent);
 
-    scene->addItem(ASlot.name);
-    scene->addItem(ASlot.sensorText);
-    scene->addWidget(ASlot.sensorInput);
-    scene->addItem(ASlot.directionText);
-    scene->addWidget(ASlot.directionInput);
-    scene->addItem(ASlot.spinText);
-    scene->addWidget(ASlot.spinInput);
-    // magic bracho
-    scene->addItem(ASlot.buildARobot);
+    scene->addItem(&*(ASlot.name));
+    scene->addItem(&*(ASlot.sensorText));
+    scene->addWidget(&*(ASlot.sensorInput));
+    scene->addItem(&*(ASlot.directionText));
+    scene->addWidget(&*(ASlot.directionInput));
+    scene->addItem(&*(ASlot.spinText));
+    scene->addWidget(&*(ASlot.spinInput));
 }
 void editController::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
@@ -122,6 +120,7 @@ void editController::gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene)
 
 void editController::addBar(QGraphicsItem *parent, QGraphicsScene *scene)
 {
+    qDebug() << "prdime\n";
     QBrush brush(Qt::magenta);
     gameButton *clickedButton = qobject_cast<gameButton *>(sender());
     if (clickedButton)
@@ -131,7 +130,7 @@ void editController::addBar(QGraphicsItem *parent, QGraphicsScene *scene)
         QPointF pos = clickedButton->pos();
         barrierC *tmp = new barrierC(pos.x() - 3, pos.y() - 3, 50, 50, parent);
         tmp->setBrush(brush);
-        scene->addItem(tmp);
+        // scene->addItem(tmp);
         gridRefresh(parent, scene);
         BARSlot.bars.push_back(tmp);
     }
@@ -219,7 +218,7 @@ void editController::refresh(QGraphicsScene *scene)
         string robName = "RC" + to_string(i + 1);
         gameButton *tmp = new gameButton(QString::fromStdString(robName), 10 + offset_x, 10 + offset_y, 50, 50, rPanel);
         bottomSlot.rcRobs.push_back(tmp);
-        scene->addItem(tmp);
+        // scene->addItem(tmp);
 
         if (i % 2)
         {
@@ -255,7 +254,7 @@ void editController::refreshPause(QGraphicsScene *scene)
         string robName = "RC" + to_string(i + 1);
         gameButton *tmp = new gameButton(QString::fromStdString(robName), 10 + offset_x, 10 + offset_y, 50, 50, rPanel);
         bottomSlot.rcRobs.push_back(tmp);
-        scene->addItem(tmp);
+        // scene->addItem(tmp);
 
         if (j % 2)
         {
@@ -271,10 +270,10 @@ void editController::refreshPause(QGraphicsScene *scene)
 
     for (size_t i = 0; i < aRobots.size(); i++)
     {
-        string robName = "Aut" + to_string(i + 1);
+        string robName = "AR" + to_string(i + 1);
         gameButton *tmp = new gameButton(QString::fromStdString(robName), 10 + offset_x, 10 + offset_y, 50, 50, rPanel);
         bottomSlot.aRobs.push_back(tmp);
-        scene->addItem(tmp);
+        // scene->addItem(tmp);
 
         if (j % 2)
         {
@@ -323,34 +322,30 @@ void editController::buildPlayEdit(QGraphicsItem *parent, QGraphicsScene *scene)
     QBrush brush(Qt::gray);
     playSlot.save->setBrush(brush);
 
-    scene->addItem(playSlot.pause);
-    scene->addItem(playSlot.play);
-    scene->addItem(playSlot.save);
+    // scene->addItem(playSlot.pause);
+    // scene->addItem(playSlot.play);
+    // scene->addItem(playSlot.save);
 }
 
 editController::editController(QGraphicsScene *scene)
 {
     iPanel = new QGraphicsRectItem(0, 0, IPANEL_W, IPANEL_H);
     iPanel->setPos(IPANEL_X, IPANEL_Y);
-    QBrush brush;
-    QPen pen;
+    QBrush brush(Qt::white);
+    QPen pen(Qt::white);
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::white);
     iPanel->setBrush(brush);
-    pen.setColor(Qt::white);
     iPanel->setPen(pen);
     scene->addItem(iPanel);
 
     pPanel = new QGraphicsRectItem(0, 0, PPANEL_W, PPANEL_H);
     pPanel->setPos(PPANEL_X, PPANEL_Y);
-    brush.setStyle(Qt::SolidPattern);
     pPanel->setPen(pen);
     pPanel->setBrush(brush);
     scene->addItem(pPanel);
 
     rPanel = new QGraphicsRectItem(0, 0, RPANEL_W, RPANEL_H);
     rPanel->setPos(RPANEL_X, RPANEL_Y);
-    brush.setStyle(Qt::SolidPattern);
     rPanel->setBrush(brush);
     rPanel->setPen(pen);
     scene->addItem(rPanel);
@@ -402,7 +397,7 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
     tmp->setBrush(brushRob);
     aRobots.push_back(tmp);
     QObject::connect(timer, SIGNAL(timeout()), tmp, SLOT(move()));
-    scene->addItem(tmp);
+    // scene->addItem(tmp);
 }
 
 void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensorIn)
@@ -443,7 +438,7 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
     RCRobot *tmp = new RCRobot(x, y, SIZE_R, parent, sensorIn);
     tmp->setBrush(brushRob);
     rcRobots.push_back(tmp);
-    scene->addItem(tmp);
+    // scene->addItem(tmp);
 }
 
 void editController::buildBar(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y)
@@ -457,5 +452,5 @@ void editController::buildBar(QGraphicsRectItem *parent, QGraphicsScene *scene, 
     barrierC *tmp = new barrierC(x, y, 50, 50, parent);
     tmp->setBrush(brush);
     BARSlot.bars.push_back(tmp);
-    scene->addItem(tmp);
+    // scene->addItem(tmp);
 }

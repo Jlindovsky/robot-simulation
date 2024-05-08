@@ -40,4 +40,6 @@ private:
     QGraphicsRectItem *playground;
     QTimer *timer;
     bool gridOpen;
+    vector<barrierC*> edges;
+    ARobot * spawn;
 };

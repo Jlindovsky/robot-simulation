@@ -60,6 +60,8 @@
 #include <vector>
 #include <qvalidator.h>
 #include <typeinfo>
+#include <memory>
+
 using namespace std;
 
 #endif

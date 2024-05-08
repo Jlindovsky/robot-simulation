@@ -12,12 +12,25 @@ window::window()
     welcomeScene->setSceneRect(0, 0, 1024, 768);
     setScene(welcomeScene);
     gridOpen = false;
+
+    editBuilder = nullptr;
+    activeRCR = nullptr;
+    activeR = nullptr;
+    playground = nullptr;
+    timer = nullptr;
+    spawn = nullptr;
 }
 
 window::~window()
 {
     delete welcomeScene;
     delete editScene;
+    delete editBuilder;
+    delete activeRCR;
+    delete activeR;
+    delete playground;
+    delete timer;
+    delete spawn;
 }
 
 void window::mainWindow()
@@ -34,34 +47,34 @@ void window::mainWindow()
 }
 void window::setActiveRCR(RCRobot *rob)
 {
-    QPen pero;
+    QPen pen;
     if (activeRCR != nullptr)
     {
-        pero.setColor(Qt::black);
-        pero.setWidth(0);
-        activeRCR->setPen(pero);
+        pen.setColor(Qt::black);
+        pen.setWidth(0);
+        activeRCR->setPen(pen);
     }
-    pero.setColor(Qt::green);
-    pero.setWidth(4);
+    pen.setColor(Qt::green);
+    pen.setWidth(4);
     activeRCR = rob;
-    activeRCR->setPen(pero);
+    activeRCR->setPen(pen);
 }
 
 void window::setActiveR(Robot *rob)
 {
     qDebug() << "setting active";
-    QPen pero;
+    QPen pen;
 
     if (activeR != nullptr)
     {
-        pero.setColor(Qt::black);
-        pero.setWidth(0);
-        activeR->setPen(pero);
+        pen.setColor(Qt::black);
+        pen.setWidth(0);
+        activeR->setPen(pen);
     }
-    pero.setColor(Qt::green);
-    pero.setWidth(4);
+    pen.setColor(Qt::green);
+    pen.setWidth(4);
     activeR = rob;
-    activeR->setPen(pero);
+    activeR->setPen(pen);
 }
 void window::moveUpActive()
 {
@@ -98,13 +111,13 @@ void window::deleteBot()
 
 void window::checkARInput()
 {
-    auto slot = editBuilder->ASlot;
-    auto sensorText = slot.sensorInput->text();
-    auto directionText = slot.directionInput->text();
-    auto spinText = slot.spinInput->text();
+    editSlotARobot *slot = &(editBuilder->ASlot);
+    auto sensorText = slot->sensorInput->text();
+    auto directionText = slot->directionInput->text();
+    auto spinText = slot->spinInput->text();
 
     int pos = 0;
-    if (QValidator::Acceptable != slot.sensorValidator->validate(sensorText, pos))
+    if (QValidator::Acceptable != slot->sensorValidator->validate(sensorText, pos))
     {
         // popup wrong input
         QMessageBox::information(
@@ -113,7 +126,7 @@ void window::checkARInput()
             tr("ERROR, Wrong input. Sensor length is from 0 to 50"));
         return;
     }
-    if (QValidator::Acceptable != slot.directionValidator->validate(directionText, pos))
+    if (QValidator::Acceptable != slot->directionValidator->validate(directionText, pos))
     {
         // popup wrong input
         QMessageBox::information(
@@ -122,7 +135,7 @@ void window::checkARInput()
             tr("ERROR, Wrong input. Direction is -1 or 1"));
         return;
     }
-    if (QValidator::Acceptable != slot.spinValidator->validate(spinText, pos))
+    if (QValidator::Acceptable != slot->spinValidator->validate(spinText, pos))
     {
         // popup wrong input
         QMessageBox::information(
@@ -564,6 +577,7 @@ void window::editWindowSignal()
     pen.setWidth(4);
     playground->setPen(pen);
     editScene->addItem(playground);
+    // has to be added for coordinations but returns repeated addition
 
     editBuilder = new editController(editScene);
     connect(editBuilder->bottomSlot.up, SIGNAL(clicked()), this, SLOT(moveUpActive()));
@@ -580,23 +594,26 @@ void window::editWindowSignal()
     barrierC *edgeTop = new barrierC(0, -1, PLAY_W, 1, playground);
     pen.setColor(Qt::black);
     edgeTop->setPen(pen);
-    editScene->addItem(edgeTop);
+    edges.push_back(edgeTop);
+    // editScene->addItem(edgeTop);
 
     barrierC *edgeBottom = new barrierC(0, PLAY_H, PLAY_W, 1, playground);
     edgeBottom->setPen(pen);
-    editScene->addItem(edgeBottom);
+    edges.push_back(edgeBottom);
+    // editScene->addItem(edgeBottom);
 
     barrierC *edgeLeft = new barrierC(-1, 0, 1, PLAY_H, playground);
-
     edgeLeft->setPen(pen);
-    editScene->addItem(edgeLeft);
+    edges.push_back(edgeLeft);
+    // editScene->addItem(edgeLeft);
 
     barrierC *edgeRight = new barrierC(PLAY_W, 0, 1, PLAY_H, playground);
     edgeRight->setPen(pen);
-    editScene->addItem(edgeRight);
+    edges.push_back(edgeRight);
+    // editScene->addItem(edgeRight);
 
-    ARobot *Spawn = new ARobot(SPAWN_X, SPAWN_Y, 100, playground, 0, 0, 0);
-    editScene->addItem(Spawn);
+    spawn = new ARobot(SPAWN_X, SPAWN_Y, 100, playground, 0, 0, 0);
+    editScene->addItem(spawn);
 
     timer = new QTimer();
 

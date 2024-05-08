@@ -18,19 +18,19 @@ enum inputType
 
 struct editSlotARobot
 {
-    QGraphicsTextItem *name;
+    unique_ptr<QGraphicsTextItem> name;
 
-    QGraphicsTextItem *sensorText;
-    QIntValidator *sensorValidator;
-    QLineEdit *sensorInput;
+    unique_ptr<QGraphicsTextItem> sensorText;
+    unique_ptr<QIntValidator> sensorValidator;
+    unique_ptr<QLineEdit> sensorInput;
 
-    QGraphicsTextItem *directionText;
-    QIntValidator *directionValidator;
-    QLineEdit *directionInput;
+    unique_ptr<QGraphicsTextItem> directionText;
+    unique_ptr<QIntValidator> directionValidator;
+    unique_ptr<QLineEdit> directionInput;
 
-    QGraphicsTextItem *spinText;
-    QLineEdit *spinInput;
-    QIntValidator *spinValidator;
+    unique_ptr<QGraphicsTextItem> spinText;
+    unique_ptr<QLineEdit> spinInput;
+    unique_ptr<QIntValidator> spinValidator;
 
     gameButton *buildARobot;
 
