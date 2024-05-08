@@ -1,8 +1,10 @@
 #include "../header/window.h"
 
 /**
- * @brief Construct a new window::window object
+ * @brief Construct a new window::window object.
  *
+ * This constructor initializes the window object by setting up the screen,
+ * setting up the scene, and initializing various member variables.
  */
 window::window()
 {
@@ -26,8 +28,10 @@ window::window()
 }
 
 /**
- * @brief Destroy the window::window object
+ * @brief Destroy the window::window object.
  *
+ * This destructor cleans up resources allocated by the window object,
+ * including the scenes, builders, active objects, playground, timer, and spawn.
  */
 window::~window()
 {
@@ -42,8 +46,10 @@ window::~window()
 }
 
 /**
- * @brief
+ * @brief Function to set up the main window.
  *
+ * This function initializes the main window by creating and adding game buttons
+ * to the welcome scene. It connects signals from the buttons to appropriate slots.
  */
 void window::mainWindow()
 {
@@ -59,9 +65,12 @@ void window::mainWindow()
 }
 
 /**
- * @brief
+ * @brief Set the active RC robot.
  *
- * @param rob
+ * This function sets the active RC robot and updates its appearance
+ * to indicate its active status by changing its pen color to green.
+ *
+ * @param rob Pointer to the RCRobot object to set as active.
  */
 void window::setActiveRCR(RCRobot *rob)
 {
@@ -79,9 +88,12 @@ void window::setActiveRCR(RCRobot *rob)
 }
 
 /**
- * @brief
+ * @brief Set the active robot.
  *
- * @param rob
+ * This function sets the active robot and updates its appearance
+ * to indicate its active status by changing its pen color to green.
+ *
+ * @param rob Pointer to the Robot object to set as active.
  */
 void window::setActiveR(Robot *rob)
 {
@@ -101,8 +113,9 @@ void window::setActiveR(Robot *rob)
 }
 
 /**
- * @brief
+ * @brief Move the active RC robot up.
  *
+ * This function moves the active RC robot upward if it exists.
  */
 void window::moveUpActive()
 {
@@ -111,8 +124,9 @@ void window::moveUpActive()
 }
 
 /**
- * @brief
+ * @brief Rotate the active RC robot left.
  *
+ * This function rotates the active RC robot to the left if it exists.
  */
 void window::rotateLeftActive()
 {
@@ -121,8 +135,9 @@ void window::rotateLeftActive()
 }
 
 /**
- * @brief
+ * @brief Rotate the active RC robot right.
  *
+ * This function rotates the active RC robot to the right if it exists.
  */
 void window::rotateRightActive()
 {
@@ -131,8 +146,10 @@ void window::rotateRightActive()
 }
 
 /**
- * @brief
+ * @brief Delete the active robot.
  *
+ * This function deletes the active robot from the edit builder and refreshes the edit scene.
+ * It also resets the active robot pointer to nullptr and reconnects signals for remaining robots.
  */
 void window::deleteBot()
 {
@@ -152,8 +169,13 @@ void window::deleteBot()
 }
 
 /**
- * @brief
+ * @brief Check input for creating an autonomous robot.
  *
+ * This function checks the input provided for creating an autonomous robot.
+ * It validates the sensor length, direction, and spin values entered by the user.
+ * If any input is invalid, it displays an error message.
+ * If the input is valid, it builds the autonomous robot and updates the edit scene.
+ * If the timer is paused, it refreshes the edit scene and reconnects signals for existing robots.
  */
 void window::checkARInput()
 {
@@ -209,8 +231,14 @@ void window::checkARInput()
 }
 
 /**
- * @brief
+ * @brief Check input for creating a remote-controlled robot.
  *
+ * This function checks the input provided for creating a remote-controlled robot.
+ * It validates the sensor length entered by the user.
+ * If the input is invalid, it displays an error message.
+ * If the input is valid, it builds the remote-controlled robot and updates the edit scene.
+ * If the timer is active, it refreshes the edit scene and reconnects signals for remote-controlled robots.
+ * If the timer is paused, it refreshes the edit scene and reconnects signals for both remote-controlled and autonomous robots.
  */
 void window::checkRCRInput()
 {
@@ -254,8 +282,10 @@ void window::checkRCRInput()
 }
 
 /**
- * @brief
+ * @brief Connect buttons to their respective slots.
  *
+ * This function sets up connections between buttons and their corresponding slots.
+ * It also adjusts the appearance of some buttons.
  */
 void window::connectButtons()
 {
@@ -274,8 +304,10 @@ void window::connectButtons()
 }
 
 /**
- * @brief
+ * @brief Disconnect buttons from their respective slots.
  *
+ * This function disconnects buttons from their corresponding slots.
+ * It also adjusts the appearance of some buttons.
  */
 void window::disconnectButtons()
 {
@@ -294,8 +326,11 @@ void window::disconnectButtons()
 }
 
 /**
- * @brief
+ * @brief Stop the timer and perform necessary cleanup.
  *
+ * This function stops the timer and disconnects buttons from their slots.
+ * It also resets the appearance of the active remote-controlled robot (if any),
+ * refreshes the edit scene, and reconnects signals for existing robots.
  */
 void window::stopTimer()
 {
@@ -322,12 +357,14 @@ void window::stopTimer()
 }
 
 /**
- * @brief
+ * @brief Start the timer and prepare for simulation.
  *
+ * This function starts the timer and prepares for simulation by connecting buttons to their slots,
+ * refreshing the edit scene, and connecting signals for remote-controlled robots.
+ * If the grid is not open, it also resets the appearance of the active robot (if any).
  */
 void window::startTimer()
 {
-
     if (!gridOpen)
     {
         if (activeR != nullptr)
@@ -350,8 +387,12 @@ void window::startTimer()
 }
 
 /**
- * @brief
+ * @brief Handle grid click event.
  *
+ * This function toggles the grid between open and closed states.
+ * When the grid is opened, it allows the user to interact with the grid by adding barriers,
+ * and starts the simulation if it's not already running.
+ * When the grid is closed, it stops the simulation, disconnects interaction buttons, and clears the grid.
  */
 void window::clickGrid()
 {
@@ -395,8 +436,13 @@ void window::clickGrid()
 }
 
 /**
- * @brief
+ * @brief Save the current game state to a JSON file.
  *
+ * This function allows the user to save the current game state to a JSON file.
+ * It prompts the user for a file name if one is not provided or chosen from existing files.
+ * If a file with the same name already exists, it prompts the user to confirm overwriting it.
+ * The game state includes information about barriers, remote-controlled robots, and autonomous robots.
+ * The JSON file is saved in the "examples" directory.
  */
 void window::saveGame()
 {
@@ -514,8 +560,12 @@ void window::saveGame()
 }
 
 /**
- * @brief
+ * @brief Load game state from a JSON file.
  *
+ * This function allows the user to load a previously saved game state from a JSON file.
+ * It prompts the user to select a JSON file from the "examples" directory and parses its contents.
+ * The JSON file should contain information about barriers, remote-controlled robots, and autonomous robots.
+ * Once parsed, the function reconstructs the game state based on the JSON data and updates the edit scene accordingly.
  */
 void window::loadFromFile()
 {
@@ -642,8 +692,14 @@ void window::loadFromFile()
 }
 
 /**
- * @brief
+ * @brief Set up the editing window scene and connect signals to slots.
  *
+ * This function initializes the editing window scene by creating a new QGraphicsScene,
+ * setting its dimensions, and adding a playground area with specified dimensions and position.
+ * It also sets up an edit controller to handle user interactions and connects various signals
+ * emitted by edit controls to corresponding slots for handling actions such as moving robots,
+ * rotating robots, building autonomous and remote-controlled robots, toggling grid visibility,
+ * and controlling the timer.
  */
 void window::editWindowSignal()
 {
