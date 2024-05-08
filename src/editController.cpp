@@ -158,7 +158,6 @@ void editController::gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene)
  */
 void editController::addBar(QGraphicsItem *parent, QGraphicsScene *scene)
 {
-    qDebug() << "prdime\n";
     QBrush brush(Qt::magenta);
     gameButton *clickedButton = qobject_cast<gameButton *>(sender());
     if (clickedButton)

@@ -28,7 +28,7 @@ protected:
     QPointF previousLocation;
     int circumference;
     int directionOfSpin; // ±1
-    int angle;           // [0-360] actuall direction
+    int angle;           // [0-360] actual direction
     int step;
     int sensor;
     int spin;
