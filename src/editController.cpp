@@ -63,7 +63,7 @@ void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     ASlot.directionText->setDefaultTextColor(Qt::black);
 
     ASlot.directionInput = make_unique<QLineEdit>();
-    ASlot.directionInput->setPlaceholderText("  -1 and 1");
+    ASlot.directionInput->setPlaceholderText("  -1 or 1");
     ASlot.directionValidator = make_unique<QIntValidator>(-1, 1);
     ASlot.directionInput->setValidator(&*(ASlot.directionValidator));
     ASlot.directionInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 160, 100, 30);
@@ -105,7 +105,7 @@ void editController::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     BARSlot.buildBarrier = new gameButton(QString("Open"), BARSlot.name->x(), BARSlot.name->y() + 40, 100, 30, parent);
 
     scene->addItem(BARSlot.name);
-    scene->addItem(BARSlot.buildBarrier);
+    // scene->addItem(BARSlot.buildBarrier);
 }
 
 /**
@@ -124,10 +124,10 @@ void editController::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *sc
     QBrush brush(Qt::gray);
     bottomSlot.dlt->setBrush(brush);
 
-    scene->addItem(bottomSlot.dlt);
-    scene->addItem(bottomSlot.up);
-    scene->addItem(bottomSlot.left);
-    scene->addItem(bottomSlot.right);
+    // scene->addItem(bottomSlot.dlt);
+    // scene->addItem(bottomSlot.up);
+    // scene->addItem(bottomSlot.left);
+    // scene->addItem(bottomSlot.right);
 }
 
 /**
@@ -143,7 +143,7 @@ void editController::gridRefresh(QGraphicsItem *parent, QGraphicsScene *scene)
         for (int j = 0; j < 13; j++)
         {
             gameButton *tmp = new gameButton(QString("add"), 3 + i * 50, 3 + j * 50, 44, 44, parent);
-            scene->addItem(tmp);
+            // scene->addItem(tmp);
             barGrid.push_back(tmp);
             placeBar(tmp, parent, scene);
         }
@@ -489,7 +489,7 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
     ARobot *tmp = new ARobot(x, y, SIZE_R, parent, sensor, directionOfSpin, spin);
     tmp->setBrush(brushRob);
     aRobots.push_back(tmp);
-    
+
     connect(timer, &QTimer::timeout, tmp, [=]{tmp->move();});
 }
 

@@ -708,7 +708,6 @@ void window::editWindowSignal()
     editScene->clear();
     editScene->setSceneRect(0, 0, 1024, 768);
     setScene(editScene);
-
     playground = new QGraphicsRectItem(0, 0, PLAY_W, PLAY_H);
     playground->setPos(PLAY_X, PLAY_Y);
     QPen pen;
@@ -752,7 +751,7 @@ void window::editWindowSignal()
     // editScene->addItem(edgeRight);
 
     spawn = new ARobot(SPAWN_X, SPAWN_Y, 100, playground, 0, 0, 0);
-    editScene->addItem(spawn);
+    // editScene->addItem(spawn);
 
     timer = new QTimer();
 
