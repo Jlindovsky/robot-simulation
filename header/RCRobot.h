@@ -16,6 +16,7 @@ class RCRobot : public Robot
 {
 public:
     RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIN);
+    RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIN,int angleIN);
     // void keyPressEvent(QKeyEvent * event)override;
     QJsonObject save() override;
 public slots:

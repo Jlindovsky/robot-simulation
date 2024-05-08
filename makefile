@@ -16,6 +16,8 @@ clean:
 run: $(TARGET)
 	./$(BUILD_DIR)/$(TARGET)
 
+doc: doxygen
+
 doxygen:
 	doxygen Doxyfile
 

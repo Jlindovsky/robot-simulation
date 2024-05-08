@@ -19,6 +19,26 @@ RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int senso
     spin = 30;
     step = sensorIN / 2;
 }
+/**
+ * @brief Construct a new RCRobot object.
+ *
+ * Initializes a new RCRobot object with the specified parameters.
+ *
+ * @param x The x-coordinate of the RCRobot's position.
+ * @param y The y-coordinate of the RCRobot's position.
+ * @param w The width of the RCRobot.
+ * @param parent The parent QGraphicsRectItem of the RCRobot.
+ * @param sensorIN The sensor input value for the RCRobot.
+ */
+RCRobot::RCRobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIN, int angleIN)
+    : Robot(x, y, w, parent)
+{
+    sensor = sensorIN;
+    directionOfSpin = 1;
+    spin = 30;
+    step = sensorIN / 2;
+    angle = angleIN;
+}
 
 /**
  * @brief Save the current state of the RCRobot.
@@ -37,6 +57,7 @@ QJsonObject RCRobot::save()
     barObject["x"] = x;
     barObject["y"] = y;
     barObject["sensor"] = sensor;
+    barObject["angle"] = angle;
     barObject["type"] = "RC Robot";
     return barObject;
 }

@@ -13,10 +13,7 @@
 barrierC::barrierC(qreal x, qreal y, QGraphicsRectItem *parent)
     : QGraphicsRectItem(0, 0, SIZE_B, SIZE_B, parent)
 {
-
     this->setPos(mapToParent(x, y));
-    // hitbox = new Hitbox(this);
-    // Additional initialization code specific to barrierC if needed
 }
 
 /**
@@ -37,8 +34,6 @@ barrierC::barrierC(qreal x, qreal y, qreal w, qreal h, QGraphicsItem *parent)
 {
 
     this->setPos(mapToParent(x, y));
-    // hitbox = new Hitbox(this);
-    // Additional initialization code specific to barrierC if needed
 }
 
 /**
@@ -49,10 +44,3 @@ barrierC::barrierC(qreal x, qreal y, qreal w, qreal h, QGraphicsItem *parent)
  */
 barrierC::barrierC() : QGraphicsRectItem(0, 0, SIZE_B, SIZE_B) {}
 
-/**
- * @brief Destroy the barrierC object.
- *
- * This destructor is responsible for deallocating any resources
- * held by the barrierC object upon its destruction.
- */
-barrierC::~barrierC() {}

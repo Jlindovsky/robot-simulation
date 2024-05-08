@@ -12,6 +12,7 @@ class ARobot : public Robot
 {
 public:
     ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIn, int directionOfSpinIn, int spinIn);
+    ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIn, int directionOfSpinIn, int spinIn,int angleIN);
     QJsonObject save()override;
 public slots:
     void move();//override;

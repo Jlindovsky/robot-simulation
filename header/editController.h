@@ -92,6 +92,8 @@ public:
 
     void buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensorIn);
     void buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensor, int directionOfSpin, int spin, QTimer *timer);
+    void buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensorIn,int angleIN);
+    void buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensor, int directionOfSpin, int spin, QTimer *timer,int angleIN);
     void buildBar(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y);
 
     editSlotARobot ASlot;

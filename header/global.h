@@ -2,8 +2,9 @@
 #define GLOBAL_H
 
 /**
- * @file
+ * @file global.h
  * @brief Definitions of various sizes and coordinates used in the program.
+ * @authors xlindo04 xmrave02
  */
 
 /**

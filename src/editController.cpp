@@ -441,7 +441,6 @@ editController::editController(QGraphicsScene *scene)
     buildControlsEdit(rPanel, scene);
     buildPlayEdit(pPanel, scene);
 }
-
 /**
  * @brief Verifies and builds a automatic robot(ARobot) at the specified position on the scene.
  *
@@ -455,39 +454,46 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
 {
     if (aRobots.size() >= 10)
     {
-        QDialog dialog;
-        dialog.setModal(true);                                                 // Set modal to ensure it blocks interaction with the scene
-        dialog.setWindowFlags(dialog.windowFlags() | Qt::FramelessWindowHint); // Hide window frame
-        dialog.hide();                                                         // Hide the dialog
-
-        // Create and show the message box
-        QMessageBox::information(&dialog, "Can't add Robots", "You have reached the limit for number of robots");
-
-        // Make sure the dialog is deleted after the message box is closed
-        QObject::connect(&dialog, &QDialog::finished, &dialog, &QObject::deleteLater);
-
-        // Re-parent the dialog to the scene's views to ensure it appears on top
-        foreach (QWidget *widget, QApplication::topLevelWidgets())
-        {
-            if (widget->inherits("QGraphicsView"))
-            {
-                dialog.setParent(widget);
-                break;
-            }
-        }
-
-        // Center the dialog relative to the scene
-        QPoint dialogPos = parent->scenePos().toPoint() - QPoint(dialog.width() / 2, dialog.height() / 2);
-        dialog.move(dialogPos);
-        dialog.exec();
+        QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
+        return;
     }
-    if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
+    if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0 )
     {
         qDebug() << "Invalid position of Automatic Robot from file!\nPOS:" << x << " | " << y << "\n";
-        exit(EXIT_FAILURE);
+        return;
     }
     QBrush brushRob(Qt::darkMagenta);
     ARobot *tmp = new ARobot(x, y, SIZE_R, parent, sensor, directionOfSpin, spin);
+    tmp->setBrush(brushRob);
+    aRobots.push_back(tmp);
+
+    connect(timer, &QTimer::timeout, tmp, [=]{tmp->move();});
+}
+
+/**
+ * @brief Verifies and builds a automatic robot(ARobot) at the specified position on the scene.
+ *
+ * @param parent Pointer to the parent QGraphicsRectItem.
+ * @param scene Pointer to the QGraphicsScene where the robot will be added.
+ * @param x The x-coordinate of the robot's position.
+ * @param y The y-coordinate of the robot's position.
+ * @param sensorIn The sensor length of the robot.
+ * @param angle The spin of the robot.
+ */
+void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensor, int directionOfSpin, int spin, QTimer *timer,int angleIN)
+{
+    if (aRobots.size() >= 10)
+    {
+        QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
+        return;
+    }
+    if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0 || angleIN < 0)
+    {
+        qDebug() << "Invalid position/angle of Automatic Robot from file!\nPOS:" << x << " | " << y << "\n";
+        return;
+    }
+    QBrush brushRob(Qt::darkMagenta);
+    ARobot *tmp = new ARobot(x, y, SIZE_R, parent, sensor, directionOfSpin, spin,angleIN);
     tmp->setBrush(brushRob);
     aRobots.push_back(tmp);
 
@@ -502,46 +508,51 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
  * @param x The x-coordinate of the robot's position.
  * @param y The y-coordinate of the robot's position.
  * @param sensorIn The sensor length of the robot.
+ * @param angle The spin of the robot.
+ */
+void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensorIn,int angleIN)
+{
+    if (rcRobots.size() >= 10)
+    {
+        QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
+        return;
+    }
+    if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0 || angleIN < 0)
+    {
+        qDebug() << "Invalid position/angle of Remote Control Robot\n";
+        return;
+    }
+    QBrush brushRob(Qt::white);
+    RCRobot *tmp = new RCRobot(x, y, SIZE_R, parent, sensorIn,angleIN%360);
+    tmp->setBrush(brushRob);
+    rcRobots.push_back(tmp);
+}
+/**
+ * @brief Verifies and builds a remote control robot(RCRobot) at the specified position on the scene.
+ *
+ * @param parent Pointer to the parent QGraphicsRectItem.
+ * @param scene Pointer to the QGraphicsScene where the robot will be added.
+ * @param x The x-coordinate of the robot's position.
+ * @param y The y-coordinate of the robot's position.
+ * @param sensorIn The sensor length of the robot.
  */
 void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *scene, int x, int y, int sensorIn)
 {
     if (rcRobots.size() >= 10)
     {
-        QDialog dialog;
-        dialog.setModal(true);                                                 
-        dialog.setWindowFlags(dialog.windowFlags() | Qt::FramelessWindowHint); 
-        dialog.hide();                                                         
+        QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
+        return;
 
-        // Create and show the message box
-        QMessageBox::information(&dialog, "Can't add Robots", "You have reached the limit for number of robots");
-
-        // Make sure the dialog is deleted after the message box is closed
-        QObject::connect(&dialog, &QDialog::finished, &dialog, &QObject::deleteLater);
-
-        // Re-parent the dialog to the scene's views to ensure it appears on top
-        foreach (QWidget *widget, QApplication::topLevelWidgets())
-        {
-            if (widget->inherits("QGraphicsView"))
-            {
-                dialog.setParent(widget);
-                break;
-            }
-        }
-        // Center the dialog relative to the scene
-        QPoint dialogPos = parent->scenePos().toPoint() - QPoint(dialog.width() / 2, dialog.height() / 2);
-        dialog.move(dialogPos);
-        dialog.exec(); 
     }
     if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
     {
         qDebug() << "Invalid position of Remote Control Robot\n";
-        exit(EXIT_FAILURE);
+                return;
     }
     QBrush brushRob(Qt::white);
     RCRobot *tmp = new RCRobot(x, y, SIZE_R, parent, sensorIn);
     tmp->setBrush(brushRob);
     rcRobots.push_back(tmp);
-    
 }
 
 /**
@@ -557,7 +568,8 @@ void editController::buildBar(QGraphicsRectItem *parent, QGraphicsScene *scene, 
     if (x % 50 || y % 50 || x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
     {
         qDebug() << "Invalid position of Barrier \n";
-        exit(EXIT_FAILURE);
+                return;
+
     }
     QBrush brush(Qt::magenta);
     barrierC *tmp = new barrierC(x, y, 50, 50, parent);

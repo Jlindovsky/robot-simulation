@@ -57,7 +57,7 @@ void window::mainWindow()
     connect(newGameButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
     welcomeScene->addItem(newGameButton);
 
-    gameButton *loadGameButton = new gameButton(QString("new but blue"), 400, 475, 200, 50);
+    gameButton *loadGameButton = new gameButton(QString("load game"), 400, 475, 200, 50);
     QBrush brush(Qt::blue);
     loadGameButton->setBrush(brush);
     connect(loadGameButton, SIGNAL(clicked()), this, SLOT(loadFromFile()));
@@ -186,30 +186,34 @@ void window::checkARInput()
     int pos = 0;
     if (QValidator::Acceptable != slot->sensorValidator->validate(sensorText, pos))
     {
+        string msg = "ERROR, Wrong input. Sensor length is from 0 to 50 : " + sensorText.toStdString();
         // popup wrong input
         QMessageBox::information(
             this,
             tr("Wrong Input"),
-            tr("ERROR, Wrong input. Sensor length is from 0 to 50"));
+            tr(msg.c_str()));
         return;
     }
-    if (QValidator::Acceptable != slot->directionValidator->validate(directionText, pos) || pos == 0)
+    if (QValidator::Acceptable != slot->directionValidator->validate(directionText, pos) || (directionText).toInt() == 0)
     {
+        string msg = "ERROR, Wrong input. Direction is either -1 or 1 : " + directionText.toStdString();
         // popup wrong input
         QMessageBox::information(
             this,
             tr("Wrong Input"),
-            tr("ERROR, Wrong input. Direction is either -1 or 1"));
+            tr(msg.c_str()));
         return;
     }
     if (QValidator::Acceptable != slot->spinValidator->validate(spinText, pos))
     {
+        string msg = "ERROR, Wrong input. Spin is from 10 to 180 : " + spinText.toStdString();
         // popup wrong input
         QMessageBox::information(
             this,
             tr("Wrong Input"),
-            tr("ERROR, Wrong input. Spin is from 10 to 180"));
+            tr(msg.c_str()));
         return;
+
     }
     editBuilder->buildARobot(playground, editScene, SPAWN_X + 25, SPAWN_Y + 25, (sensorText).toInt(), (directionText).toInt(), (spinText).toInt(), timer);
     // if pause refresh buttons for deletion
@@ -247,11 +251,12 @@ void window::checkRCRInput()
     int pos = 0;
     if (QValidator::Acceptable != slot.sensorValidator->validate(sensorText, pos))
     {
+        string msg = "ERROR, Wrong input. Sensor length is from 0 to 50 : " + sensorText.toStdString();
         // popup wrong input
         QMessageBox::information(
             this,
             tr("Wrong Input"),
-            tr("ERROR, Wrong input. Sensor length is from 0 to 50"));
+            tr(msg.c_str()));
         return;
     }
     editBuilder->buildRCRobot(playground, editScene, SPAWN_X + 25, SPAWN_Y + 25, (sensorText).toInt());
@@ -651,16 +656,17 @@ void window::loadFromFile()
     }
 
     QJsonArray jsonArray = jsonDoc.array();
-
+    // skips all invalid elements
     for (const QJsonValue &value : jsonArray)
     {
         QJsonObject obj = value.toObject();
+        if (!obj.contains("y") || !obj.contains("x") || !obj.contains("type") )
+        {
+            qDebug() << "missing basic param for object (x|y|type)";
+            continue;
+        }
         int x = obj["x"].toInt();
         int y = obj["y"].toInt();
-        int sensor = obj["sensor"].toInt();
-
-        int spin = obj["spin"].toInt();
-        int directionOfSpin = obj["direction"].toInt();
         QString type = obj["type"].toString();
 
         if (type == "Barrier")
@@ -669,19 +675,37 @@ void window::loadFromFile()
         }
         else if (type == "RC Robot")
         {
-            editBuilder->buildRCRobot(playground, editScene, x, y, sensor);
+            if (!obj.contains("angle") || !obj.contains("sensor") || !obj.contains("spin") || !obj.contains("direction"))
+            {
+                qDebug() << "missing param for robot";
+                continue;
+            }
+            int angle = obj["angle"].toInt();
+            int sensor = obj["sensor"].toInt();
+            int spin = obj["spin"].toInt();
+            int directionOfSpin = obj["direction"].toInt();
+            editBuilder->buildRCRobot(playground, editScene, x, y, sensor, angle);
         }
         else if (type == "Automatic Robot")
         {
-            editBuilder->buildARobot(playground, editScene, x, y, sensor, directionOfSpin, spin, timer);
+            if (!obj.contains("angle") || !obj.contains("sensor") || !obj.contains("spin") || !obj.contains("direction"))
+            {
+                qDebug() << "missing param for robot";
+                continue;
+            }
+            int angle = obj["angle"].toInt();
+            int sensor = obj["sensor"].toInt();
+            int spin = obj["spin"].toInt();
+            int directionOfSpin = obj["direction"].toInt();
+            editBuilder->buildARobot(playground, editScene, x, y, sensor, directionOfSpin, spin, timer, angle);
         }
         else
         {
             qDebug() << "wrong type of item";
-            exit(EXIT_FAILURE);
+            continue;
         }
     }
-    editBuilder->refresh(editScene);
+    editBuilder->refreshPause(editScene);
 
     for (size_t i = 0; i < editBuilder->rcRobots.size(); i++)
     {
@@ -755,4 +779,5 @@ void window::editWindowSignal()
     timer = new QTimer();
 
     timer->start(30);
+    stopTimer();
 }

@@ -15,12 +15,38 @@
  * @param directionOfSpinIn The direction of spin of the ARobot (temporary).
  * @param spinIn The spin of the ARobot (temporary).
  */
-ARobot::ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIn, int directionOfSpinIn, int spinIn) : Robot(x, y, w, parent)
+ARobot::ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIn, int directionOfSpinIn, int spinIn)
+    : Robot(x, y, w, parent)
 {
     sensor = sensorIn;
     directionOfSpin = directionOfSpinIn; // tmp
     spin = spinIn;                       // tmp
     step = sensorIn / 2;
+}
+/**
+ * @brief Construct a new ARobot::ARobot object.
+ *
+ * This constructor initializes an ARobot object with the specified position, dimensions,
+ * and parent QGraphicsRectItem. It also sets the sensor length, direction of spin, spin,
+ * and step size for the ARobot.
+ *
+ * @param x The x-coordinate of the ARobot's top-left corner.
+ * @param y The y-coordinate of the ARobot's top-left corner.
+ * @param w The width of the ARobot.
+ * @param parent The parent QGraphicsRectItem to which the ARobot belongs.
+ * @param sensorIn The length of the sensor of the ARobot.
+ * @param directionOfSpinIn The direction of spin of the ARobot .
+ * @param spinIn The spin of the ARobot.
+ * @param angle The spin of the ARobot.
+ */
+ARobot::ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIn, int directionOfSpinIn, int spinIn, int angleIN)
+    : Robot(x, y, w, parent)
+{
+    sensor = sensorIn;
+    directionOfSpin = directionOfSpinIn; // tmp
+    spin = spinIn;                       // tmp
+    step = sensorIn / 2;
+    angle = angleIN;
 }
 
 /**
@@ -41,6 +67,7 @@ QJsonObject ARobot::save()
     barObject["sensor"] = sensor;
     barObject["spin"] = spin;
     barObject["direction"] = directionOfSpin;
+    barObject["angle"] = angle;
     barObject["type"] = "Automatic Robot";
     return barObject;
 }
