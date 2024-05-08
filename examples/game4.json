@@ -1,0 +1,54 @@
+[
+    {
+        "type": "Barrier",
+        "x": 200,
+        "y": 150
+    },
+    {
+        "type": "Barrier",
+        "x": 200,
+        "y": 200
+    },
+    {
+        "type": "Barrier",
+        "x": 200,
+        "y": 250
+    },
+    {
+        "type": "Barrier",
+        "x": 200,
+        "y": 300
+    },
+    {
+        "type": "Barrier",
+        "x": 200,
+        "y": 400
+    },
+    {
+        "type": "Barrier",
+        "x": 200,
+        "y": 500
+    },
+    {
+        "sensor": 12,
+        "type": "RC Robot",
+        "x": 303,
+        "y": 325
+    },
+    {
+        "direction": 1,
+        "sensor": 12,
+        "spin": 12,
+        "type": "Automatic Robot",
+        "x": 408,
+        "y": 558
+    },
+    {
+        "direction": -1,
+        "sensor": 80,
+        "spin": 18,
+        "type": "Automatic Robot",
+        "x": 752,
+        "y": 35
+    }
+]

@@ -486,14 +486,14 @@ void window::loadFromFile()
         }
         else
         {
-            return; // Cancel the load operation
+            return;
         }
     }
 
     if (fileName.isEmpty())
     {
         qDebug() << "No JSON file selected for loading.";
-        return; // Cancel the load operation
+        return;
     }
 
     QFile file(currentDir.absoluteFilePath(fileName));

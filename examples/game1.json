@@ -1,0 +1,10 @@
+[
+    {
+        "direction": 1,
+        "sensor": 12,
+        "spin": 12,
+        "type": "Automatic Robot",
+        "x": 400,
+        "y": 84
+    }
+]

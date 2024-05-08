@@ -1,0 +1,31 @@
+[
+    {
+        "type": "Barrier",
+        "x": 50,
+        "y": 50
+    },
+    {
+        "type": "Barrier",
+        "x": 450,
+        "y": 550
+    },
+    {
+        "type": "Barrier",
+        "x": 750,
+        "y": 200
+    },
+    {
+        "sensor": 12,
+        "type": "RC Robot",
+        "x": 400,
+        "y": 300
+    },
+    {
+        "direction": 1,
+        "sensor": 12,
+        "spin": 12,
+        "type": "Automatic Robot",
+        "x": 493,
+        "y": 9
+    }
+]
