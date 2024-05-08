@@ -47,39 +47,3 @@ void Robot::calculateHit(int step1)
         setPos(x() + base, y() - height);
     }
 }
-
-/**
- * @brief 
- * 
- */
-void Robot::move()
-{
-    qDebug() << "parent function";
-}
-
-/**
- * @brief 
- * 
- */
-void Robot::moveUp()
-{
-    qDebug() << "parent function";
-}
-
-/**
- * @brief 
- * 
- */
-void Robot::rotateLeft()
-{
-    qDebug() << "parent function";
-}
-
-/**
- * @brief 
- * 
- */
-void Robot::rotateRight()
-{
-    qDebug() << "parent function";
-}

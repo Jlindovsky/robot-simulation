@@ -489,8 +489,8 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
     ARobot *tmp = new ARobot(x, y, SIZE_R, parent, sensor, directionOfSpin, spin);
     tmp->setBrush(brushRob);
     aRobots.push_back(tmp);
-    QObject::connect(timer, SIGNAL(timeout()), tmp, SLOT(move()));
-    // scene->addItem(tmp);
+    
+    connect(timer, &QTimer::timeout, tmp, [=]{tmp->move();});
 }
 
 /**

@@ -14,7 +14,7 @@ public:
     ARobot(qreal x, qreal y, qreal w, QGraphicsRectItem *parent, int sensorIn, int directionOfSpinIn, int spinIn);
     QJsonObject save()override;
 public slots:
-    void move()override;
+    void move();//override;
 };
 
 #endif

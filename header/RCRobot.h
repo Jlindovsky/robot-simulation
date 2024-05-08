@@ -19,9 +19,9 @@ public:
     // void keyPressEvent(QKeyEvent * event)override;
     QJsonObject save() override;
 public slots:
-    void moveUp() override;
-    void rotateLeft() override;
-    void rotateRight() override;
+    void moveUp();// override;
+    void rotateLeft();// override;
+    void rotateRight();// override;
 };
 
 #endif
