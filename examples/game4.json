@@ -1,54 +1,118 @@
 [
     {
         "type": "Barrier",
-        "x": 200,
+        "x": 350,
         "y": 150
     },
     {
         "type": "Barrier",
-        "x": 200,
-        "y": 200
-    },
-    {
-        "type": "Barrier",
-        "x": 200,
+        "x": 250,
         "y": 250
     },
     {
         "type": "Barrier",
-        "x": 200,
-        "y": 300
+        "x": 150,
+        "y": 350
     },
     {
         "type": "Barrier",
-        "x": 200,
+        "x": 600,
         "y": 400
     },
     {
         "type": "Barrier",
-        "x": 200,
-        "y": 500
+        "x": 350,
+        "y": 550
     },
     {
-        "sensor": 12,
-        "type": "RC Robot",
-        "x": 303,
-        "y": 325
+        "type": "Barrier",
+        "x": 600,
+        "y": 200
     },
     {
+        "type": "Barrier",
+        "x": 500,
+        "y": 100
+    },
+    {
+        "angle": 354,
         "direction": 1,
-        "sensor": 12,
+        "sensor": 24,
         "spin": 12,
         "type": "Automatic Robot",
-        "x": 408,
-        "y": 558
+        "x": 438,
+        "y": 198
     },
     {
-        "direction": -1,
-        "sensor": 80,
-        "spin": 18,
+        "angle": 258,
+        "direction": 1,
+        "sensor": 24,
+        "spin": 12,
         "type": "Automatic Robot",
-        "x": 752,
-        "y": 35
+        "x": 350,
+        "y": 279
+    },
+    {
+        "angle": 126,
+        "direction": 1,
+        "sensor": 24,
+        "spin": 12,
+        "type": "Automatic Robot",
+        "x": 569,
+        "y": 333
+    },
+    {
+        "angle": 78,
+        "direction": 1,
+        "sensor": 24,
+        "spin": 12,
+        "type": "Automatic Robot",
+        "x": 562,
+        "y": 299
+    },
+    {
+        "angle": 90,
+        "direction": 1,
+        "sensor": 24,
+        "spin": 12,
+        "type": "Automatic Robot",
+        "x": 793,
+        "y": 511
+    },
+    {
+        "angle": 342,
+        "direction": 1,
+        "sensor": 24,
+        "spin": 12,
+        "type": "Automatic Robot",
+        "x": 721,
+        "y": 89
+    },
+    {
+        "angle": 42,
+        "direction": 1,
+        "sensor": 24,
+        "spin": 12,
+        "type": "Automatic Robot",
+        "x": 539,
+        "y": 193
+    },
+    {
+        "angle": 90,
+        "direction": 1,
+        "sensor": 24,
+        "spin": 12,
+        "type": "Automatic Robot",
+        "x": 792,
+        "y": 535
+    },
+    {
+        "angle": 90,
+        "direction": 1,
+        "sensor": 24,
+        "spin": 12,
+        "type": "Automatic Robot",
+        "x": 792,
+        "y": 403
     }
 ]

@@ -441,7 +441,8 @@ editController::editController(QGraphicsScene *scene)
     buildPlayEdit(pPanel, scene);
 }
 /**
- * @brief Verifies and builds a automatic robot(ARobot) at the specified position on the scene.
+ * @brief Builds a automatic robot(ARobot) from verified data from UI.
+ *  checks only for place in robots
  *
  * @param parent Pointer to the parent QGraphicsRectItem.
  * @param scene Pointer to the QGraphicsScene where the robot will be added.
@@ -456,11 +457,6 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
         QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
         return;
     }
-    if (x > PLAY_W - SIZE_R || x < 0 || y > PLAY_H - SIZE_R || y < 0)
-    {
-        qDebug() << "Invalid position of Automatic Robot from file!\nPOS:" << x << " | " << y << "\n";
-        return;
-    }
     QBrush brushRob(Qt::darkMagenta);
     ARobot *tmp = new ARobot(x, y, SIZE_R, parent, sensor, directionOfSpin, spin);
     tmp->setBrush(brushRob);
@@ -472,7 +468,8 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
 
 /**
  * @brief Verifies and builds a automatic robot(ARobot) at the specified position on the scene.
- *
+ * called from load
+ * 
  * @param parent Pointer to the parent QGraphicsRectItem.
  * @param scene Pointer to the QGraphicsScene where the robot will be added.
  * @param x The x-coordinate of the robot's position.
@@ -487,9 +484,14 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
         QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
         return;
     }
-    if (x > PLAY_W - SIZE_R || x < 0 || y > PLAY_H - SIZE_R || y < 0 || angleIN < 0)
+    if (x > PLAY_W - SIZE_R || x < 0 || y > PLAY_H - SIZE_R || y < 0 
+    || angleIN < 0
+    || sensor < 10 || sensor > 50
+    || (directionOfSpin != 1 && directionOfSpin != -1 )
+    || spin < 10 || spin > 180)
     {
-        qDebug() << "Invalid position/angle of Automatic Robot from file!\nPOS:" << x << " | " << y << "\n";
+        QString msg = "Invalid attribute for Automatic Robot from file:\npos: [" + QString::number(x) +"; " + QString::number(y) + " ]\n direction: " + QString::number(directionOfSpin) + " \n sensor: " + QString::number(sensor) + " \n spin: " + QString::number(spin) + " \n angle: " + QString::number(angleIN) + "\n";
+        QMessageBox::information(nullptr, "Can't create Robot", msg);
         return;
     }
     QBrush brushRob(Qt::darkMagenta);
@@ -503,7 +505,8 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
 
 /**
  * @brief Verifies and builds a remote control robot(RCRobot) at the specified position on the scene.
- *
+ * called from load
+ * 
  * @param parent Pointer to the parent QGraphicsRectItem.
  * @param scene Pointer to the QGraphicsScene where the robot will be added.
  * @param x The x-coordinate of the robot's position.
@@ -518,9 +521,11 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
         QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
         return;
     }
-    if (x > PLAY_W - SIZE_R || x < 0 || y > PLAY_H - SIZE_R || y < 0 || angleIN < 0)
+    if (x > PLAY_W - SIZE_R || x < 0 || y > PLAY_H - SIZE_R || y < 0 
+    || angleIN < 0
+    || sensorIn < 10 || sensorIn > 50)
     {
-        qDebug() << "Invalid position/angle of Remote Control Robot\n";
+        QMessageBox::information(nullptr, "Can't create Robot", "Invalid attribute for Remote Control Robot from file!");
         return;
     }
     QBrush brushRob(Qt::white);
@@ -529,7 +534,7 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
     rcRobots.push_back(tmp);
 }
 /**
- * @brief Verifies and builds a remote control robot(RCRobot) at the specified position on the scene.
+ * @brief  Builds a Remote Control Robot(RCRobot) from verified data from UI
  *
  * @param parent Pointer to the parent QGraphicsRectItem.
  * @param scene Pointer to the QGraphicsScene where the robot will be added.
@@ -542,11 +547,6 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
     if (rcRobots.size() >= 10)
     {
         QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
-        return;
-    }
-    if (x > PLAY_W - SIZE_R || x < 0 || y > PLAY_H - SIZE_R || y < 0)
-    {
-        qDebug() << "Invalid position of Remote Control Robot\n";
         return;
     }
     QBrush brushRob(Qt::white);

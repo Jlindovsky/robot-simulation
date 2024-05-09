@@ -63,6 +63,24 @@
  *  3) Elements missing essential attributes for object creation are ignored.
  *  4) Element can have as much extra attributes as user wants
  *  5) For file to be loaded it has to be inside example folder
- *
- *
+ *  Value ranges for elements:
+ *                  All:
+ *                      - x && y inside arena/playground (defined by macro values PLAY_*)
+ *                      - type: has to be one of "Barrier", "Automatic Robot" or "Remote Control Robot"
+ *                  ARobot:
+ *                      - angle > 0 : even can be over 360 degree, angle > INTMAX -> undefined behaviour
+ *                      - 10 <= sensor <= 50
+ *                      - directionOfSpin == ( -1 || 1 ) :  spins either left or right
+ *                      - 10 <= spin <=  180
+ *                  RCRobot:
+ *                      - angle > 0 : even can be over 360 degree, angle > INTMAX -> undefined behaviour
+ *                      - 10 <= sensor <= 50
+ *                  barrierC:
+ *                      - x && y % 50 == 0: to fit on the grid
+ *  if any of these restrictions isn't upheld by element program will skip over it and give you message about it(won't close with failure!)
+ * 
+ * 
+ *  \section bug Not ideal implementation
+ *  \bug save screen appears 2 times
+ *  
  */
