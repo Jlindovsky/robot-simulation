@@ -22,8 +22,8 @@ void editController::buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     RCSlot.sensorText->setDefaultTextColor(Qt::black);
 
     RCSlot.sensorInput = new QLineEdit;
-    RCSlot.sensorInput->setPlaceholderText("  0 - 50");
-    RCSlot.sensorValidator = new QIntValidator(0, 50);
+    RCSlot.sensorInput->setPlaceholderText("  10 - 50");
+    RCSlot.sensorValidator = new QIntValidator(10, 50);
     RCSlot.sensorInput->setValidator(RCSlot.sensorValidator);
     RCSlot.sensorInput->setGeometry(RCSlot.name->x(), RCSlot.name->y() + 80, 100, 30); // Adjust position and size as needed
 
@@ -56,8 +56,8 @@ void editController::buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
     ASlot.sensorText->setDefaultTextColor(Qt::black);
 
     ASlot.sensorInput = make_unique<QLineEdit>();
-    ASlot.sensorInput->setPlaceholderText("  0 - 50");
-    ASlot.sensorValidator = make_unique<QIntValidator>(0, 50);
+    ASlot.sensorInput->setPlaceholderText("  10 - 50");
+    ASlot.sensorValidator = make_unique<QIntValidator>(10, 50);
     // extract from unique pointer
     ASlot.sensorInput->setValidator(&*(ASlot.sensorValidator));
     ASlot.sensorInput->setGeometry(ASlot.name->x(), ASlot.name->y() + 80, 100, 30); // Adjust position and size as needed
@@ -456,7 +456,7 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
         QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
         return;
     }
-    if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
+    if (x > PLAY_W - SIZE_R || x < 0 || y > PLAY_H - SIZE_R || y < 0)
     {
         qDebug() << "Invalid position of Automatic Robot from file!\nPOS:" << x << " | " << y << "\n";
         return;
@@ -487,7 +487,7 @@ void editController::buildARobot(QGraphicsRectItem *parent, QGraphicsScene *scen
         QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
         return;
     }
-    if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0 || angleIN < 0)
+    if (x > PLAY_W - SIZE_R || x < 0 || y > PLAY_H - SIZE_R || y < 0 || angleIN < 0)
     {
         qDebug() << "Invalid position/angle of Automatic Robot from file!\nPOS:" << x << " | " << y << "\n";
         return;
@@ -518,7 +518,7 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
         QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
         return;
     }
-    if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0 || angleIN < 0)
+    if (x > PLAY_W - SIZE_R || x < 0 || y > PLAY_H - SIZE_R || y < 0 || angleIN < 0)
     {
         qDebug() << "Invalid position/angle of Remote Control Robot\n";
         return;
@@ -544,7 +544,7 @@ void editController::buildRCRobot(QGraphicsRectItem *parent, QGraphicsScene *sce
         QMessageBox::information(nullptr, "Can't add Robots", "You have reached the limit for number of robots");
         return;
     }
-    if (x > PLAY_W || x < 0 || y > PLAY_H || y < 0)
+    if (x > PLAY_W - SIZE_R || x < 0 || y > PLAY_H - SIZE_R || y < 0)
     {
         qDebug() << "Invalid position of Remote Control Robot\n";
         return;

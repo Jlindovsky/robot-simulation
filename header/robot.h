@@ -6,7 +6,8 @@
 #include "global.h"
 
 /**
- * @brief 
+ * @brief parent class for Robots
+ * owns attributes and method for hit detection
  * 
  */
 class Robot : public QObject, public QGraphicsEllipseItem

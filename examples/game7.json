@@ -1,2 +1,32 @@
 [
+    {
+        "type": "Barrier",
+        "x": 300,
+        "y": 600
+    },
+    {
+        "type": "Barrier",
+        "x": 0,
+        "y": 300
+    },
+    {
+        "type": "Barrier",
+        "x": 800,
+        "y": 600
+    },
+    {
+        "type": "Barrier",
+        "x": 800,
+        "y": 400
+    },
+    {
+        "type": "Barrier",
+        "x": 550,
+        "y": 0
+    },
+    {
+        "type": "Barrier",
+        "x": 0,
+        "y": 600
+    }
 ]
