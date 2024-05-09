@@ -77,6 +77,7 @@ class editController : public QObject
     Q_OBJECT
 public:
     editController(QGraphicsScene *scene);
+    ~editController();
     void buildAREdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildRCREdit(QGraphicsItem *parent, QGraphicsScene *scene);
     void buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene);

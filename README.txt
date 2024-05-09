@@ -1,13 +1,16 @@
-/*! \mainpage ICP Project Welcome page
- * \authors Jan Lindovský (xlindo04) 
- *  Marcel Mravec (xmrave02)
+ /*! \mainpage ICP Project Welcome page
+ * \date 9.5.2024 (last official day of development)
+ * \authors
+ *  - Jan Lindovský (xlindo04) 
+ *  - Marcel Mravec (xmrave02)
  *
  * \section Introduction
+ * ***************************************************************************************************************************************
  * We welcome you to our amazing project!
  * Here we will give you a little preview how the program works, what some special details we implemented and overall the creation steps of the project.
  * Some basic information about our project:
- *          - language: c++
- *              - libraries: Qt5
+ *          - language: c++ 
+ *              - libraries : Qt5
  *          - requirements:
  *              - Hardware: screen < 1024x768
  *              - Software: Qt library version 5 or higher
@@ -16,6 +19,7 @@
  *          - attitude: positive
  *          - fun: required
  *  \section game_desc Game description
+ *  ***************************************************************************************************************************************
  *  We have created a game where you can simulate movement of robots in fixed-sized arena. Game starts in paused state so that player can prebuilt the arena. When game is running player can control Remote Control Robots and Automatic Robots run themselves.
  *  Robots have hit detection. We have 2 types Automatic Robot (ARobot) and Remote Control Robot(RCRobot)
  *  Each robot has these attributes:
@@ -23,29 +27,30 @@
  *                          - Size: Fixed for all robots defined by macro value(SIZE_R)
  *                          - Sensor length: the range it detects barriers,
  *                          - Speed(step): is proportional to it's sensor length (we can't have fast drivers who don't see far enough)
- *                          - Spin: number of degrees it changes it's direction
- *                                                              ARobot - when collide with barrier
- *                                                              RCRobot - on direction change left || right  button
+ *                          - Spin: number of degrees it changes it's direction:
+ *                                                              - ARobot - when collide with barrier
+ *                                                              - RCRobot - when pressed left || right  button
  *                          - Direction of spin:
- *                                      ARobot - custom value but immutable value
- *                                      RCRobot - based on left || right  button
+ *                                      - ARobot - custom value but immutable value
+ *                                      - RCRobot - based on left || right  button
  *  And also we have barriers with fixed size and const position aligned to a grid . Position of barriers are chosen either form the grid or given from loaded file.
- *  Limitations:
+ *  - Limitations:
  *          - max 10 of each type of robot
  *          - max 221 barriers (grid size)
  *  \section UI
+ *  ***************************************************************************************************************************************
  *  At the start of the app user is presented with 2 options: open new game or load game. When loading the game user is presented with drop down choice from which file he wants to load the game. User can as well close the load option which will effectively result in creating in new game.
  *  When game is either loaded or created new user is presented with stopped clock and controls. When button shouldn't be pressed it is disconnected and displayed with grey color
- *  Left panel:
+ *  - Left panel:
  *          - Robot generation params - can be created either during play or when game is paused
  *          - Open/close barrier button - when pressed during play it will result in game stopping and generating grid for barrier generation
  *                                      - game can't be saved nor resumed when grid is opened
- *  Play panel(pPanel):
+ *  - Play panel(pPanel):
  *                  - play button: resumes play -> activates timer
  *                  - pause button: stops play -> stops timer
  *                  - save button: saves game either in file from examples folder or into new, active only when paused
  *  
- *  Robots panel(rPanel): 
+ *  - Robots panel(rPanel): 
  *                  - Robot buttons:
  *                              - during play: display RCRobots used for setting active RCRobot
  *                              - during pause: displays both RCRobots and ARobots -> used to set active Robot 
@@ -53,34 +58,45 @@
  *                  - delete button: deletes active Robot, if no robot chosen does nothing, deactivated during play
  *  
  *  \section Implementation
+ *  ***************************************************************************************************************************************
  *  This program is run in event loop of QApplication. Events are handled by our objects and their respective methods.
- *  We have two main types of events  - timeout() which signals Automatic Robots to move
- *                                    - mouse press events which are generated by our gameButtons and connected to methods
+ *  We have two main types of events:
+                                    - timeout() which signals Automatic Robots to move
+ *                                  - mouse press events which are generated by our gameButtons and connected to methods
+ * 
  *  \section lff Load File Format - LFF
+ *  ***************************************************************************************************************************************
  *  Our restrictions for loaded format are following:
- *  1) file has to be correct .json format
- *  2) each element represents one instance of (Automatic Robot || Remote Control Robot || Barrier)
- *  3) Elements missing essential attributes for object creation are ignored.
- *  4) Element can have as much extra attributes as user wants
- *  5) For file to be loaded it has to be inside example folder
- *  Value ranges for elements:
- *                  All:
+ *  *  File has to be correct .json format.
+ *  *  Each element represents one instance of ( ARobot || RCRobot || barrierC).
+ *  *  Elements missing essential attributes for object creation are ignored.
+ *  *  Element can have as much extra attributes as user wants.
+ *  *  For file to be loaded it has to be inside example folder.
+ *  - Value ranges for elements:
+ *                  - All:
  *                      - x && y inside arena/playground (defined by macro values PLAY_*)
  *                      - type: has to be one of "Barrier", "Automatic Robot" or "Remote Control Robot"
- *                  ARobot:
- *                      - angle > 0 : even can be over 360 degree, angle > INTMAX -> undefined behaviour
+ *                  - ARobot:
+ *                      - angle > 0 : even can be over 360 degree, angle > INTMAX -> undefined behavior
  *                      - 10 <= sensor <= 50
  *                      - directionOfSpin == ( -1 || 1 ) :  spins either left or right
  *                      - 10 <= spin <=  180
- *                  RCRobot:
- *                      - angle > 0 : even can be over 360 degree, angle > INTMAX -> undefined behaviour
+ *                  - RCRobot:
+ *                      - angle > 0 : even can be over 360 degree, angle > INTMAX -> undefined behavior
  *                      - 10 <= sensor <= 50
- *                  barrierC:
- *                      - x && y % 50 == 0: to fit on the grid
+ *                  - barrierC:
+ *                      - x, y: has to be divisible by 50 -> to match on the grid
  *  if any of these restrictions isn't upheld by element program will skip over it and give you message about it(won't close with failure!)
  * 
+ *  \section COOP Cooperation on this project
+ *  ***************************************************************************************************************************************
+ *  90% of development we did in the same room. From our perspective it generates better workspace for communication and any plan changes can be made faster.
+ *  As you can probably see we used github as our main version holding system. But thanks to the fact that we were always coding together we didn't have to make branches since we mostly cooped offline on one machine. Even though it might not look standard practice we think it helped us generate much higher quality code. Few sections were written separately and it shows.
+ *  So as a few words from us to you: support offline coop, don't be scared to shout at each other, proper communication builds proper code,"Suffering builds character"
  * 
- *  \section bug Not ideal implementation
- *  \bug save screen appears 2 times
- *  
+ *  \section bug Even the best make mistakes
+ *  ***************************************************************************************************************************************
+ *  \bug save screen appeared 2 times -> past tense is correct here since we weren't able to replicate this bug(maybe means it is fixed?)
+ * 
+ *  \bug Undefined behavior: can load barrierC object onto Robot object and vice versa -> this will result in immobile robot and most likely un deletable barrier
  */

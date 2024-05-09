@@ -440,6 +440,17 @@ editController::editController(QGraphicsScene *scene)
     buildControlsEdit(rPanel, scene);
     buildPlayEdit(pPanel, scene);
 }
+editController::~editController()
+{
+    qDebug()<<"1";
+    delete iPanel;
+    qDebug()<<"2";
+    delete rPanel;
+    qDebug()<<"3";
+    delete pPanel;
+    qDebug()<<"4";
+}
+
 /**
  * @brief Builds a automatic robot(ARobot) from verified data from UI.
  *  checks only for place in robots

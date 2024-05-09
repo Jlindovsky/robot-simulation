@@ -35,14 +35,19 @@ window::window()
  */
 window::~window()
 {
-    delete welcomeScene;
-    delete editScene;
+    // qDebug()<<"prd1";
+    // qDebug()<<"prd2";
+    qDebug()<<"prd3";
     delete editBuilder;
+    qDebug()<<"prd4";
     delete activeRCR;
+    qDebug()<<"prd5";
     delete activeR;
+    qDebug()<<"prd6";
     delete playground;
+    qDebug()<<"prd7";
     delete timer;
-    delete spawn;
+    qDebug()<<"prd8";
 }
 
 /**
