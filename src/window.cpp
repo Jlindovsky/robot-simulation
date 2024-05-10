@@ -18,7 +18,7 @@ window::window()
     welcomeScene->setSceneRect(0, 0, 1024, 768);
     setScene(welcomeScene);
     gridOpen = false;
-    
+
     editScene = nullptr;
     editBuilder = nullptr;
     activeRCR = nullptr;
@@ -37,17 +37,16 @@ window::window()
 window::~window()
 {
     // qDebug()<<"prd1";
+    delete editBuilder;
+    qDebug()<<"prd3";
+    delete playground;
+    qDebug()<<"prd6";
     delete editScene;
     qDebug()<<"prd2";
     delete welcomeScene;
-    qDebug()<<"prd3";
-    delete editBuilder;
     qDebug()<<"prd4";
     delete activeRCR;
     qDebug()<<"prd5";
-    delete activeR;
-    qDebug()<<"prd6";
-    delete playground;
     qDebug()<<"prd7";
     delete timer;
     qDebug()<<"prd8";
