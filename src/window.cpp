@@ -18,7 +18,8 @@ window::window()
     welcomeScene->setSceneRect(0, 0, 1024, 768);
     setScene(welcomeScene);
     gridOpen = false;
-
+    
+    editScene = nullptr;
     editBuilder = nullptr;
     activeRCR = nullptr;
     activeR = nullptr;
