@@ -450,6 +450,34 @@ editController::~editController()
     // delete pPanel;
     qDebug()<<"4";
 }
+editSlotRCRobot::~editSlotRCRobot()
+{
+    delete buildRCRobot;
+    delete rob;
+}
+editSlotARobot::~editSlotARobot()
+{
+    delete buildARobot;
+    delete rob;
+}
+editSlotBarrier::~editSlotBarrier()
+{
+    delete buildBarrier;
+    delete bar;
+}
+bSlot::~bSlot()
+{
+    delete up;
+    delete left;
+    delete right;
+    delete dlt;
+}
+pSlot::~pSlot()
+{
+    delete play;
+    delete pause;
+    delete save;
+}
 
 /**
  * @brief Builds a automatic robot(ARobot) from verified data from UI.

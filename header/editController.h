@@ -32,6 +32,7 @@ struct editSlotARobot
     gameButton *buildARobot;
 
     ARobot *rob;
+    ~editSlotARobot();
 };
 
 struct editSlotRCRobot
@@ -45,6 +46,7 @@ struct editSlotRCRobot
     gameButton *buildRCRobot;
 
     RCRobot *rob;
+    ~editSlotRCRobot();
 };
 
 struct editSlotBarrier
@@ -53,6 +55,7 @@ struct editSlotBarrier
     QGraphicsTextItem *name;
     gameButton *buildBarrier;
     barrierC *bar;
+    ~editSlotBarrier();
 };
 
 struct bSlot
@@ -63,6 +66,7 @@ struct bSlot
     gameButton *left;
     gameButton *right;
     gameButton *dlt;
+    ~bSlot();
 };
 
 struct pSlot
@@ -70,6 +74,7 @@ struct pSlot
     gameButton *play;
     gameButton *pause;
     gameButton *save;
+    ~pSlot();
 };
 
 class editController : public QObject
