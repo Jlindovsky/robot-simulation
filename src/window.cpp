@@ -36,7 +36,8 @@ window::window()
 window::~window()
 {
     // qDebug()<<"prd1";
-    // qDebug()<<"prd2";
+    delete editScene;
+    qDebug()<<"prd2";
     qDebug()<<"prd3";
     delete editBuilder;
     qDebug()<<"prd4";
