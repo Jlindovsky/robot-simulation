@@ -443,11 +443,11 @@ editController::editController(QGraphicsScene *scene)
 editController::~editController()
 {
     qDebug()<<"1";
-    delete iPanel;
+    // delete iPanel;
     qDebug()<<"2";
-    delete rPanel;
+    // delete rPanel;
     qDebug()<<"3";
-    delete pPanel;
+    // delete pPanel;
     qDebug()<<"4";
 }
 
