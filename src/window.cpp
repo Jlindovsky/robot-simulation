@@ -18,6 +18,8 @@ window::window()
     welcomeScene->setSceneRect(0, 0, 1024, 768);
     setScene(welcomeScene);
     gridOpen = false;
+    newGameButton = nullptr;
+    loadGameButton = nullptr;
 
     editScene = nullptr;
     editBuilder = nullptr;
@@ -38,16 +40,16 @@ window::~window()
 {
     // qDebug()<<"prd1";
     delete editBuilder;
-    qDebug()<<"prd3";
+    qDebug() << "prd3";
     delete playground;
-    qDebug()<<"prd6";
+    qDebug() << "prd6";
     delete editScene;
-    qDebug()<<"prd2";
+    qDebug() << "prd2";
     delete welcomeScene;
-    qDebug()<<"prd4";
-    qDebug()<<"prd7";
+    qDebug() << "prd4";
+    qDebug() << "prd7";
     delete timer;
-    qDebug()<<"prd8";
+    qDebug() << "prd8";
 }
 
 /**
@@ -58,11 +60,11 @@ window::~window()
  */
 void window::mainWindow()
 {
-    gameButton *newGameButton = new gameButton(QString("new"), 400, 275, 200, 50);
+    newGameButton = new gameButton(QString("new"), 400, 275, 200, 50);
     connect(newGameButton, SIGNAL(clicked()), this, SLOT(editWindowSignal()));
     welcomeScene->addItem(newGameButton);
 
-    gameButton *loadGameButton = new gameButton(QString("load game"), 400, 475, 200, 50);
+    loadGameButton = new gameButton(QString("load game"), 400, 475, 200, 50);
     QBrush brush(Qt::blue);
     loadGameButton->setBrush(brush);
     connect(loadGameButton, SIGNAL(clicked()), this, SLOT(loadFromFile()));
@@ -679,7 +681,7 @@ void window::loadFromFile()
         }
         else if (type == "RC Robot")
         {
-            if (!obj.contains("angle") || !obj.contains("sensor") )
+            if (!obj.contains("angle") || !obj.contains("sensor"))
             {
                 qDebug() << "missing param for robot";
                 continue;

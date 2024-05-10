@@ -37,6 +37,8 @@ public slots:
     void deleteBot();
 
 private:
+    gameButton *newGameButton;
+    gameButton *loadGameButton;
     editController *editBuilder;
     RCRobot *activeRCR;
     Robot *activeR;
