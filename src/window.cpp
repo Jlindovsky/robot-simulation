@@ -45,8 +45,6 @@ window::~window()
     qDebug()<<"prd2";
     delete welcomeScene;
     qDebug()<<"prd4";
-    delete activeRCR;
-    qDebug()<<"prd5";
     qDebug()<<"prd7";
     delete timer;
     qDebug()<<"prd8";

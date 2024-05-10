@@ -442,44 +442,31 @@ editController::editController(QGraphicsScene *scene)
 }
 editController::~editController()
 {
-    // delete iPanel;
+    delete iPanel;
+    delete rPanel;
+    delete pPanel;
+    qDebug()<<"7";
 
-    // delete rPanel;
-    // delete pPanel;
 }
 editSlotRCRobot::~editSlotRCRobot()
 {
         qDebug()<<"1";
-
-    delete buildRCRobot;
-    delete rob;
 }
 editSlotARobot::~editSlotARobot()
 {
         qDebug()<<"2";
-    delete buildARobot;
-    delete rob;
 }
 editSlotBarrier::~editSlotBarrier()
 {
     qDebug()<<"3";
-    delete buildBarrier;
-    delete bar;
 }
 bSlot::~bSlot()
 {
     qDebug()<<"4";
-    delete up;
-    delete left;
-    delete right;
-    delete dlt;
 }
 pSlot::~pSlot()
 {
-    delete play;
     qDebug()<<"5";
-    delete pause;
-    delete save;
 }
 
 /**
