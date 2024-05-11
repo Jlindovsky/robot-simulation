@@ -129,7 +129,7 @@ void editController::buildBAREdit(QGraphicsItem *parent, QGraphicsScene *scene)
  */
 void editController::buildControlsEdit(QGraphicsItem *parent, QGraphicsScene *scene)
 {
-    bottomSlot.up = new gameButton(QString("up"), RPANEL_W - 130, 10, 50, 50, parent);
+    bottomSlot.up = new gameButton(QString("move"), RPANEL_W - 130, 10, 50, 50, parent);
     bottomSlot.left = new gameButton(QString("left"), RPANEL_W - 190, 10, 50, 50, parent);
     bottomSlot.right = new gameButton(QString("right"), RPANEL_W - 70, 10, 50, 50, parent);
 

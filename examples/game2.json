@@ -32,15 +32,6 @@
     {
         "angle": 90,
         "direction": 1,
-        "sensor": 2,
-        "spin": 12,
-        "type": "Automatic Robot",
-        "x": 797,
-        "y": 68
-    },
-    {
-        "angle": 90,
-        "direction": 1,
         "sensor": 24,
         "spin": 12,
         "type": "Automatic Robot",
