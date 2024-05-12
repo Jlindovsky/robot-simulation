@@ -1,2 +1,130 @@
 [
+    {
+        "type": "Barrier",
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type": "Barrier",
+        "x": 0,
+        "y": 50
+    },
+    {
+        "type": "Barrier",
+        "x": 0,
+        "y": 100
+    },
+    {
+        "type": "Barrier",
+        "x": 0,
+        "y": 150
+    },
+    {
+        "type": "Barrier",
+        "x": 800,
+        "y": 600
+    },
+    {
+        "type": "Barrier",
+        "x": 800,
+        "y": 550
+    },
+    {
+        "type": "Barrier",
+        "x": 800,
+        "y": 500
+    },
+    {
+        "type": "Barrier",
+        "x": 800,
+        "y": 450
+    },
+    {
+        "type": "Barrier",
+        "x": 800,
+        "y": 400
+    },
+    {
+        "type": "Barrier",
+        "x": 400,
+        "y": 600
+    },
+    {
+        "type": "Barrier",
+        "x": 400,
+        "y": 550
+    },
+    {
+        "type": "Barrier",
+        "x": 400,
+        "y": 500
+    },
+    {
+        "type": "Barrier",
+        "x": 400,
+        "y": 450
+    },
+    {
+        "type": "Barrier",
+        "x": 200,
+        "y": 0
+    },
+    {
+        "type": "Barrier",
+        "x": 200,
+        "y": 50
+    },
+    {
+        "type": "Barrier",
+        "x": 200,
+        "y": 100
+    },
+    {
+        "type": "Barrier",
+        "x": 200,
+        "y": 150
+    },
+    {
+        "type": "Barrier",
+        "x": 50,
+        "y": 600
+    },
+    {
+        "type": "Barrier",
+        "x": 100,
+        "y": 500
+    },
+    {
+        "type": "Barrier",
+        "x": 50,
+        "y": 400
+    },
+    {
+        "angle": 270,
+        "sensor": 22,
+        "type": "RC Robot",
+        "x": 400,
+        "y": 168
+    },
+    {
+        "angle": 330,
+        "sensor": 12,
+        "type": "RC Robot",
+        "x": 555,
+        "y": 210
+    },
+    {
+        "angle": 150,
+        "sensor": 32,
+        "type": "RC Robot",
+        "x": 233,
+        "y": 396
+    },
+    {
+        "angle": 30,
+        "sensor": 42,
+        "type": "RC Robot",
+        "x": 581,
+        "y": 405
+    }
 ]

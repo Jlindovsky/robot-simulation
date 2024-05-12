@@ -28,5 +28,25 @@
         "type": "Barrier",
         "x": 0,
         "y": 600
+    },
+    {
+        "type": "Barrier",
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type": "Barrier",
+        "x": 200,
+        "y": 150
+    },
+    {
+        "type": "Barrier",
+        "x": 650,
+        "y": 200
+    },
+    {
+        "type": "Barrier",
+        "x": 150,
+        "y": 500
     }
 ]

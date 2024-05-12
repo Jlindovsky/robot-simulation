@@ -448,28 +448,22 @@ editController::~editController()
     delete iPanel;
     delete rPanel;
     delete pPanel;
-    qDebug()<<"7";
 
 }
 editSlotRCRobot::~editSlotRCRobot()
 {
-        qDebug()<<"1";
 }
 editSlotARobot::~editSlotARobot()
 {
-        qDebug()<<"2";
 }
 editSlotBarrier::~editSlotBarrier()
 {
-    qDebug()<<"3";
 }
 bSlot::~bSlot()
 {
-    qDebug()<<"4";
 }
 pSlot::~pSlot()
 {
-    qDebug()<<"5";
 }
 
 /**

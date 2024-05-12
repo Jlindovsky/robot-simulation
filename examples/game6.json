@@ -1,0 +1,38 @@
+[
+    {
+        "angle": 90,
+        "direction": 1,
+        "sensor": 12,
+        "spin": 12,
+        "type": "Automatic Robot",
+        "x": 795,
+        "y": 465
+    },
+    {
+        "angle": 353,
+        "direction": -1,
+        "sensor": 22,
+        "spin": 23,
+        "type": "Automatic Robot",
+        "x": 528,
+        "y": 540
+    },
+    {
+        "angle": 90,
+        "direction": -1,
+        "sensor": 15,
+        "spin": 100,
+        "type": "Automatic Robot",
+        "x": 264,
+        "y": 206
+    },
+    {
+        "angle": 0,
+        "direction": 1,
+        "sensor": 24,
+        "spin": 150,
+        "type": "Automatic Robot",
+        "x": 65,
+        "y": 177
+    }
+]

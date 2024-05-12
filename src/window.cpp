@@ -41,18 +41,11 @@ window::window()
  */
 window::~window()
 {
-    // qDebug()<<"prd1";
     delete editBuilder;
-    qDebug() << "prd3";
     delete playground;
-    qDebug() << "prd6";
     delete editScene;
-    qDebug() << "prd2";
     delete welcomeScene;
-    qDebug() << "prd4";
-    qDebug() << "prd7";
     delete timer;
-    qDebug() << "prd8";
 }
 
 /**
