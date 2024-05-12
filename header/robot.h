@@ -8,6 +8,7 @@
 /**
  * @brief parent class for Robots
  * owns attributes and method for hit detection
+ * @authors Jan Lindovský (xlindo04) Marcel Mravec(xmrave02)
  * 
  */
 class Robot : public QObject, public QGraphicsEllipseItem

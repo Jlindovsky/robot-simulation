@@ -4,8 +4,11 @@
 #include "global.h"
 
 /**
- * @brief
+ * @brief A class representing a game button.
  *
+ * This class inherits from both QObject and QGraphicsRectItem to provide
+ * functionality for creating interactive buttons within a QGraphicsScene.
+ * @authors Jan Lindovský (xlindo04) Marcel Mravec(xmrave02)
  */
 class gameButton : public QObject, public QGraphicsRectItem
 {

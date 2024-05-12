@@ -2,8 +2,12 @@
 #include "global.h"
 
 /**
- * @brief 
- * 
+ * @brief A class representing the main window of the application.
+ *
+ * This class inherits from QGraphicsView and serves as the main graphical user interface for the application.
+ * It contains functionality for displaying different windows, handling user input, managing game elements, and
+ * connecting signals and slots for communication between objects.
+ * @authors Jan Lindovský (xlindo04) Marcel Mravec(xmrave02)
  */
 class window : public QGraphicsView
 {
@@ -45,6 +49,6 @@ private:
     QGraphicsRectItem *playground;
     QTimer *timer;
     bool gridOpen;
-    vector<barrierC*> edges;
-    ARobot * spawn;
+    vector<barrierC *> edges;
+    ARobot *spawn;
 };
