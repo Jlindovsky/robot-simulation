@@ -1,9 +1,9 @@
-DOC := doc
-ZIPFILE := xmrave02-xlindo04.zip
-ZIPFILES := header/* src/* Makefile README.md Doxyfile CMakeLists.txt
 BUILD_DIR := build
+ZIPNAME := xlindo04-xmrave02.zip
 TARGET := icp24 
-# Targets
+FILES := header/* src/* Makefile README.txt Doxyfile CMakeLists.txt Conceptual_design.pdf
+DOC := doc
+
 .PHONY: all clean run doc
 all:$(TARGET)
 
@@ -22,4 +22,4 @@ doxygen:
 	doxygen Doxyfile
 
 pack:
-	zip $(ZIPFILE) $(ZIPFILES)
+	zip $(ZIPNAME) $(FILES)
