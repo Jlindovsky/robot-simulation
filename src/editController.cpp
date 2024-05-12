@@ -1,5 +1,8 @@
 #include "../header/editController.h"
-
+/** 
+ * @brief this file consists of editController and it's own structures method implementations
+ * @authors Jan Lindovský (xlindo04) Marcel Mravec(xmrave02)
+*/
 /**
  * @brief Builds the interface for creating an Remote Control Robot(RCRobot).
  *

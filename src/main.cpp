@@ -1,7 +1,10 @@
 
 #include "../header/window.h"
 #include "../header/global.h"
-
+/** 
+ * @brief this file describes start of the program as function main
+ * @authors Jan Lindovský (xlindo04) Marcel Mravec(xmrave02)
+*/
 /**
  * @brief Main function to initialize and run the application.
  *

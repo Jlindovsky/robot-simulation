@@ -1,5 +1,8 @@
 #include "../header/barrierC.h"
-
+/** 
+ * @brief this file consists of barrierC method implementations
+ * @authors Jan Lindovský (xlindo04) Marcel Mravec(xmrave02)
+*/
 /**
  * @brief Construct a new barrierC object.
  *

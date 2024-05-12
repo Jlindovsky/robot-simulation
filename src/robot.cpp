@@ -1,5 +1,8 @@
 #include "../header/robot.h"
-
+/** 
+ * @brief this file consists of Robot method implementations
+ * @authors Jan Lindovský (xlindo04) Marcel Mravec(xmrave02)
+*/
 /**
  * @brief Construct a new Robot object.
  *

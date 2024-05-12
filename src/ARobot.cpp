@@ -1,5 +1,8 @@
 #include "../header/ARobot.h"
-
+/** 
+ * @brief this file consists of ARobot method implementations
+ * @authors Jan Lindovský (xlindo04) Marcel Mravec(xmrave02)
+*/
 /**
  * @brief Construct a new ARobot::ARobot object.
  *

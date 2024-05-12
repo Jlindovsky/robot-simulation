@@ -1,5 +1,8 @@
 #include "../header/gameButton.h"
-
+/** 
+ * @brief this file consists of gameButton method implementations
+ * @authors Jan Lindovský (xlindo04) Marcel Mravec(xmrave02)
+*/
 /**
  * @brief Construct a new gameButton object.
  *

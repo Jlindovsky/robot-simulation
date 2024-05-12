@@ -1,5 +1,8 @@
 #include "../header/RCRobot.h"
-
+/** 
+ * @brief this file consists of RCRobot method implementations
+ * @authors Jan Lindovský (xlindo04) Marcel Mravec(xmrave02)
+*/
 /**
  * @brief Construct a new RCRobot object.
  *
